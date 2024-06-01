@@ -19,7 +19,7 @@ const postTemplate = [
          player2slug,
          imgWrapper) {
          return `<div style="padding-bottom: 5px;">
-         <h2 style="margin-top: unset;">ATP ${eventName}</h2>
+         <h2 style="margin-top: unset;">WTA ${eventName}</h2>
          <p>${eventHeading2}</p>
          </div>
          
