@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Pdf Scrapper</title>
+
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+      }
+
+      body {
+         font-family: 'Courier New', Courier, monospace;
+      }
+
+      body>main {
+         padding: 10px 50px;
+      }
+
+      #root {
+         height: 100vh;
+         position: relative;
+      }
+
+      #formAction {
+         box-shadow: 0 0 16px 0 #0000003d;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         border: 1px solid #0000003d;
+         padding: 20px 25px;
+         border-radius: 4px;
+      }
+
+      .inp_group {
+         display: flex;
+         flex-direction: column;
+         margin-bottom: 20px;
+      }
+
+      .inp {
+         border: 1px solid #2626267d;
+         border-radius: 6px;
+         padding: 5px 10px;
+         font-size: 1rem;
+         display: block;
+         margin-top: 5px;
+      }
+
+      .submit_btn {
+         padding: 5px 15px;
+         border-radius: 4px;
+         font-size: 0.9rem;
+         transition: linear 0.3s;
+         border: 1px solid #2626267d;
+         cursor: pointer;
+      }
+
+      .submit_btn:hover {
+         background-color: rgb(182, 182, 182);
+
+      }
+   </style>
+</head>
+
+<body>
+   <main>
+
+      <div id="response_message"></div>
+      <div class="open-task" id="root"></div>
+   </main>
+</body>
+
+<script>
+   window.onload = async function () {
+      const baseUrl = `${window && window.location.protocol}//${window && window.location?.host}` || "http://localhost:9000";
+
+      const openTask = document.querySelector(".open-task");
+      const responseMessage = document.getElementById("response_message");
+
+      async function openConfigurationFunc() {
+         try {
+            responseMessage.innerText = "";
+            const response = await fetch(`${baseUrl}/conf-open`, { method: "POST" });
+
+            const result = await response.json();
+
+
+            if (result?.data) {
+               const { scheduleTime, scheduleAction, scheduleTimeLabel } = result?.data;
+               openTask.innerHTML = `
+               <div>
+                  
+                  <div id="formAction">
+
+                     <h2 style="font-size: 1rem; padding: 10px 0 25px 0; text-align: center;">Pdf Scrapper Configuration</h2>
+
+                     <div class="inp_group">
+                        <label>Schedule Action:&nbsp;&nbsp${scheduleAction}</label>
+                     </div>
+
+                     <div class="inp_group">
+                        <label>Schedule Format:&nbsp;&nbsp;${scheduleTimeLabel}</label>
+                     </div>
+
+                     <div class="inp_group">
+                        <label htmlfor="scheduleTimeValue">Schedule Time:&nbsp;&nbsp${scheduleTime} ${scheduleTimeLabel}</label>
+                     </div>
+                  </div>
+               </div>
+               `;
+            }
+
+         } catch (error) {
+            window.alert(error?.message);
+         }
+      }
+
+      await openConfigurationFunc();
+
+      setInterval(async () => await openConfigurationFunc(), 10000);
+   }
+</script>
+
+</html>
