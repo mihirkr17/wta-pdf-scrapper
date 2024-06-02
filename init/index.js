@@ -39,8 +39,13 @@ async function init() {
       // Getting pdf first link
       const mediaNotes = await getPdfLinks(constant?.wtaNoteUri);
 
-      let mediaNoteLinks = mediaNotes?.links.slice(0, 1) || ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_8.pdf"];
+      console.log(mediaNotes);
 
+      return
+
+      let mediaNoteLinks = mediaNotes?.links.slice(0, 1) || ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_9.pdf"];
+
+     
       const lengthOfNoteUrls = mediaNoteLinks?.length || 0;
 
       if (lengthOfNoteUrls <= 0 || !Array.isArray(mediaNoteLinks)) {
