@@ -37,13 +37,10 @@ async function init() {
       consoleLogger(`Script started for ${constant?.clientDomainName}.`);
 
       // Getting pdf first link
-      const mediaNotes = await getPdfLinks(constant?.wtaNoteUri);
+      // const mediaNotes = await getPdfLinks(constant?.wtaNoteUri);
 
-      console.log(mediaNotes);
 
-      return
-
-      let mediaNoteLinks = mediaNotes?.links.slice(0, 1) || ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_9.pdf"];
+      let mediaNoteLinks = ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_9.pdf"]; // mediaNotes?.links.slice(0, 1);
 
      
       const lengthOfNoteUrls = mediaNoteLinks?.length || 0;
@@ -55,7 +52,7 @@ async function init() {
       consoleLogger(`Found ${lengthOfNoteUrls} media note urls.`);
 
       // Extracting event details from media notes
-      const eventDetails = mediaNotes?.eventDetails || "Roland Garros  |  Paris, France  |  Grand Slam  |  May 26 - June 9";
+      const eventDetails = "Roland Garros  |  Paris, France  |  Grand Slam  |  May 26 - June 9"; // mediaNotes?.eventDetails || ;
 
       if (!eventDetails || eventDetails.length < 0) {
          return { message: `Sorry no events available right now!` };
