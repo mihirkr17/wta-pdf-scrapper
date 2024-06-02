@@ -11,7 +11,6 @@ const runCheerio = require("./runCheerio");
 const runPuppeteer = require("./runPuppeteer");
 const PDFParser = require('pdf-parse');
 
-
 async function getPdfLinks(url) {
    try {
       return await runPuppeteer(url);

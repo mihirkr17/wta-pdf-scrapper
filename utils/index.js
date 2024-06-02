@@ -297,7 +297,7 @@ function extractMatchInfo(text, eventDetails) {
 
    const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e?.trim());
 
-   const seasonHistories = seasonHistory?.split("seasonHistoryBreakHere")?.filter(e => e?.trim());
+   // const seasonHistories = seasonHistory?.split("seasonHistoryBreakHere")?.filter(e => e?.trim());
 
    // Result will assign here
    const results = [];
@@ -395,7 +395,6 @@ function extractMatchInfo(text, eventDetails) {
          eventAddress: eventAddress
       });
    }
-
    return results;
 }
 

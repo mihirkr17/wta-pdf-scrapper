@@ -6,17 +6,11 @@ const constant = {
    restAuthToken: process.env.SG_AUTH_TOKEN,
    clientDomainName: process.env.CLIENT_DOMAIN,
    mediaUri: function (slug) {
-      return `${constant.clientDomainName}/wp-json/wp/v2/media?slug=${slug}_yes`;
-   },
-   pdfUri: function (pdfLink) {
-      return `https://www.wtatennis.com/match-notes`;
+      return `${constant.clientDomainName}/wp-json/wp/v2/media?slug=wta_${slug}_yes`;
    },
    tagUri: "",
    categoryUri: "",
-   categoryName: "ATP Tennis Predictions",
-   wtaNoteUri: function (year = 2024) {
-      return `https://www.wtatennis.com/match-notes`;
-   },
+   wtaNoteUri: `https://www.wtatennis.com/match-notes`,
    postExistUri: function (slug = "") {
       return `${constant.clientDomainName}/wp-json/wp/v2/posts?status=any&slug=${slug}`
    },
