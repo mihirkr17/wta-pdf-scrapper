@@ -139,9 +139,9 @@ async function init() {
                      }
 
                      const categoryId = resource?.categoryId;
-                     const playerOneTag = resource?.tags?.replace("name", playerOne);
-                     const playerTwoTag = resource?.tags?.replace("name", playerTwo);
-                     const eventTag = eventName + " " + resource?.category;
+                     const playerOneTag = resource?.playerTag?.replace("#playerName", playerOne);
+                     const playerTwoTag = resource?.playerTag?.replace("#playerName", playerTwo);
+                     const eventTag = `${eventName} ${resource?.eventTag}`;
 
                      try {
                         const [eventHeadingTwoTranslate, eventAddressTranslate, eventDayTranslate, eventDateTranslate] = await Promise.all([
@@ -151,10 +151,10 @@ async function init() {
                            translate(eventDate, { from: 'en', to: resource?.languageCode }),
                         ]);
 
-                        const newTitle = resource?.title?.replace("eventName", eventName)
-                           ?.replace("playerOne", playerOne)
-                           ?.replace("playerTwo", playerTwo)
-                           ?.replace("eventDate", eventDateTranslate);
+                        const newTitle = resource?.title?.replace("#eventName", eventName)
+                           ?.replace("#playerOne", playerOne)
+                           ?.replace("#playerTwo", playerTwo)
+                           ?.replace("#eventDate", eventDateTranslate);
 
                         const title = capitalizeFirstLetterOfEachWord(newTitle);
                         const slug = slugMaker(title);

@@ -1,11 +1,13 @@
 const postTemplate = [
    {
-      "language": "English",
-      "languageCode": "en",
-      "category": "ATP Tennis Predictions",
-      "categoryId": 8996,
-      "title": "eventName Predictions: playerOne vs playerTwo – eventDate",
-      "contents": function (eventName,
+      language: "English",
+      languageCode: "en",
+      category: "ATP / WTA Tennis Predictions",
+      categoryId: 8996,
+      title: "#eventName Predictions: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "#playerName Predictions",
+      eventTag: "WTA Tennis Predictions",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -67,17 +69,17 @@ const postTemplate = [
          Stevegtennis.com ${playerOne} vs ${playerTwo} prediction.
          </a> 
          </p>`
-      },
-      "tags": "name Predictions",
-      "eventName": "ATP"
+      }
    },
    {
-      "language": "Spanish",
-      "languageCode": "es",
-      "category": "Pronósticos De Tenis ATP",
-      "categoryId": 9262,
-      "title": "Pronósticos de eventName: playerOne vs playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Spanish",
+      languageCode: "es",
+      category: "Pronósticos De Tenis ATP / WTA",
+      categoryId: 9262,
+      title: "Pronósticos de #eventName: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "Pronósticos de #playerName",
+      eventTag: "Pronósticos De Tenis WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -143,17 +145,17 @@ const postTemplate = [
             </a> 
         </p>`
 
-      },
-      "tags": "Pronósticos de name",
-      "eventName": "Pronósticos"
+      }
    },
    {
-      "language": "Portuguese",
-      "languageCode": "pt",
-      "category": "Palpites Tênis ATP",
-      "categoryId": 9263,
-      "title": "Palpites de eventName: playerOne vs playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Portuguese",
+      languageCode: "pt",
+      category: "Palpites Tênis ATP / WTA",
+      categoryId: 9263,
+      title: "Palpites de #eventName: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "Palpites de #playerName",
+      eventTag: "Palpites Tênis WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -219,16 +221,17 @@ const postTemplate = [
      </p>`
 
       },
-      "tags": "Palpites de name",
-      "eventName": "Palpites"
+
    },
    {
-      "language": "French",
-      "languageCode": "fr",
-      "category": "Pronostics Tennis ATP",
-      "categoryId": 9264,
-      "title": "Pronostics nameOfEvent : playerOne contre playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "French",
+      languageCode: "fr",
+      category: "Pronostics Tennis ATP / WTA",
+      categoryId: 9264,
+      title: "Pronostics #eventName: #playerOne contre #playerTwo - #eventDate",
+      playerTag: "Pronostics #playerName",
+      eventTag: "Pronostics Tennis WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -293,17 +296,17 @@ const postTemplate = [
          </a> 
      </p>`
 
-      },
-      "tags": "Pronostics name",
-      "eventName": "Pronostics"
+      }
    },
    {
-      "language": "German",
-      "languageCode": "de",
-      "category": "Doppel Tipps Tennis ATP",
-      "categoryId": 9265,
-      "title": "eventName Doppel Tipps: playerOne vs playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "German",
+      languageCode: "de",
+      category: "Tennis Tipps & Prognosen ATP / WTA",
+      categoryId: 9265,
+      title: "#eventName Tipps & Prognosen: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "#playerName Vorhersagen",
+      eventTag: "Tennis Tipps & Prognosen WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -368,16 +371,16 @@ const postTemplate = [
          </a> 
      </p>`
       },
-      "tags": "name Vorhersagen",
-      "eventName": "Doppel Tipps"
    },
    {
-      "language": "Italian",
-      "languageCode": "it",
-      "category": "Pronostici Tennis ATP",
-      "categoryId": 9266,
-      "title": "Pronostici su eventName: playerOne vs playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Italian",
+      languageCode: "it",
+      category: "Pronostici Tennis ATP / WTA",
+      categoryId: 9266,
+      title: "Pronostici su #eventName: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "#playerName Pronostici",
+      eventTag: "Pronostici Tennis WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -442,17 +445,17 @@ const postTemplate = [
          Pronostico di Stevegtennis.com ${playerOne} vs ${playerTwo}.
          </a> 
          </p>`
-      },
-      "tags": "name Pronostici",
-      "eventName": "Pronostici"
+      }
    },
    {
-      "language": "Polish",
-      "languageCode": "pl",
-      "category": "Prognozy Tenis ATP",
-      "categoryId": 9267,
-      "title": "Prognozy eventName: playerOne vs playerTwo – eventDate",
-      "contents": function (eventName,
+      language: "Polish",
+      languageCode: "pl",
+      category: "Prognozy Tenis ATP / WTA",
+      categoryId: 9267,
+      title: "Prognozy #eventName: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "Prognozy #playerName",
+      eventTag: "Prognozy Tenis WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -518,16 +521,16 @@ const postTemplate = [
       </p>
       `
       },
-      "tags": "Prognozy name",
-      "eventName": "Prognozy"
    },
    {
-      "language": "Dutch",
-      "languageCode": "nl",
-      "category": "Tennis Wedtips En Voorspellingen ATP",
-      "categoryId": 9268,
-      "title": "eventName Voorspellingen Wedtips: playerOne versus playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Dutch",
+      languageCode: "nl",
+      category: "Tennis Wedtips En Voorspellingen ATP / WTA",
+      categoryId: 9268,
+      title: "#eventName Voorspellingen Wedtips: #playerOne versus #playerTwo - #eventDate",
+      playerTag: "#playerName Voorspellingen Wedtips",
+      eventTag: "Tennis Wedtips En Voorspellingen WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -593,17 +596,17 @@ const postTemplate = [
          </a> 
          </p>
          `
-      },
-      "tags": "name Voorspellingen Wedtips",
-      "eventName": "Wedtips"
+      }
    },
    {
-      "language": "Turkish",
-      "languageCode": "tr",
-      "category": "Tenis Tahminleri ATP",
-      "categoryId": 9269,
-      "title": "eventName Tahminler: playerOne vs playerTwo – eventDate",
-      "contents": function (eventName,
+      language: "Turkish",
+      languageCode: "tr",
+      category: "Tenis Tahminleri ATP / WTA",
+      categoryId: 9269,
+      title: "#eventName Tahminler: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "#playerName Tahminleri",
+      eventTag: "Tenis Tahminleri WTA",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -669,17 +672,17 @@ const postTemplate = [
          </a> 
          </p>
          `
-      },
-      "tags": "name Tahminleri",
-      "eventName": "Tahminleri"
+      }
    },
    {
-      "language": "Chinese Mandarin",
-      "languageCode": "zh",
-      "category": "ATP 网球预测",
-      "categoryId": 9270,
-      "title": "eventName 预测：playerOne vs playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Chinese Mandarin",
+      languageCode: "zh",
+      category: "ATP / WTA 网球预测",
+      categoryId: 9270,
+      title: "#eventName 预测： #playerOne vs #playerTwo - #eventDate",
+      playerTag: "#playerName 预测",
+      eventTag: "WTA 网球预测",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -745,17 +748,17 @@ const postTemplate = [
          </a> 
          </p>
          `
-      },
-      "tags": "name 预测",
-      "eventName": null
+      }
    },
    {
-      "language": "Arabic",
-      "languageCode": "ar",
-      "category": "توقعات اتحاد لاعبي التنس المحترفين للتنس",
-      "categoryId": 9271,
-      "title": "`توقعات eventName: playerOne vs playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Arabic",
+      languageCode: "ar",
+      category: "توقعات اتحاد لاعبي التنس المحترفين للتنس",
+      categoryId: 9271,
+      title: "`توقعات #eventName: #playerOne vs #playerTwo - #eventDate",
+      playerTag: "توقعات  #playerName",
+      eventTag: "توقعات اتحاد لاعبي التنس المحترفين للتنس",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -822,16 +825,17 @@ const postTemplate = [
          </a> 
          </p>
          `
-      }, "tags": "توقعات  name",
-      "eventName": null
+      }
    },
    {
-      "language": "Japanese",
-      "languageCode": "ja",
-      "category": "ATPテニスの予想",
-      "categoryId": 9272,
-      "title": "eventName の予測: playerOne 対 playerTwo – eventDate",
-      "contents": function (eventName,
+      language: "Japanese",
+      languageCode: "ja",
+      category: "ATP / WTAテニスの予想",
+      categoryId: 9272,
+      title: "#eventName の予測: #playerOne 対 #playerTwo - #eventDate",
+      playerTag: "#playerName の予測",
+      eventTag: "WTAテニスの予想",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -898,16 +902,17 @@ const postTemplate = [
             </a> 
          </p>
          `
-      }, "tags": "name の予測",
-      "eventName": null
+      }
    },
    {
-      "language": "Russian",
-      "languageCode": "ru",
-      "category": "Прогнозы ATP на теннис",
-      "categoryId": 9273,
-      "title": "Прогнозы на eventName: playerOne против playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Russian",
+      languageCode: "ru",
+      category: "Прогнозы ATP / WTA на теннис",
+      categoryId: 9273,
+      title: "Прогнозы на #eventName: #playerOne против #playerTwo - #eventDate",
+      playerTag: "Прогнозы #playerName",
+      eventTag: "Прогнозы WTA на теннис",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -974,16 +979,17 @@ const postTemplate = [
             </a> 
          </p>
          `
-      }, "tags": "Прогнозы name",
-      "eventName": null
+      }
    },
    {
-      "language": "Hindi",
-      "languageCode": "hi",
-      "category": "एटीपी टेनिस भविष्यवाणियाँ",
-      "categoryId": 9274,
-      "title": "eventName पूर्वानुमान: playerOne बनाम playerTwo - eventDate",
-      "contents": function (eventName,
+      language: "Hindi",
+      languageCode: "hi",
+      category: "एटीपी टेनिस भविष्यवाणियाँ",
+      categoryId: 9274,
+      title: "#eventName पूर्वानुमान: #playerOne बनाम #playerTwo - #eventDate",
+      playerTag: "#playerName भविष्यवाणियाँ`",
+      eventTag: "एटीपी टेनिस भविष्यवाणियाँ",
+      contents: function (eventName,
          leads,
          eventAddress,
          playerOne,
@@ -1045,9 +1051,7 @@ const postTemplate = [
          स्टीवगटेनिस.कॉम ${playerOne} बनाम ${playerOne} भविष्यवाणी।
          </a> 
       </p>`
-      },
-      "tags": "name भविष्यवाणियाँ`",
-      "eventName": null
+      }
    }
 ]
 
