@@ -205,7 +205,7 @@ function findPlayerNames(inputString) {
 
 function extractMatchInfo(text, eventDetails) {
 
-   const splittedTexts = text?.split("\n")?.filter(line => line.length > 0);
+   const splittedTexts = text?.split("\n")?.filter(line => line?.trim().length !== 0);
 
    let dayDateString;
 
@@ -287,7 +287,7 @@ function extractMatchInfo(text, eventDetails) {
          seasonHistory += (line + "\n");
       }
 
-      if ((/[–|-] DAY \d [–|-]/i).test(line)) {
+      if ((/MATCH NOTES [–|-|–] DAY \d+ [–|-|–]/i).test(line)) {
          dayDateString = line;
       }
    }
@@ -314,7 +314,6 @@ function extractMatchInfo(text, eventDetails) {
 
    // Looping paragraphs
    for (const para of paragraphs) {
-
       const player = findPlayerNames(para?.trim()?.split("\n")[0] || "");
 
       const matchLeads = player?.leads ? player?.leads : "";
@@ -359,6 +358,8 @@ function extractMatchInfo(text, eventDetails) {
       })?.filter(e => e);
 
 
+     
+
       //  Getting season history by player names...
       // const seasonHistoryNew = seasonHistories && seasonHistories?.map(str => {
       //    let matchIndex = str?.lastIndexOf("MATCH NOTES");
@@ -378,14 +379,14 @@ function extractMatchInfo(text, eventDetails) {
 
       const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
 
-      const eventHeadingTwo = `${eventDay} - ${eventDate}, ${eventAddress}.`
+      const eventHeadingTwo = `${eventDay} - ${eventDate}, ${eventAddress}.`;
 
       results.push({
          content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
          player1: player?.player1,
          player2: player?.player2,
-         player1slug: player?.player1.toLowerCase().replace(slugRegex, "_"),
-         player2slug: player?.player2.toLowerCase().replace(slugRegex, "_"),
+         player1slug: player?.player1?.toLowerCase()?.replace(slugRegex, "_"),
+         player2slug: player?.player2?.toLowerCase()?.replace(slugRegex, "_"),
          leads: matchLeads,
          round: player?.round,
          eventDate: eventDate?.trim(),
