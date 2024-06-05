@@ -207,39 +207,63 @@ function extractMatchInfo(text, eventDetails) {
 
    const splittedTexts = text?.split("\n")?.filter(line => line?.trim().length !== 0);
 
-   let dayDateString;
-
    // new variables
    let tournamentHistory = "";
    // let playerNameString;
-   let seasonHistory = "";
+   // let seasonHistory = "";
    let paragraph = "";
 
    // const matchup = [];
    let tournamentHistoryTracker = false;
    let tournamentHistoryHeadTracker = false;
 
-   let seasonHistoryTracker = false;
-   let seasonHistoryHeadTracker = false;
+   // let seasonHistoryTracker = false;
+   // let seasonHistoryHeadTracker = false;
 
    let paragraphTracker = false;
    let paragraphHeadTracker = false;
 
-   let eventNameAndAddress = eventDetails?.split("|");
+   const [eventName = "", eventAddress = ""] = eventDetails?.split("|").map(str => str.trim());
+   let eventDay = "";
+   let eventDate = "";
+   let eventYear = "";
 
+   // regex patterns 1
+   const targetDateDayYearRegex = /MATCH NOTES [–|-|–] DAY \d+ [–|-|–]/i;
+   const dateRegex = /\b\w+day\b[, -]?\s+(\w+)\s+(\d{1,2})[, -]?\s+(\d{4})/i;
+   const dayRegex = /Day \d+/i;
+   const yearRegex = /\d{4}/i;
+
+
+
+   // regex patterns 2
+   const paragraphRegex = / vs[. -]? .+ (leads|First meeting|Tied)/gi;
+   const matchNoteRegex = /MATCH NOTES/gi;
 
    for (let i = 0; i < splittedTexts.length; i++) {
 
       const line = splittedTexts[i]?.trim();
 
-      if ((/ vs\. .+ (leads|First meeting|Tied)/gi).test(line)) {
+      // 1. Extracting Event day, date, year;
+      if (targetDateDayYearRegex.test(line)) {
+         let days = line && line.match(dayRegex);
+         eventDay = days[0] ? days[0] : "";
+         let dates = line && line.match(dateRegex);
+         eventDate = dates[0] ? dates[0]?.replace(/\s+/, " ") : "";
+         let year = eventDate && eventDate?.match(yearRegex)[0];
+         eventYear = year ? year : new Date().getFullYear();
+      }
+
+
+      // 2.
+      if (paragraphRegex.test(line)) {
          paragraphTracker = true;
          paragraphHeadTracker = true;
       } else {
          paragraphHeadTracker = false;
       }
 
-      if ((/MATCH NOTES/gi).test(line)) {
+      if (matchNoteRegex.test(line)) {
          paragraphTracker = false;
       }
 
@@ -248,7 +272,7 @@ function extractMatchInfo(text, eventDetails) {
          if (paragraphHeadTracker) {
             paragraph += "paragraphBreakHere \n";
          }
-         paragraph += line + "\n";
+         paragraph += line && line.length > 0 && line + "\n";
       }
 
       if ((/TOURNAMENT HISTORY/gi).test(line)) {
@@ -269,48 +293,36 @@ function extractMatchInfo(text, eventDetails) {
          tournamentHistory += (line + "\n");
       }
 
-      if ((/Season+\s\d+\sHistory/gi).test(line)) {
-         seasonHistoryTracker = true;
-         seasonHistoryHeadTracker = true;
-      } else {
-         seasonHistoryHeadTracker = false;
-      }
+      // if ((/Season+\s\d+\sHistory/gi).test(line)) {
+      //    seasonHistoryTracker = true;
+      //    seasonHistoryHeadTracker = true;
+      // } else {
+      //    seasonHistoryHeadTracker = false;
+      // }
 
-      if ((/Titles/gi).test(line)) {
-         seasonHistoryTracker = false;
-      }
+      // if ((/Titles/gi).test(line)) {
+      //    seasonHistoryTracker = false;
+      // }
 
-      if (seasonHistoryTracker) {
-         if (seasonHistoryHeadTracker) {
-            seasonHistory += "seasonHistoryBreakHere\n";
-         }
-         seasonHistory += (line + "\n");
-      }
-
-      if ((/MATCH NOTES [–|-|–] DAY \d+ [–|-|–]/i).test(line)) {
-         dayDateString = line;
-      }
+      // if (seasonHistoryTracker) {
+      //    if (seasonHistoryHeadTracker) {
+      //       seasonHistory += "seasonHistoryBreakHere\n";
+      //    }
+      //    seasonHistory += (line + "\n");
+      // }
    }
 
-   // Splitting 3 sections 
-   const paragraphs = paragraph?.split("paragraphBreakHere")?.filter(e => e?.trim());
 
-   const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e?.trim());
+
+   // Splitting 3 sections 
+   const paragraphs = paragraph?.split("paragraphBreakHere");
+
+   const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere");
 
    // const seasonHistories = seasonHistory?.split("seasonHistoryBreakHere")?.filter(e => e?.trim());
 
    // Result will assign here
    const results = [];
-
-   dayDateString = dayDateString?.split(/[–|-]/g);
-
-   const eventDay = dayDateString[1]?.trim();
-
-   const eventDate = dayDateString[2]?.trim()?.replace(/\s+/g, " ");
-
-   const eventName = eventNameAndAddress[0]?.trim() || "";
-
-   const eventAddress = eventNameAndAddress[1]?.trim() || "";
 
    // Looping paragraphs
    for (const para of paragraphs) {
@@ -343,11 +355,11 @@ function extractMatchInfo(text, eventDetails) {
             let player1Tour = splitStr[1]?.replace(/CURRENT TOURNAMENT[\s\S]*/gi, "");
             let player2Tour = splitStr[2]?.replace(/MATCH NOTES[\s\S]*/gi, "");
 
-            let playerOneTournamentLines = player1Tour?.split('\n');
+            let playerOneTournamentLines = player1Tour?.split('\n')?.filter(e => e?.trim()?.length > 0);
             playerOneTournamentLines?.unshift(player?.player1 + " Tournament History:\n");
             const pt1 = playerOneTournamentLines?.join(" ");
 
-            let playerTwoTournamentLines = player2Tour?.split('\n');
+            let playerTwoTournamentLines = player2Tour?.split('\n')?.filter(e => e?.trim()?.length > 0);
             playerTwoTournamentLines?.unshift(player?.player2 + " Tournament History:\n");
             const pt2 = playerTwoTournamentLines?.join(" ");
 
@@ -355,7 +367,7 @@ function extractMatchInfo(text, eventDetails) {
          } else {
             return "";
          }
-      })?.filter(e => e);
+      })?.filter(e => e?.trim()?.length > 0);
 
 
 
@@ -381,7 +393,7 @@ function extractMatchInfo(text, eventDetails) {
 
       const eventHeadingTwo = `${eventDay} - ${eventDate}, ${eventAddress}.`;
 
-      if (tournamentNew && eventDay && eventDate && eventName && eventAddress) {
+      if (tournamentNew[0] && eventDay && eventDate && eventName && eventAddress) {
 
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
@@ -391,11 +403,12 @@ function extractMatchInfo(text, eventDetails) {
             player2slug: player?.player2?.toLowerCase()?.replace(slugRegex, "_"),
             leads: matchLeads,
             round: player?.round,
-            eventDate: eventDate?.trim(),
-            eventDay,
+            eventDate: capitalizeFirstLetterOfEachWord(eventDate),
+            eventDay: capitalizeFirstLetterOfEachWord(eventDay),
             eventName: eventName,
-            eventHeadingTwo: eventHeadingTwo?.trim(),
-            eventAddress: eventAddress
+            eventHeadingTwo: capitalizeFirstLetterOfEachWord(eventHeadingTwo?.trim()),
+            eventAddress: eventAddress,
+            eventYear
          });
       }
    }

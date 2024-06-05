@@ -95,11 +95,11 @@ async function init() {
             // Extracting match details from pdf contents | basically it returns [Array];
             const contents = extractMatchInfo(pdfTextContents, eventDetails);
 
-
-            if (!Array.isArray(contents) || contents.length === 0) {
+            if (!Array.isArray(contents) || contents?.length === 0) {
                continue;
             }
 
+  
             consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
             for (const content of contents) {
@@ -117,6 +117,7 @@ async function init() {
                const leads = content?.leads;
                const playerOneSurname = getSurnameOfPlayer(playerOne);
                const playerTwoSurname = getSurnameOfPlayer(playerTwo);
+               const eventYear = content?.eventYear;
 
                if (!playerOne || !playerTwo || !eventName) {
                   consoleLogger(`Some fields are missing.`);
