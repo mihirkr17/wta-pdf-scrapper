@@ -48,7 +48,16 @@ const postTemplate = [
          <h3>Match Details:</h3>
          <p>${playerOne} vs ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/> <br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>${playerOne} vs ${playerTwo} Head-to-Head, Preview, Stats & Pick:</h3>
          <article>
@@ -123,7 +132,16 @@ const postTemplate = [
         <h3>Detalles del partido:</h3>
         <p>${playerOne} frente a ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
         
-        <br/> <br/>
+        <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
         
         <h3>${playerOne} vs ${playerTwo} cara a cara, vista previa, estadísticas y selección:</h3>
         <article>
@@ -198,7 +216,16 @@ const postTemplate = [
      <h3>Detalhes da partida:</h3>
      <p>${playerOne} vs ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
      
-     <br/> <br/>
+     <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
      
      <h3>${playerOne} vs ${playerTwo} confronto direto, visualização, estatísticas e escolha:</h3>
      <article>
@@ -274,7 +301,16 @@ const postTemplate = [
      <h3>Détails du match :</h3>
      <p>${playerOne} contre ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
      
-     <br/> <br/>
+     <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
      
      <h3>${playerOne} contre ${playerTwo} Face-à-face, aperçu, statistiques et choix :</h3>
      <article>
@@ -349,7 +385,16 @@ const postTemplate = [
      <h3>Spieldetails:</h3>
      <p>${playerOne} vs ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
      
-     <br/> <br/>
+     <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
      
      <h3>${playerOne} vs. ${playerTwo} Head-to-Head, Vorschau, Statistiken & Auswahl:</h3>
      <article>
@@ -424,7 +469,16 @@ const postTemplate = [
          <h3>Dettagli partita:</h3>
          <p>${playerOne} contro ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/><br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>Confronto testa a testa tra ${playerOne} e ${playerTwo}, anteprima, statistiche e scelta:</h3>
          <article>
@@ -498,7 +552,16 @@ const postTemplate = [
       <h3>Szczegóły meczu:</h3>
       <p>${playerOne} kontra ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
       
-      <br/> <br/>
+      <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
       
       <h3>${playerOne} kontra ${playerTwo} bezpośrednie starcie, podgląd, statystyki i wybór:</h3>
       <article>
@@ -574,7 +637,16 @@ const postTemplate = [
          <h3>Wedstrijddetails:</h3>
          <p>${playerOne} versus ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/> <br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>${playerOne} versus ${playerTwo} Head-to-Head, preview, statistieken en keuze:</h3>
          <article>
@@ -650,7 +722,16 @@ const postTemplate = [
          <h3>Eşleşme Ayrıntıları:</h3>
          <p>${playerOne} vs ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/><br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>${playerOne} ile ${playerTwo} Karşı karşıya, Önizleme, İstatistikler ve Seçim:</h3>
          <article>
@@ -726,7 +807,16 @@ const postTemplate = [
          <h3>比赛详情：</h3>
          <p>${playerOne} 对阵 ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/><br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>${playerOne} 与 ${playerTwo} 的对决、预览、统计数据和选择：</h3>
          <article>
@@ -802,7 +892,16 @@ const postTemplate = [
          <h3>تفاصيل المباراة:</h3>
          <p>${playerOne} ضد ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/><br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>${playerOne} vs ${playerTwo} المواجهات المباشرة والمعاينة والإحصائيات والاختيار:</h3>
          <article>
@@ -879,7 +978,16 @@ const postTemplate = [
          <h3>試合の詳細:</h3>
          <p>${playerOne} 対 ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br /><br />
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>${playerOne} 対 ${playerTwo} の直接対決、プレビュー、統計、選択:</h3>
          <article>
@@ -956,7 +1064,16 @@ const postTemplate = [
          <h3>Подробности матча:</h3>
          <p>${playerOne} против ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
          
-         <br/><br/>
+         <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
          
          <h3>Личный бой ${playerOne} против ${playerTwo}, обзор, статистика и выбор:</h3>
          <article>
@@ -1030,7 +1147,16 @@ const postTemplate = [
       <h3>मैच विवरण:</h3>
       <p>${playerOne} बनाम ${playerTwo}${eventRound ? " - " + eventRound + " - " : " - "}${eventDate} - ${eventName} - ${eventAddress}</p>
       
-      <br/> <br/>
+      <br/>
+         <p>
+            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+         </p>
+         <br/>
       
       <h3>${playerOne} बनाम ${playerTwo} आमने-सामने, पूर्वावलोकन, आँकड़े और चयन:</h3>
       <article>
