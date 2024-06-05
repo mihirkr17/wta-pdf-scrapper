@@ -306,7 +306,7 @@ function extractMatchInfo(text, eventDetails) {
 
    const eventDay = dayDateString[1]?.trim();
 
-   const eventDate = dayDateString[2]?.trim();
+   const eventDate = dayDateString[2]?.trim()?.replace(/\s+/g, " ");
 
    const eventName = eventNameAndAddress[0]?.trim() || "";
 
@@ -358,7 +358,7 @@ function extractMatchInfo(text, eventDetails) {
       })?.filter(e => e);
 
 
-     
+
 
       //  Getting season history by player names...
       // const seasonHistoryNew = seasonHistories && seasonHistories?.map(str => {
@@ -381,20 +381,23 @@ function extractMatchInfo(text, eventDetails) {
 
       const eventHeadingTwo = `${eventDay} - ${eventDate}, ${eventAddress}.`;
 
-      results.push({
-         content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
-         player1: player?.player1,
-         player2: player?.player2,
-         player1slug: player?.player1?.toLowerCase()?.replace(slugRegex, "_"),
-         player2slug: player?.player2?.toLowerCase()?.replace(slugRegex, "_"),
-         leads: matchLeads,
-         round: player?.round,
-         eventDate: eventDate?.trim(),
-         eventDay,
-         eventName: eventName,
-         eventHeadingTwo: eventHeadingTwo?.trim(),
-         eventAddress: eventAddress
-      });
+      if (tournamentNew && eventDay && eventDate && eventName && eventAddress) {
+
+         results.push({
+            content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
+            player1: player?.player1,
+            player2: player?.player2,
+            player1slug: player?.player1?.toLowerCase()?.replace(slugRegex, "_"),
+            player2slug: player?.player2?.toLowerCase()?.replace(slugRegex, "_"),
+            leads: matchLeads,
+            round: player?.round,
+            eventDate: eventDate?.trim(),
+            eventDay,
+            eventName: eventName,
+            eventHeadingTwo: eventHeadingTwo?.trim(),
+            eventAddress: eventAddress
+         });
+      }
    }
    return results;
 }

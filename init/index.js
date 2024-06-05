@@ -37,11 +37,16 @@ async function init() {
       consoleLogger(`Script started for ${constant?.clientDomainName}.`);
 
       // Getting pdf first link
-      // const mediaNotes = await getPdfLinks(constant?.wtaNoteUri);
+      const mediaNotes = await getPdfLinks(constant?.wtaNoteUri);
+
+      console.log(mediaNotes);
+
+      return
 
 
-      let mediaNoteLinks = ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_10.pdf"]; // mediaNotes?.links.slice(0, 1);
+      let mediaNoteLinks = mediaNotes?.links.slice(0, 1);
 
+      //["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_11.pdf"];
      
       const lengthOfNoteUrls = mediaNoteLinks?.length || 0;
 
@@ -90,6 +95,10 @@ async function init() {
             // Extracting match details from pdf contents | basically it returns [Array];
             const contents = extractMatchInfo(pdfTextContents, eventDetails);
 
+
+            console.log(contents);
+
+            return
             if (!Array.isArray(contents) || contents.length === 0) {
                continue;
             }
