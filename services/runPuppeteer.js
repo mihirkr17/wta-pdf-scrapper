@@ -1,7 +1,7 @@
-let puppeteer = require("puppeteer-extra");
+const puppeteer = require("puppeteer-extra");
 const Stealth = require("puppeteer-extra-plugin-stealth");
 const { consoleLogger } = require("../utils");
-
+puppeteer.use(Stealth());
 
 async function runPuppeteer(url) {
    let browser;
@@ -10,11 +10,12 @@ async function runPuppeteer(url) {
       throw new Error("Required atp media url!");
    }
 
-   puppeteer = puppeteer.use(Stealth());
-
-   browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+   browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 
    let page = await browser.newPage();
+   
+   // Set a user agent to mimic a real browser
+   await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
    await page.goto(url, { timeout: 80000, waitUntil: "domcontentloaded" });
 
