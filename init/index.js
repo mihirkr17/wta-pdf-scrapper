@@ -44,7 +44,7 @@ async function init() {
       // return
 
 
-      let mediaNoteLinks = ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_11.pdf"]; // mediaNotes?.links.slice(0, 1);
+      let mediaNoteLinks = ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/2012_4.pdf"]; // mediaNotes?.links.slice(0, 1);
 
       //["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/903_11.pdf"];
 
@@ -57,7 +57,7 @@ async function init() {
       consoleLogger(`Found ${lengthOfNoteUrls} media note urls.`);
 
       // Extracting event details from media notes
-      const eventDetails = "Roland Garros  |  Paris, France  |  Grand Slam  |  May 26 - June 9"; // mediaNotes?.eventDetails || ;
+      const eventDetails = "Ecotrans Ladies Open | Berlin, Germany | WTA 500 | June 17- June 23"; // mediaNotes?.eventDetails || ;
 
       if (!eventDetails || eventDetails.length < 0) {
          return { message: `Sorry no events available right now!` };
@@ -93,14 +93,17 @@ async function init() {
             consoleLogger(`Successfully got PDF texts.`);
 
             // Extracting match details from pdf contents | basically it returns [Array];
-            const contents = extractMatchInfo(pdfTextContents, eventDetails);
+            let contents = extractMatchInfo(pdfTextContents, eventDetails);
+            contents = contents.filter(e => e.player1.trim().length > 0);
+
 
             if (!Array.isArray(contents) || contents?.length === 0) {
                continue;
             }
 
-  
+
             consoleLogger(`Pdf downloaded and extracted contents successfully.`);
+
 
             for (const content of contents) {
                const playerOne = content?.player1;
@@ -148,7 +151,7 @@ async function init() {
                      const categoryId = resource?.categoryId;
                      const playerOneTag = resource?.playerTag?.replace("#playerName", playerOne);
                      const playerTwoTag = resource?.playerTag?.replace("#playerName", playerTwo);
-                     const eventTag = `${eventName} ${resource?.eventTag}`;
+                     const eventTag = resource?.eventTag?.replace("#eventName", eventName);
 
                      try {
                         const [eventHeadingTwoTranslate, eventAddressTranslate, eventDayTranslate, eventDateTranslate] = await Promise.all([

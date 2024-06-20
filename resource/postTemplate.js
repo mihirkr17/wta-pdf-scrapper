@@ -5,8 +5,8 @@ const postTemplate = [
       category: "ATP / WTA Tennis Predictions",
       categoryId: 8996,
       title: "#eventName Predictions: #playerOne vs #playerTwo - #eventDate",
-      playerTag: "#playerName Predictions",
-      eventTag: "WTA Tennis Predictions",
+      playerTag: "#playerName STATS & PREDICTIONS",
+      eventTag: "#eventName WTA TENNIS PREDICTIONS & PICKS",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -39,7 +39,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         The ${eventName} continues with plenty of interesting matches on the ${eventDay} schedule. 
          Let's have a look at all the career, performance and head-to-head stats for the match and find out if ${playerOne} or ${playerTwo} is expected to win.
          </p>`.replace(/\n/g, " ")}
          
@@ -87,7 +86,7 @@ const postTemplate = [
       categoryId: 9262,
       title: "Pronósticos de #eventName: #playerOne vs #playerTwo - #eventDate",
       playerTag: "Pronósticos de #playerName",
-      eventTag: "Pronósticos De Tenis WTA",
+      eventTag: "#eventName Pronósticos De Tenis WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -122,8 +121,7 @@ const postTemplate = [
             </ul>
         </div>
         
-        ${`<p>
-            El ${eventName} de continúa con muchos partidos interesantes en el calendario de ${eventDay}. 
+        ${`<p> 
             Echemos un vistazo a todas las estadísticas de carrera, rendimiento y enfrentamientos directos del partido y descubramos si se espera que ${playerOne} o ${playerTwo} ganen.
         </p>`.replace(/\n/g, " ")}
         
@@ -172,7 +170,7 @@ const postTemplate = [
       categoryId: 9263,
       title: "Palpites de #eventName: #playerOne vs #playerTwo - #eventDate",
       playerTag: "Palpites de #playerName",
-      eventTag: "Palpites Tênis WTA",
+      eventTag: "#eventName Palpites Tênis WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -207,7 +205,6 @@ const postTemplate = [
      </div>
      
      ${`<p>
-         O ${eventName} continua com muitas partidas interessantes na programação do ${eventDay}. 
          Vamos dar uma olhada em todas as estatísticas de carreira, desempenho e confrontos diretos da partida e descobrir se ${playerOne} ou ${playerTwo} devem vencer.
      </p>`.replace(/\n/g, " ")}
      
@@ -257,7 +254,7 @@ const postTemplate = [
       categoryId: 9264,
       title: "Pronostics #eventName: #playerOne contre #playerTwo - #eventDate",
       playerTag: "Pronostics #playerName",
-      eventTag: "Pronostics Tennis WTA",
+      eventTag: "#eventName Pronostics Tennis WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -292,7 +289,6 @@ const postTemplate = [
      </div>
      
      ${`<p>
-         Le ${eventName} se poursuit avec de nombreux matchs intéressants au programme du ${eventDay}. 
          Jetons un coup d'œil à toutes les statistiques de carrière, de performance et d'affrontement du match et découvrons si ${playerOne} ou ${playerTwo} devrait gagner.
      </p>`.replace(/\n/g, " ")}
      
@@ -341,7 +337,7 @@ const postTemplate = [
       categoryId: 9265,
       title: "#eventName Tipps & Prognosen: #playerOne vs #playerTwo - #eventDate",
       playerTag: "#playerName Vorhersagen",
-      eventTag: "Tennis Tipps & Prognosen WTA",
+      eventTag: "#eventName Tennis Tipps & Prognosen WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -376,7 +372,6 @@ const postTemplate = [
      </div>
      
      ${`<p>
-         Das ${eventName} geht mit vielen interessanten Spielen im ${eventDay}-Zeitplan weiter. 
          Werfen wir einen Blick auf alle Karriere-, Leistungs- und Head-to-Head-Statistiken für das Spiel und finden wir heraus, ob ${playerOne} oder ${playerTwo} voraussichtlich gewinnen wird.
      </p>`.replace(/\n/g, " ")}
      
@@ -424,7 +419,7 @@ const postTemplate = [
       categoryId: 9266,
       title: "Pronostici su #eventName: #playerOne vs #playerTwo - #eventDate",
       playerTag: "#playerName Pronostici",
-      eventTag: "Pronostici Tennis WTA",
+      eventTag: "#eventName Pronostici Tennis WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -460,7 +455,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         Il ${eventName} continua con tantissime partite interessanti nel programma di ${eventDay}. 
          Diamo un'occhiata a tutte le statistiche relative a carriera, prestazioni e testa a testa della partita e scopriamo se ci si aspetta che ${playerOne} o ${playerTwo} vincano.
          </p>`.replace(/\n/g, " ")}
          
@@ -508,7 +502,7 @@ const postTemplate = [
       categoryId: 9267,
       title: "Prognozy #eventName: #playerOne vs #playerTwo - #eventDate",
       playerTag: "Prognozy #playerName",
-      eventTag: "Prognozy Tenis WTA",
+      eventTag: "#eventName Prognozy Tenis WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -543,7 +537,6 @@ const postTemplate = [
       </div>
       
       ${`<p>
-      ${eventName} będzie kontynuowane z mnóstwem interesujących meczów w harmonogramie ${eventDay}. 
       Rzućmy okiem na wszystkie statystyki dotyczące kariery, występów i bezpośrednich pojedynków w tym meczu i dowiedzmy się, czy wygra ${playerOne} czy ${playerTwo}.
       </p>`.replace(/\n/g, " ")}
       
@@ -592,7 +585,7 @@ const postTemplate = [
       categoryId: 9268,
       title: "#eventName Voorspellingen Wedtips: #playerOne versus #playerTwo - #eventDate",
       playerTag: "#playerName Voorspellingen Wedtips",
-      eventTag: "Tennis Wedtips En Voorspellingen WTA",
+      eventTag: "#eventName Tennis Wedtips En Voorspellingen WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -628,7 +621,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         De ${eventName} gaat verder met veel interessante wedstrijden op het ${eventDay} schema. 
          Laten we eens kijken naar alle carrière-, prestatie- en onderlinge statistieken voor de wedstrijd en kijken of ${playerOne} of ${playerTwo} naar verwachting zal winnen.
          </p>`.replace(/\n/g, " ")}
          
@@ -677,7 +669,7 @@ const postTemplate = [
       categoryId: 9269,
       title: "#eventName Tahminler: #playerOne vs #playerTwo - #eventDate",
       playerTag: "#playerName Tahminleri",
-      eventTag: "Tenis Tahminleri WTA",
+      eventTag: "#eventName Tenis Tahminleri WTA",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -713,7 +705,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         ${eventName}, ${eventDay} programında birçok ilginç maçla devam ediyor. 
          Maçın tüm kariyer, performans ve kafa kafaya istatistiklerine bir göz atalım ve ${playerOne}'ın mı yoksa ${playerTwo}'un mu kazanmasının beklendiğini öğrenelim.
          </p>`.replace(/\n/g, " ")}
          
@@ -762,7 +753,7 @@ const postTemplate = [
       categoryId: 9270,
       title: "#eventName 预测： #playerOne vs #playerTwo - #eventDate",
       playerTag: "#playerName 预测",
-      eventTag: "WTA 网球预测",
+      eventTag: "#eventName WTA 网球预测",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -798,7 +789,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         年 ${eventName} 的 ${eventDay} 日程安排中将继续举办大量有趣的比赛。 
          让我们看一下比赛的所有职业生涯、表现和交锋统计数据，看看 ${playerOne} 或 ${playerTwo} 是否有望获胜。
          </p>`.replace(/\n/g, " ")}
          
@@ -847,7 +837,7 @@ const postTemplate = [
       categoryId: 9271,
       title: "`توقعات #eventName: #playerOne vs #playerTwo - #eventDate",
       playerTag: "توقعات  #playerName",
-      eventTag: "توقعات اتحاد لاعبي التنس المحترفين للتنس",
+      eventTag: "#eventName توقعات اتحاد لاعبي التنس المحترفين للتنس",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -883,7 +873,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         يستمر حدث ${eventName} لعام مع الكثير من المباريات المثيرة للاهتمام وفقًا لجدول ${eventDay}. 
          دعونا نلقي نظرة على جميع الإحصائيات المهنية والأداء والمواجهات المباشرة للمباراة ونكتشف ما إذا كان ${playerOne} أو ${playerTwo} من المتوقع أن يفوز.
          </p>`.replace(/\n/g, " ")}
          
@@ -933,7 +922,7 @@ const postTemplate = [
       categoryId: 9272,
       title: "#eventName の予測: #playerOne 対 #playerTwo - #eventDate",
       playerTag: "#playerName の予測",
-      eventTag: "WTAテニスの予想",
+      eventTag: "#eventName WTAテニスの予想",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -968,8 +957,7 @@ const postTemplate = [
             </ul>
          </div>
          
-         ${`<p>
-         年の ${eventName} では、${eventDay} のスケジュールで興味深い試合が数多く行われます。 
+         ${`<p> 
          試合のすべてのキャリア、パフォーマンス、対戦成績を見て、${playerOne} と ${playerTwo} のどちらが勝つと予想されるかを調べてみましょう。
          </p>`.replace(/\n/g, " ")}
          
@@ -1019,7 +1007,7 @@ const postTemplate = [
       categoryId: 9273,
       title: "Прогнозы на #eventName: #playerOne против #playerTwo - #eventDate",
       playerTag: "Прогнозы #playerName",
-      eventTag: "Прогнозы WTA на теннис",
+      eventTag: "#eventName Прогнозы WTA на теннис",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -1055,7 +1043,6 @@ const postTemplate = [
          </div>
          
          ${`<p>
-         ${eventName} года продолжается множеством интересных матчей в расписании ${eventDay}. 
          Давайте посмотрим на всю статистику карьеры, выступлений и личных встреч в матче и выясним, кто, как ожидается, выиграет: ${playerOne} или ${playerTwo}.
          </p>`.replace(/\n/g, " ")}
          
@@ -1105,7 +1092,7 @@ const postTemplate = [
       categoryId: 9274,
       title: "#eventName पूर्वानुमान: #playerOne बनाम #playerTwo - #eventDate",
       playerTag: "#playerName भविष्यवाणियाँ`",
-      eventTag: "एटीपी टेनिस भविष्यवाणियाँ",
+      eventTag: "#eventName एटीपी टेनिस भविष्यवाणियाँ",
       contents: function (eventName,
          leads,
          eventAddress,
@@ -1138,7 +1125,6 @@ const postTemplate = [
       </div>
       
       ${`<p>
-         ${eventName} ${eventDay} शेड्यूल पर बहुत सारे दिलचस्प मैचों के साथ जारी है। 
          आइए मैच के सभी करियर, प्रदर्शन और आमने-सामने के आँकड़ों पर एक नज़र डालें और पता करें कि क्या ${playerOne} या ${playerTwo} के जीतने की उम्मीद है।
       </p>`.replace(/\n/g, " ")}
       
