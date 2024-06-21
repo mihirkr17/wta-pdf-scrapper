@@ -203,7 +203,7 @@ function findPlayerNames(inputString) {
 }
 
 
-function extractMatchInfo(text, eventDetails) {
+function extractMatchInfo(text, tournamentName, tournamentLocation) {
 
    const splittedTexts = text?.split("\n")?.filter(line => line?.trim().length !== 0);
 
@@ -223,15 +223,14 @@ function extractMatchInfo(text, eventDetails) {
    let paragraphTracker = false;
    let paragraphHeadTracker = false;
 
-   const [eventName = "", eventAddress = ""] = eventDetails?.split("|").map(str => str.trim());
    let eventDay = "";
    let eventDate = "";
    let eventYear = "";
 
    // regex patterns 1
-   const targetDateDayYearRegex = /MATCH NOTES [–|-|–] DAY \d+ [–|-|–]/i;
+   const targetDateDayYearRegex = /MATCH NOTES [–|-|–] (DAY \d+|QUARTERFINALS) [–|-|–]/i;
    const dateRegex = /\b\w+day\b[, -]?\s+(\w+)\s+(\d{1,2})[, -]?\s+(\d{4})/i;
-   const dayRegex = /Day \d+/i;
+   const dayRegex = /(Day \d+|QUARTERFINALS)/i;
    const yearRegex = /\d{4}/i;
 
 
@@ -312,8 +311,6 @@ function extractMatchInfo(text, eventDetails) {
       // }
    }
 
-
-
    // Splitting 3 sections 
    const paragraphs = paragraph?.split("paragraphBreakHere");
 
@@ -391,9 +388,9 @@ function extractMatchInfo(text, eventDetails) {
 
       const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
 
-      const eventHeadingTwo = `${eventDay} - ${eventDate}, ${eventAddress}.`;
+      const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`;
 
-      if (tournamentNew[0] && eventDay && eventDate && eventName && eventAddress) {
+      if (tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation) {
 
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
@@ -405,14 +402,14 @@ function extractMatchInfo(text, eventDetails) {
             round: player?.round,
             eventDate: capitalizeFirstLetterOfEachWord(eventDate),
             eventDay: capitalizeFirstLetterOfEachWord(eventDay),
-            eventName: eventName,
+            eventName: tournamentName,
             eventHeadingTwo: capitalizeFirstLetterOfEachWord(eventHeadingTwo?.trim()),
-            eventAddress: eventAddress,
+            eventAddress: tournamentLocation,
             eventYear
          });
       }
    }
-   return results;
+   return results.filter(e => e?.player1.trim().length > 0);
 }
 
 function compareAndSeparatePdf(newMediaPdf, fixedMediaPdf) {

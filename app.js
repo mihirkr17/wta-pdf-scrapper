@@ -36,51 +36,67 @@ const { constant } = require("./config");
          throw new Error(`ERROR: Post status must be set as "POST_STATUS=publish or future or draft or pending or private" in .env`);
       }
 
-      if (!constant?.authorId || !(/[0-9]/g).test(constant?.authorId)) {
-         throw new Error(`ERROR: Author id must be set as "AUTHOR_ID=12345" in .env`);
+      if (!constant?.authorIdSg || !(/[0-9]/g).test(constant?.authorIdSg) || !constant?.authorIdMs || !(/[0-9]/g).test(constant?.authorIdMs)) {
+         throw new Error(`ERROR: Author id must be set as "AUTHOR_ID_SG=12345 | AUTHOR_ID_MS=12345" in .env`);
       }
 
-      // if (!["ON", "OFF"].includes(constant?.scheduleAction)) {
-      //    throw new Error(`ERROR: Schedule action must be set as "SCHEDULE_ACTION=ON or OFF" in .env`);
-      // }
 
-      // const isScheduleTimeValueDigit = (/[2-9]/g).test(constant?.scheduleTime);
+      const sites = [
+         // {
+         //    id: 1,
+         //    siteName: "stevegtennis",
+         //    nick: "sg",
+         //    domain: constant?.domainSg,
+         //    authToken: constant?.authTokenSg,
+         //    authorId: constant?.authorIdSg,
+         //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+         // },
+         {
+            id: 2,
+            siteName: "matchstat",
+            nick: "ms",
+            domain: constant?.domainMs,
+            authToken: constant?.authTokenMs,
+            authorId: constant?.authorIdMs,
+            chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
+         }
+      ];
 
-      // if (!isScheduleTimeValueDigit) {
-      //    throw new Error(`ERROR: Schedule time must be set as "SCHEDULE_TIME=2 to 9" in .env.`);
-      // }
-      // const scheduleTime = parseInt(constant?.scheduleTime);
-
-      // const scheduleTimeLabel = constant?.scheduleTimeLabel;
-
-      // if (!["minutes", "hours"].includes(scheduleTimeLabel)) {
-      //    throw new Error(`ERROR: Schedule format must be set as "SCHEDULE_TIME_LABEL=minutes or hours" in .env.`);
-      // }
-
-      // const scheduleJobTime = scheduleTimeLabel === "minutes" ? `*/${scheduleTime} * * * *` : `0 */${scheduleTime} * * *`;
+      let mediaNotes = [
+         {
+            tournamentName: "Ecotrans Ladies Open",
+            tournamentLocation: "Berlin, Germany",
+            pdfLinks: ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/2012_QF.pdf"]
+         }
+      ];
 
 
-      const result = await init();
+      const lengthOfMediaNoteLinks = mediaNotes.length || 0;
 
-      consoleLogger(`${result?.message}`);
+      if (lengthOfMediaNoteLinks <= 0) {
+         consoleLogger(`Sorry no media note urls available right now!`);
+         return;
+      }
 
+      // Operation will run here
+      for (const site of sites) {
+         consoleLogger(`Running ${site?.siteName} site.`);
+         consoleLogger(`Script started for ${site?.domain}.`);
 
-      // schedule.scheduleJob(scheduleJobTime, async function () {
-      //    try {
-      //       const isSchedule = constant?.scheduleAction === "ON" ? true : false;
+         for (const note of mediaNotes) {
+            const links = note?.pdfLinks;
 
-      //       consoleLogger(`Function will run every ${scheduleTime} ${scheduleTimeLabel}.`);
-
-      //       if (isSchedule) {
-      //          const result = await init();
-      //          consoleLogger(`${result?.message}`);
-      //       } else {
-      //          consoleLogger("Schedule off.");
-      //       }
-      //    } catch (error) {
-      //       throw error;
-      //    }
-      // });
+            if (Array.isArray(links) && links.length >= 1) {
+               const firstLink = links?.[0];
+               const result = await init(site, {
+                  tournamentLink: firstLink,
+                  tournamentLocation: note?.tournamentLocation,
+                  tournamentName: note?.tournamentName
+               });
+               consoleLogger(`${result?.message} for ${site?.siteName}`);
+            }
+         }
+      }
 
    } catch (error) {
       consoleLogger(error?.message);

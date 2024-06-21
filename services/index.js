@@ -41,13 +41,11 @@ async function getPostTagIdsOfWP(url, tags, token) {
             } else {
                tagIds.push(result?.id);
             }
-
-            await delay();
          } catch (error) {
             throw new Error(`Error In getPostTagIdsOfWP: ${error?.message}`);
          }
       }
-      return tagIds;
+      return tagIds.filter(e => e);
    })();
 }
 
@@ -58,7 +56,7 @@ async function downloadPDF(url) {
       consoleLogger(`Got pdf buffered values. Parsing pdf now...`);
       const pdfContents = await PDFParser(buffers);
       return pdfContents.text;
-   })();
+   }, 10)();
 }
 
 
