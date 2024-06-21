@@ -120,7 +120,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
                   const playerVsPlayerTag = resource?.playerVsPlayerTag ?
                      resource?.playerVsPlayerTag?.replace("#playerOneSurname", playerOneSurname)?.replace("#playerTwoSurname", playerTwoSurname) : "";
 
-                  const eventTag = resource?.eventTag?.replace("#eventName", infos?.nick === "sg" ? eventName : plainEventName);
+                  const eventTag = resource?.eventTag?.replace("#eventName", siteInfo?.nick === "sg" ? eventName : plainEventName);
 
 
                   const [eventHeadingTwoTranslate, eventAddressTranslate, eventDayTranslate, eventDateTranslate] = await Promise.all([
@@ -133,14 +133,14 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
                   let newTitle = "";
 
-                  if (infos?.nick === "sg") {
+                  if (siteInfo?.nick === "sg") {
                      newTitle = resource?.title?.replace("#eventName", eventName)
                         ?.replace("#playerOne", playerOne)
                         ?.replace("#playerTwo", playerTwo)
                         ?.replace("#eventDate", eventDateTranslate);
                   }
 
-                  if (infos?.nick === "ms") {
+                  if (siteInfo?.nick === "ms") {
                      newTitle = resource?.title?.replace("#eventName", plainEventName)
                         ?.replace("#playerOneSurname", playerOneSurname)
                         ?.replace("#playerTwoSurname", playerTwoSurname)
@@ -201,7 +201,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
                      slug,
                      content: htmlContent,
                      status: constant?.postStatus,
-                     author: parseInt(infos?.authorId),
+                     author: parseInt(siteInfo?.authorId),
                      tags: tagIds,
                      featured_media: playerOneMedia?.mediaId || playerTwoMedia?.mediaId,
                      categories: [categoryId]
