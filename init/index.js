@@ -30,7 +30,7 @@ translate.key = process.env.LIBRE_TRANSLATE_KEY;
 async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", tournamentLocation = "" }) {
    try {
 
-      const resources = siteInfo?.nick === "sg" ? stevegtennisTemplate.slice(0, 1) : matchstatsTemplate.slice(0, 1);
+      const resources = siteInfo?.nick === "sg" ? stevegtennisTemplate : matchstatsTemplate;
 
       if (!resources || !Array.isArray(resources)) {
          throw new Error(`Resource not found.`);
