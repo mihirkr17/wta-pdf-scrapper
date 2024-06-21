@@ -69,7 +69,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
-      for (const matchContent of matchedContents) {
+      for (const matchContent of matchedContents.slice(0, 1)) {
          const playerOne = matchContent?.player1;
          const playerTwo = matchContent?.player2;
          const player1slug = matchContent?.player1slug;
