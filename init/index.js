@@ -95,15 +95,15 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
          try {
             let playerOneMedia = {}, playerTwoMedia = {};
 
-            playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, player1slug), token);
-            playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, player2slug), token);
+            playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_${player1slug}`), token);
+            playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_${player2slug}`), token);
 
             if (!playerOneMedia?.mediaId) {
-               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_generic${Math.floor(Math.random() * 6) + 1}`), token);
+               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), token);
             }
 
             if (!playerTwoMedia?.mediaId) {
-               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_generic${Math.floor(Math.random() * 6) + 1}`), token);
+               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), token);
             }
 
             const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], playerOneSurname, playerTwoSurname);
