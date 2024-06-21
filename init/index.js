@@ -30,7 +30,7 @@ translate.key = process.env.LIBRE_TRANSLATE_KEY;
 async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", tournamentLocation = "" }) {
    try {
 
-      const resources = siteInfo?.nick === "sg" ? stevegtennisTemplate : matchstatsTemplate.slice(0, 1);
+      const resources = siteInfo?.nick === "sg" ? stevegtennisTemplate.slice(0, 1) : matchstatsTemplate.slice(0, 1);
 
       if (!resources || !Array.isArray(resources)) {
          throw new Error(`Resource not found.`);
@@ -69,7 +69,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
-      for (const matchContent of matchedContents.slice(0, 1)) {
+      for (const matchContent of matchedContents) {
          const playerOne = matchContent?.player1;
          const playerTwo = matchContent?.player2;
          const player1slug = matchContent?.player1slug;
