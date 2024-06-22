@@ -41,28 +41,6 @@ const { getPdfLinks } = require("./services");
          throw new Error(`ERROR: Author id must be set as "AUTHOR_ID_SG=12345 | AUTHOR_ID_MS=12345" in .env`);
       }
 
-
-      const sites = [
-         {
-            id: 1,
-            siteName: "stevegtennis",
-            nick: "sg",
-            domain: constant?.domainSg,
-            authToken: constant?.authTokenSg,
-            authorId: constant?.authorIdSg,
-            chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-         },
-         {
-            id: 2,
-            siteName: "matchstat",
-            nick: "ms",
-            domain: constant?.domainMs,
-            authToken: constant?.authTokenMs,
-            authorId: constant?.authorIdMs,
-            chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
-         }
-      ];
-
       let mediaNotes = await getPdfLinks("https://www.wtatennis.com/match-notes");
 
       // [
@@ -82,23 +60,24 @@ const { getPdfLinks } = require("./services");
       }
 
       // Operation will run here
-      for (const site of sites) {
-         consoleLogger(`Running ${site?.siteName} site.`);
-         consoleLogger(`Script started for ${site?.domain}.`);
+      for (const note of mediaNotes) {
+         const link = note?.pdfLink;
 
-         for (const note of mediaNotes) {
-            const link = note?.pdfLink;
-
-            if (link && link.length >= 1) {
-               const result = await init(site, {
-                  tournamentLink: link,
-                  tournamentLocation: note?.tournamentLocation,
-                  tournamentName: note?.tournamentName
-               });
-               consoleLogger(`${result?.message} for ${site?.siteName}`);
-            }
+         if (link && link.length >= 1) {
+            const result = await init({
+               tournamentLink: link,
+               tournamentLocation: note?.tournamentLocation,
+               tournamentName: note?.tournamentName
+            });
+            consoleLogger(`${result?.message}`);
          }
       }
+      // for (const site of sites) {
+      //    consoleLogger(`Running ${site?.siteName} site.`);
+      //    consoleLogger(`Script started for ${site?.domain}.`);
+
+
+      // }
 
    } catch (error) {
       consoleLogger(error?.message);

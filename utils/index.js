@@ -13,9 +13,9 @@ function getSurnameOfPlayer(fullName) {
    return nameParts[nameParts.length - 1];
 }
 
-function imgWrapper(arr, playerOneSurname, playerTwoSurname) {
+function imgWrapper(arr, player1Surname, player2Surname) {
    return arr.map((item, index) => {
-      return (`<img src="${item?.sourceUrl}" title="${index === 0 ? playerOneSurname + " vs " + playerTwoSurname : playerTwoSurname + " vs " + playerOneSurname}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
+      return (`<img src="${item?.sourceUrl}" title="${index === 0 ? player1Surname + " vs " + player2Surname : player2Surname + " vs " + player1Surname}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
    });
 }
 
@@ -327,22 +327,24 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
 
    // Looping paragraphs
    for (const para of paragraphs) {
-      const player = findPlayerNames(para?.trim()?.split("\n")[0] || "");
+      const { player1 = "", player2 = "", leads = "", round } = findPlayerNames(para?.trim()?.split("\n")[0] || "");
 
-      const matchLeads = player?.leads ? player?.leads : "";
+      if (player1.length === 0 || player2.length === 0) {
+         continue;
+      }
 
-      const parts = matchLeads && matchLeads?.split(/\s(?=\d)/);
+      const parts = leads && leads?.split(/\s(?=\d)/);
 
       const leadKey = parts[0] ? parts[0] : "";
       const leadValue = parts[1] ? parts[1] : "";
 
-      const regex = new RegExp(matchLeads, 'g');
+      const regex = new RegExp(leads, 'g');
 
       const regexWith = `${leadKey}${leadValue ? " head to head " + leadValue + "." : "."}`;
       const slugRegex = /[-\s]/g;
 
-      const p1r = player?.player1?.replace(/ /g, "|");
-      const p2r = player?.player2?.replace(/ /g, "|");
+      const p1r = player1?.replace(/ /g, "|");
+      const p2r = player2?.replace(/ /g, "|");
 
       const regex2 = new RegExp(`${p1r}|${p2r}`, "gi");
 
@@ -357,11 +359,11 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
             let player2Tour = splitStr[2]?.replace(/MATCH NOTES[\s\S]*/gi, "");
 
             let playerOneTournamentLines = player1Tour?.split('\n')?.filter(e => e?.trim()?.length > 0);
-            playerOneTournamentLines && playerOneTournamentLines?.unshift(player?.player1 + " Tournament History:\n");
+            playerOneTournamentLines && playerOneTournamentLines?.unshift(player1 + " Tournament History:\n");
             const pt1 = playerOneTournamentLines?.join(" ");
 
             let playerTwoTournamentLines = player2Tour?.split('\n')?.filter(e => e?.trim()?.length > 0);
-            playerTwoTournamentLines && playerTwoTournamentLines?.unshift(player?.player2 + " Tournament History:\n");
+            playerTwoTournamentLines && playerTwoTournamentLines?.unshift(player2 + " Tournament History:\n");
             const pt2 = playerTwoTournamentLines?.join(" ");
 
             return (pt1 || "") + "\n\n" + (pt2 || "");
@@ -372,23 +374,26 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
 
       const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
 
-
-
-      if (tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation) {
+      if (newParagraph && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation) {
 
          eventDate = capitalizeFirstLetterOfEachWord(eventDate);
          eventDay = capitalizeFirstLetterOfEachWord(eventDay);
          const eventAddress = capitalizeFirstLetterOfEachWord(tournamentLocation);
 
+         const player1Surname = getSurnameOfPlayer(player1);
+         const player2Surname = getSurnameOfPlayer(player2);
+
          const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`.trim();
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
-            player1: player?.player1,
-            player2: player?.player2,
-            player1slug: player?.player1?.toLowerCase()?.replace(slugRegex, "_"),
-            player2slug: player?.player2?.toLowerCase()?.replace(slugRegex, "_"),
-            leads: matchLeads,
-            round: player?.round,
+            player1,
+            player2,
+            player1Surname,
+            player2Surname,
+            player1slug: player1?.toLowerCase()?.replace(slugRegex, "_"),
+            player2slug: player2?.toLowerCase()?.replace(slugRegex, "_"),
+            leads,
+            eventRound: round,
             eventDate,
             eventDay,
             eventName: capitalizeFirstLetterOfEachWord(tournamentName),

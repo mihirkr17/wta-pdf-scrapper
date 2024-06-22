@@ -36,40 +36,45 @@ const translate = (...args) =>
 translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
-async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", tournamentLocation = "" }) {
+const sites = [
+   {
+      id: 1,
+      siteName: "stevegtennis",
+      siteCode: "sg",
+      siteDomain: constant?.domainSg,
+      authToken: constant?.authTokenSg,
+      authorId: constant?.authorIdSg,
+      templates: stevegtennisTemplate,
+      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   },
+   {
+      id: 2,
+      siteName: "matchstat",
+      siteCode: "ms",
+      siteDomain: constant?.domainMs,
+      authToken: constant?.authTokenMs,
+      authorId: constant?.authorIdMs,
+      templates: matchstatsTemplate,
+      chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
+   }
+];
+
+async function init({ tournamentLink = "", tournamentName = "", tournamentLocation = "" }) {
    try {
 
+      let postCounter = 0;
+
       if (typeof tournamentLink !== "string" || !isValidPdfUrl(tournamentLink)) {
-         throw new Error("Invalid tournament link.");
+         return { message: "Invalid tournament link." };
       }
 
       if (typeof tournamentName !== "string" || tournamentName.length === 0) {
-         throw new Error("Required tournament name.");
+         return { message: "Invalid tournament name." };
       }
 
       if (typeof tournamentLocation !== "string" || tournamentLocation.length === 0) {
-         throw new Error("Required tournament location.");
+         return { message: "Invalid tournament location." };
       }
-
-
-      const resources = siteInfo?.nick === "sg" ? stevegtennisTemplate : matchstatsTemplate;
-
-      if (!resources || !Array.isArray(resources)) {
-         throw new Error(`Resource not found.`);
-      }
-
-      consoleLogger("Post template found.");
-
-      // Basic wordpress authentication
-      const token = siteInfo?.authToken;
-
-      if (!token) {
-         throw new Error(`Sorry! Auth token not found.`);
-      }
-
-      consoleLogger(`Auth token found.`);
-
-      let postCounter = 0;
 
       consoleLogger(`Downloading pdf from ${tournamentLink}.`);
 
@@ -90,162 +95,182 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
-      for (const matchContent of matchedContents) {
-         const playerOne = matchContent?.player1;
-         const playerTwo = matchContent?.player2;
-         const player1slug = matchContent?.player1slug;
-         const player2slug = matchContent?.player2slug;
-         const text = matchContent?.content;
-         const eventName = matchContent?.eventName;
-         const eventDate = matchContent?.eventDate;
-         const eventDay = matchContent?.eventDay;
-         const eventAddress = matchContent?.eventAddress;
-         const eventRound = matchContent?.round || null;
-         const eventHeadingTwo = matchContent?.eventHeadingTwo;
-         const leads = matchContent?.leads;
-         const playerOneSurname = getSurnameOfPlayer(playerOne);
-         const playerTwoSurname = getSurnameOfPlayer(playerTwo);
-         const eventYear = matchContent?.eventYear;
-         const plainEventName = eventName?.replace(/\d/g, '')?.trim();
+      // Rest codes
 
-         if (!playerOne || !playerTwo || !eventName) {
-            consoleLogger(`Some fields are missing.`);
+      for (const site of sites) {
+         const { siteDomain, siteName, chatgptCommand, templates, siteCode, authToken, authorId } = site;
+
+         consoleLogger(`Running ${siteDomain}.`);
+
+         if (!authToken) {
+            consoleLogger(`Sorry! Auth token not found from ${siteName}.`);
             continue;
          }
 
-         try {
-            let playerOneMedia = {}, playerTwoMedia = {};
+         consoleLogger(`Auth token found from ${siteName}.`);
 
-            playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_${player1slug}`), token);
-            playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_${player2slug}`), token);
+         if (!templates || !Array.isArray(templates)) {
+            consoleLogger(`Post template not found from ${siteName}.`);
+            continue
+         }
 
-            if (!playerOneMedia?.mediaId) {
-               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), token);
+         consoleLogger(`Post template found from ${siteName}.`);
+
+         for (const matchContent of matchedContents) {
+
+            const {
+               player1, player2, player1slug, player2slug, player1Surname, player2Surname,
+               content, eventName, eventAddress, eventDay, eventRound, eventHeadingTwo,
+               leads, eventYear, eventDate
+            } = matchContent;
+
+            const text = content;
+            const plainEventName = eventName?.replace(/\d/g, '')?.trim();
+
+            if (!player1 || !player2 || !eventName || !eventAddress || !eventDate || !content) {
+               consoleLogger(`Some fields are missing. Content skipped.`);
+               continue;
             }
 
-            if (!playerTwoMedia?.mediaId) {
-               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteInfo?.domain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), token);
-            }
+            try {
+               let playerOneMedia = {}, playerTwoMedia = {};
 
-            const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], playerOneSurname, playerTwoSurname);
+               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_${player1slug}`), authToken);
+               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_${player2slug}`), authToken);
 
-            await Promise.all(resources.map(async (resource) => {
-
-               let newTitle = "";
-               try {
-                  if (!resource?.categoryId || !resource?.category || !resource?.language || !resource?.eventTag) {
-                     throw new Error("Post skipped. Required [ categoryId, category, language, eventTag ]");
-                  }
-
-                  const categoryId = resource?.categoryId;
-                  const playerOneTag = resource?.playerTag?.replace("#playerName", playerOne);
-                  const playerTwoTag = resource?.playerTag?.replace("#playerName", playerTwo);
-                  const playerVsPlayerTag = resource?.playerVsPlayerTag ?
-                     resource?.playerVsPlayerTag?.replace("#playerOneSurname", playerOneSurname)?.replace("#playerTwoSurname", playerTwoSurname) : "";
-
-                  const eventTag = resource?.eventTag?.replace("#eventName", siteInfo?.nick === "sg" ? eventName : plainEventName);
-
-                  const [eventHeadingTwoTranslate, eventAddressTranslate, eventDayTranslate, eventDateTranslate] = await Promise.all([
-                     translate(eventHeadingTwo, { from: 'en', to: resource?.languageCode }),
-                     translate(eventAddress, { from: 'en', to: resource?.languageCode }),
-                     translate(eventDay, { from: 'en', to: resource?.languageCode }),
-                     translate(eventDate, { from: 'en', to: resource?.languageCode }),
-                  ]);
-
-
-                  // For Stevegtennis site
-                  if (siteInfo?.nick === "sg") {
-                     newTitle = resource?.title?.replace("#eventName", eventName)
-                        ?.replace("#playerOne", playerOne)
-                        ?.replace("#playerTwo", playerTwo)
-                        ?.replace("#eventDate", eventDateTranslate);
-                  }
-
-                  // For Matchstats site
-                  if (siteInfo?.nick === "ms") {
-                     newTitle = resource?.title?.replace("#eventName", plainEventName)
-                        ?.replace("#playerOneSurname", playerOneSurname)
-                        ?.replace("#playerTwoSurname", playerTwoSurname)
-                        ?.replace("#eventYear", eventYear);
-                  }
-
-                  let title = capitalizeFirstLetterOfEachWord(newTitle);
-                  title = title?.replace(/Wta/gi, "WTA");
-
-                  // Generating post slug
-                  const slug = slugMaker(title);
-
-
-                  // Finding duplicate post by slug
-                  const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteInfo?.domain, slug), token);
-
-                  if (isUniquePost) {
-                     consoleLogger(`Post already exists [ SLUG: ${slug} ].`);
-                     return;
-                  }
-
-                  consoleLogger(`Post for ${slug} starting...`);
-
-                  consoleLogger("Tags creating...");
-
-                  const tagIds = await getPostTagIdsOfWP(constant?.tagUri(siteInfo?.domain), [playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag], token);
-
-                  if (!Array.isArray(tagIds) || tagIds.length === 0) {
-                     throw new Error(`Tags are not created. Terminate the request.`);
-                  }
-
-                  consoleLogger(`Tags created. Id's: ${tagIds}`);
-
-                  consoleLogger("Paraphrase starting...");
-                  const chatgptCommand = siteInfo?.chatgptCommand?.replace("#language", resource?.language)?.replace("#texts", text);
-                  const paraphrasedBlog = await paraphraseContents(chatgptCommand);
-                  consoleLogger("Paraphrased done.");
-
-                  const htmlContent = resource?.contents(
-                     eventName,
-                     leads,
-                     eventAddressTranslate,
-                     playerOne,
-                     playerTwo,
-                     eventDateTranslate,
-                     eventHeadingTwoTranslate,
-                     eventRound,
-                     eventDayTranslate,
-                     paraphrasedBlog,
-                     player1slug,
-                     player2slug,
-                     imageWrapperHtml,
-                     playerOneSurname,
-                     playerTwoSurname,
-                     eventYear,
-                     plainEventName
-                  );
-
-                  consoleLogger(`Post creating...`);
-                  await createPostOfWP(constant?.postUri(siteInfo?.domain), token, {
-                     title,
-                     slug,
-                     content: htmlContent,
-                     status: constant?.postStatus,
-                     author: parseInt(siteInfo?.authorId),
-                     tags: tagIds,
-                     featured_media: playerOneMedia?.mediaId || playerTwoMedia?.mediaId,
-                     categories: [categoryId]
-                  });
-                  consoleLogger(`Post created successfully.`);
-
-                  postCounter += 1;
-               } catch (error) {
-                  consoleLogger(`ERROR: ${error?.message}.`);
-                  await delay(1000);
+               if (!playerOneMedia?.mediaId) {
+                  playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), authToken);
                }
-            }));
-         } catch (error) {
-            consoleLogger(`Error In Contents Model: ${error?.message}. Post skipped.`);
-            await delay(1000);
-            continue;
+
+               if (!playerTwoMedia?.mediaId) {
+                  playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), authToken);
+               }
+
+               // Generate image wrapper
+               const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], player1Surname, player2Surname);
+
+               await Promise.all(templates.map(async (template) => {
+
+                  const { tpCategoryId, tpCategory, tpLanguage, tpLanguageCode, tpEventTag, tpPlayerTag, tpPlayerVsPlayerTag, tpTitle, tpContents } = template;
+
+                  let newTitle = "";
+                  try {
+                     if (!tpCategoryId || !tpCategory || !tpLanguage || !tpEventTag) {
+                        throw new Error("Post skipped. Required [ categoryId, category, language, eventTag ]");
+                     }
+
+                     const playerOneTag = tpPlayerTag?.replace("#playerName", player1);
+                     const playerTwoTag = tpPlayerTag?.replace("#playerName", player2);
+                     const playerVsPlayerTag = tpPlayerVsPlayerTag ?
+                        tpPlayerVsPlayerTag?.replace("#player1Surname", player1Surname)?.replace("#player2Surname", player2Surname) : "";
+
+                     const eventTag = tpEventTag?.replace("#eventName", siteCode === "sg" ? eventName : plainEventName);
+
+                     const [eventHeadingTwoTranslate, eventAddressTranslate, eventDayTranslate, eventDateTranslate] = await Promise.all([
+                        translate(eventHeadingTwo, { from: 'en', to: tpLanguageCode }),
+                        translate(eventAddress, { from: 'en', to: tpLanguageCode }),
+                        translate(eventDay, { from: 'en', to: tpLanguageCode }),
+                        translate(eventDate, { from: 'en', to: tpLanguageCode }),
+                     ]);
+
+
+                     // For Stevegtennis site
+                     if (siteCode === "sg") {
+                        newTitle = tpTitle?.replace("#eventName", eventName)
+                           ?.replace("#player1", player1)
+                           ?.replace("#player2", player2)
+                           ?.replace("#eventDate", eventDateTranslate);
+                     }
+
+                     // For Matchstats site
+                     if (siteCode === "ms") {
+                        newTitle = tpTitle?.replace("#eventName", plainEventName)
+                           ?.replace("#player1Surname", player1Surname)
+                           ?.replace("#player2Surname", player2Surname)
+                           ?.replace("#eventYear", eventYear);
+                     }
+
+                     let title = capitalizeFirstLetterOfEachWord(newTitle);
+                     title = title?.replace(/Wta/gi, "WTA");
+
+                     // Generating post slug
+                     const slug = slugMaker(title);
+
+
+                     // Finding duplicate post by slug
+                     const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteDomain, slug), authToken);
+
+                     if (isUniquePost) {
+                        consoleLogger(`Post already exists [ SLUG: ${slug} ].`);
+                        return;
+                     }
+
+                     consoleLogger(`Post for ${slug} starting...`);
+
+                     consoleLogger("Tags creating...");
+
+                     const tagIds = await getPostTagIdsOfWP(constant?.tagUri(siteDomain), [playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag], authToken);
+
+                     if (!Array.isArray(tagIds) || tagIds.length === 0) {
+                        throw new Error(`Tags are not created. Terminate the request.`);
+                     }
+
+                     consoleLogger(`Tags created. Id's: ${tagIds}`);
+
+                     consoleLogger("Paraphrase starting...");
+                     const newChatgptCommand = chatgptCommand?.replace("#language", tpLanguage)?.replace("#texts", text);
+                     const paraphrasedBlog = await paraphraseContents(newChatgptCommand);
+                     consoleLogger("Paraphrased done.");
+
+                     const htmlContent = tpContents(
+                        eventName,
+                        leads,
+                        eventAddressTranslate,
+                        player1,
+                        player2,
+                        eventDateTranslate,
+                        eventHeadingTwoTranslate,
+                        eventRound,
+                        eventDayTranslate,
+                        paraphrasedBlog,
+                        player1slug,
+                        player2slug,
+                        imageWrapperHtml,
+                        player1Surname,
+                        player2Surname,
+                        eventYear,
+                        plainEventName
+                     );
+
+                     consoleLogger(`Post creating...`);
+                     await createPostOfWP(constant?.postUri(siteDomain), authToken, {
+                        title,
+                        slug,
+                        content: htmlContent,
+                        status: constant?.postStatus,
+                        author: parseInt(authorId),
+                        tags: tagIds,
+                        featured_media: playerOneMedia?.mediaId || playerTwoMedia?.mediaId,
+                        categories: [tpCategoryId]
+                     });
+                     consoleLogger(`Post created successfully.`);
+
+                     postCounter += 1;
+                  } catch (error) {
+                     consoleLogger(`ERROR: ${error?.message}.`);
+                     await delay(1000);
+                  }
+               }));
+            } catch (error) {
+               consoleLogger(`Error In Contents: ${error?.message}. Post skipped.`);
+               await delay(1000);
+               continue;
+            }
          }
       }
+
+
+      // Rest codes
 
       return { message: `${postCounter >= 1 ? `Total ${postCounter} posts created.` : "No posts have been created."} Operation done.` };
    } catch (error) {
