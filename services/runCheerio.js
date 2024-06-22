@@ -1,40 +1,34 @@
 const cheerio = require('cheerio');
-const { httpsGetRequest, retryOperation } = require('../utils');
+const { httpsGetRequest, retryOperation, xhrGetRequest } = require('../utils');
 
 async function runCheerio(url) {
    return retryOperation(async () => {
-      const data = await httpsGetRequest(url);
+      const data = await xhrGetRequest(url); // httpsGetRequest(url);
+
 
       if (!data) {
          throw new Error("No response from atp media notes.");
       }
 
-      console.log(data);
-
       const $ = cheerio.load(data);
 
-      // Select the second <p> element within the specified container
-      let mediaUrlContainer = $("div.static-article__body.article-body.wrapper > p").eq(1);
 
-      // Select all <a> elements within the chosen <p> element
-      const mediaPdf = mediaUrlContainer.find("a");
+      let arr = 3;
 
-      // Extracting event details from the first <strong> element within the specified container
-      let eventDetails = $("div.static-article__body.article-body.wrapper > p > strong").first().text();
+      const wta = []; // { eventDetails1, pdfLink1, pdfText1 };
+      for (let i = 0; i < arr; i++) {
+         let eventDetails = $("div.static-article__body.article-body.wrapper > p > strong").eq(i).text() || "";
+         let pdfContainerIndex = (i * 2) + 1;
 
+         let pdfLink = $("div.static-article__body.article-body.wrapper > p").eq(pdfContainerIndex).find("a").last().attr("href") || "";
+         let pdfText = $("div.static-article__body.article-body.wrapper > p").eq(pdfContainerIndex).find("a").last().text() || "";
+         eventDetails = eventDetails.length > 0 && eventDetails?.split("|");
 
-      const links = [];
+         wta.push({ tournamentName: eventDetails?.[0].trim(), tournamentLocation: eventDetails?.[1]?.trim(), pdfLink, pdfText });
+      }
 
-      if (mediaPdf) {
-         mediaPdf.each((_, pdf) => {
-            const aLink = $(pdf)?.attr("href");
-            const title = $(pdf)?.text();
-
-            if ((/Day \d/i).test(title)) {
-               links.push(aLink)
-            }
-         });
-         return { links: links.reverse(), eventDetails };
+      if (Array.isArray(wta)) {
+         return wta.filter(e => (/(Day \d+|QF|SF)/gi).test(e.pdfText));
       }
    })();
 }

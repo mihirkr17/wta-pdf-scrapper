@@ -11,6 +11,7 @@ const {
 // const path = require("path");
 const init = require("./init");
 const { constant } = require("./config");
+const { getPdfLinks } = require("./services");
 
 
 // const app = express();
@@ -62,13 +63,15 @@ const { constant } = require("./config");
          }
       ];
 
-      let mediaNotes = [
-         {
-            tournamentName: "Ecotrans Ladies Open",
-            tournamentLocation: "Berlin, Germany",
-            pdfLinks: ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/2012_QF.pdf"]
-         }
-      ];
+      let mediaNotes = await getPdfLinks("https://www.wtatennis.com/match-notes");
+
+      // [
+      //    {
+      //       tournamentName: "Ecotrans Ladies Open",
+      //       tournamentLocation: "Berlin, Germany",
+      //       pdfLink: ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/2012_QF.pdf"]
+      //    }
+      // ];
 
 
       const lengthOfMediaNoteLinks = mediaNotes.length || 0;
@@ -84,12 +87,11 @@ const { constant } = require("./config");
          consoleLogger(`Script started for ${site?.domain}.`);
 
          for (const note of mediaNotes) {
-            const links = note?.pdfLinks;
+            const link = note?.pdfLink;
 
-            if (Array.isArray(links) && links.length >= 1) {
-               const firstLink = links?.[0];
+            if (link && link.length >= 1) {
                const result = await init(site, {
-                  tournamentLink: firstLink,
+                  tournamentLink: link,
                   tournamentLocation: note?.tournamentLocation,
                   tournamentName: note?.tournamentName
                });

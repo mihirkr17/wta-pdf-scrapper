@@ -13,6 +13,7 @@ const PDFParser = require('pdf-parse');
 
 async function getPdfLinks(url) {
    try {
+      return await runCheerio(url);
       return await runPuppeteer(url);
    } catch (error) {
       return await runCheerio(url);

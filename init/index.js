@@ -1,7 +1,12 @@
-const { constant } = require("../config");
-const postTemplate = require("../resource/postTemplate");
+/**
+ * init/index.js
+ * Author: Mihir Roy
+ * Senior Node Dev
+ */
 
-const { getPdfLinks,
+const { constant } = require("../config");
+
+const {
    createPostOfWP,
    getPostTagIdsOfWP,
    getMediaIdOfWP,
@@ -9,6 +14,8 @@ const { getPdfLinks,
    downloadPDF,
    paraphraseContents
 } = require("../services");
+
+// Template files
 const matchstatsTemplate = require("../templates/matchstatsTemplate");
 const stevegtennisTemplate = require("../templates/stevegtennisTemplate");
 
@@ -17,10 +24,12 @@ const { consoleLogger, extractMatchInfo,
    delay,
    slugMaker,
    capitalizeFirstLetterOfEachWord,
-   getSurnameOfPlayer
+   getSurnameOfPlayer,
+   isValidPdfUrl
 } = require("../utils");
 
 
+// Translate Library
 const translate = (...args) =>
    import('translate').then(({ default: fetch }) => fetch(...args));
 
@@ -30,13 +39,26 @@ translate.key = process.env.LIBRE_TRANSLATE_KEY;
 async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", tournamentLocation = "" }) {
    try {
 
+      if (typeof tournamentLink !== "string" || !isValidPdfUrl(tournamentLink)) {
+         throw new Error("Invalid tournament link.");
+      }
+
+      if (typeof tournamentName !== "string" || tournamentName.length === 0) {
+         throw new Error("Required tournament name.");
+      }
+
+      if (typeof tournamentLocation !== "string" || tournamentLocation.length === 0) {
+         throw new Error("Required tournament location.");
+      }
+
+
       const resources = siteInfo?.nick === "sg" ? stevegtennisTemplate : matchstatsTemplate;
 
       if (!resources || !Array.isArray(resources)) {
          throw new Error(`Resource not found.`);
       }
 
-      consoleLogger("Post template resource found.");
+      consoleLogger("Post template found.");
 
       // Basic wordpress authentication
       const token = siteInfo?.authToken;
@@ -48,7 +70,6 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
       consoleLogger(`Auth token found.`);
 
       let postCounter = 0;
-
 
       consoleLogger(`Downloading pdf from ${tournamentLink}.`);
 
@@ -109,9 +130,11 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
             const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], playerOneSurname, playerTwoSurname);
 
             await Promise.all(resources.map(async (resource) => {
+
+               let newTitle = "";
                try {
                   if (!resource?.categoryId || !resource?.category || !resource?.language || !resource?.eventTag) {
-                     throw new Error("Something went wrong.");
+                     throw new Error("Post skipped. Required [ categoryId, category, language, eventTag ]");
                   }
 
                   const categoryId = resource?.categoryId;
@@ -122,7 +145,6 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
                   const eventTag = resource?.eventTag?.replace("#eventName", siteInfo?.nick === "sg" ? eventName : plainEventName);
 
-
                   const [eventHeadingTwoTranslate, eventAddressTranslate, eventDayTranslate, eventDateTranslate] = await Promise.all([
                      translate(eventHeadingTwo, { from: 'en', to: resource?.languageCode }),
                      translate(eventAddress, { from: 'en', to: resource?.languageCode }),
@@ -131,8 +153,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
                   ]);
 
 
-                  let newTitle = "";
-
+                  // For Stevegtennis site
                   if (siteInfo?.nick === "sg") {
                      newTitle = resource?.title?.replace("#eventName", eventName)
                         ?.replace("#playerOne", playerOne)
@@ -140,6 +161,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
                         ?.replace("#eventDate", eventDateTranslate);
                   }
 
+                  // For Matchstats site
                   if (siteInfo?.nick === "ms") {
                      newTitle = resource?.title?.replace("#eventName", plainEventName)
                         ?.replace("#playerOneSurname", playerOneSurname)
@@ -149,17 +171,22 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
                   let title = capitalizeFirstLetterOfEachWord(newTitle);
                   title = title?.replace(/Wta/gi, "WTA");
+
+                  // Generating post slug
                   const slug = slugMaker(title);
 
+
+                  // Finding duplicate post by slug
                   const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteInfo?.domain, slug), token);
 
                   if (isUniquePost) {
-                     consoleLogger(`Post already exist for ${slug}.`);
+                     consoleLogger(`Post already exists [ SLUG: ${slug} ].`);
                      return;
                   }
 
-                  consoleLogger(`Starting post for ${resource?.language}. Slug: ${slug}. ${eventDay}`);
-                  consoleLogger("Tags generating...");
+                  consoleLogger(`Post for ${slug} starting...`);
+
+                  consoleLogger("Tags creating...");
 
                   const tagIds = await getPostTagIdsOfWP(constant?.tagUri(siteInfo?.domain), [playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag], token);
 
@@ -167,9 +194,8 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
                      throw new Error(`Tags are not created. Terminate the request.`);
                   }
 
-                  consoleLogger(`Tags generated. Ids: ${tagIds}`);
+                  consoleLogger(`Tags created. Id's: ${tagIds}`);
 
-                  await delay();
                   consoleLogger("Paraphrase starting...");
                   const chatgptCommand = siteInfo?.chatgptCommand?.replace("#language", resource?.language)?.replace("#texts", text);
                   const paraphrasedBlog = await paraphraseContents(chatgptCommand);
@@ -210,7 +236,7 @@ async function init(siteInfo = {}, { tournamentLink = "", tournamentName = "", t
 
                   postCounter += 1;
                } catch (error) {
-                  consoleLogger(`Error In Resource Model: ${error?.message}.`);
+                  consoleLogger(`ERROR: ${error?.message}.`);
                   await delay(1000);
                }
             }));

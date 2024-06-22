@@ -314,6 +314,10 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
    // Splitting 3 sections 
    const paragraphs = paragraph?.split("paragraphBreakHere");
 
+   if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
+      return [];
+   }
+
    const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere");
 
    // const seasonHistories = seasonHistory?.split("seasonHistoryBreakHere")?.filter(e => e?.trim());
@@ -348,16 +352,16 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          const subStr = str.substring(matchIndex);
 
          if (regex2.test(subStr)) {
-            let splitStr = str?.split(/PLAYER NOTES\n/gi);
+            let splitStr = str && str?.split(/PLAYER NOTES\n/gi);
             let player1Tour = splitStr[1]?.replace(/CURRENT TOURNAMENT[\s\S]*/gi, "");
             let player2Tour = splitStr[2]?.replace(/MATCH NOTES[\s\S]*/gi, "");
 
             let playerOneTournamentLines = player1Tour?.split('\n')?.filter(e => e?.trim()?.length > 0);
-            playerOneTournamentLines?.unshift(player?.player1 + " Tournament History:\n");
+            playerOneTournamentLines && playerOneTournamentLines?.unshift(player?.player1 + " Tournament History:\n");
             const pt1 = playerOneTournamentLines?.join(" ");
 
             let playerTwoTournamentLines = player2Tour?.split('\n')?.filter(e => e?.trim()?.length > 0);
-            playerTwoTournamentLines?.unshift(player?.player2 + " Tournament History:\n");
+            playerTwoTournamentLines && playerTwoTournamentLines?.unshift(player?.player2 + " Tournament History:\n");
             const pt2 = playerTwoTournamentLines?.join(" ");
 
             return (pt1 || "") + "\n\n" + (pt2 || "");
@@ -366,32 +370,17 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          }
       })?.filter(e => e?.trim()?.length > 0);
 
-
-
-
-      //  Getting season history by player names...
-      // const seasonHistoryNew = seasonHistories && seasonHistories?.map(str => {
-      //    let matchIndex = str?.lastIndexOf("MATCH NOTES");
-      //    const subStr = str?.substring(matchIndex)
-      //    if (regex2.test(subStr)) {
-      //       let splitStr = str?.replace(/VALUE\s?WTA\s?RANK\s?MATCH\s?STATS\s?VALUE\s?WTA\s?RANK\n[\s\S]*/gi, "")?.split("\n")?.filter(e => e?.trim());
-      //       let seasonHistoryHeader = splitStr[0];
-      //       splitStr?.shift();
-      //       seasonHistoryHeader = `${seasonHistoryHeader} of ${player?.player1} and ${player?.player2}:\n`;
-      //       splitStr?.unshift(seasonHistoryHeader);
-
-      //       return splitStr?.join(" ");
-      //    } else {
-      //       return "";
-      //    }
-      // })?.filter(e => e);
-
       const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
 
-      const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`;
+
 
       if (tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation) {
 
+         eventDate = capitalizeFirstLetterOfEachWord(eventDate);
+         eventDay = capitalizeFirstLetterOfEachWord(eventDay);
+         const eventAddress = capitalizeFirstLetterOfEachWord(tournamentLocation);
+
+         const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`.trim();
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
             player1: player?.player1,
@@ -400,11 +389,11 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
             player2slug: player?.player2?.toLowerCase()?.replace(slugRegex, "_"),
             leads: matchLeads,
             round: player?.round,
-            eventDate: capitalizeFirstLetterOfEachWord(eventDate),
-            eventDay: capitalizeFirstLetterOfEachWord(eventDay),
-            eventName: tournamentName,
-            eventHeadingTwo: capitalizeFirstLetterOfEachWord(eventHeadingTwo?.trim()),
-            eventAddress: tournamentLocation,
+            eventDate,
+            eventDay,
+            eventName: capitalizeFirstLetterOfEachWord(tournamentName),
+            eventHeadingTwo,
+            eventAddress,
             eventYear
          });
       }
@@ -434,6 +423,11 @@ function capitalizeFirstLetterOfEachWord(string) {
       .join(' ');
 }
 
+
+function isValidPdfUrl(url = "") {
+   return new URL(url).pathname.endsWith('.pdf');
+}
+
 module.exports = {
    xhrGetRequest,
    xhrPostRequest,
@@ -448,5 +442,6 @@ module.exports = {
    retryOperation,
    httpsGetRequest,
    capitalizeFirstLetterOfEachWord,
-   getSurnameOfPlayer
+   getSurnameOfPlayer,
+   isValidPdfUrl
 }
