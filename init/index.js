@@ -151,7 +151,7 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
 
                await Promise.all(templates.map(async (template) => {
 
-                  const { tpCategoryId, tpCategory, tpLanguage, tpLanguageCode, tpEventTag, tpPlayerTag, tpPlayerVsPlayerTag, tpTitle, tpContents } = template;
+                  const { tpCategoryId, tpCategory, tpLanguage, tpLanguageCode, tpEventTag, tpPlayerTag, tpPlayerVsPlayerTag, tpTitle, tpContent } = template;
 
                   let newTitle = "";
                   try {
@@ -222,7 +222,7 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
                      const paraphrasedBlog = await paraphraseContents(newChatgptCommand);
                      consoleLogger("Paraphrased done.");
 
-                     const htmlContent = tpContents(
+                     const htmlContent = tpContent(
                         eventName,
                         leads,
                         eventAddressTranslate,
