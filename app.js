@@ -60,7 +60,7 @@ const { getPdfLinks } = require("./services");
       }
 
       // Operation will run here
-      for (const note of mediaNotes.slice(0, 1)) {
+      for (const note of mediaNotes) {
          const link = note?.pdfLink;
 
          if (link && link.length >= 1) {
