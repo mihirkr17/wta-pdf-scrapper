@@ -4,7 +4,7 @@ const matchstatsTemplate = [
       tpLanguageCode: "en",
       tpCategory: "WTA / ATP Tennis Predictions",
       tpCategoryId: 4339,
-      tpTitle: "Who Will Win #player1Surname vs #player2Surname? Prediction For WTA #eventName #eventYear",
+      tpTitle: "Who Will Win: #player1Surname vs #player2Surname? Prediction For WTA #eventName #eventYear",
       tpPlayerTag: "#playerName PREDICTIONS",
       tpPlayerVsPlayerTag: "#player1Surname VS #player2Surname H2H PREDICTIONS",
       tpEventTag: "WTA #eventName PREDICTIONS, PICKS & BEST BETS",

@@ -84,7 +84,7 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
          return { message: "Pdf not found." };
       }
 
-      consoleLogger(`PDF parsed. Extracting contents now...`);
+      consoleLogger(`PDF parsed. Extracting...`);
 
       // Extracting match details from pdf contents | basically it returns [Array];
       const matchedContents = extractMatchInfo(downloadedPdf, tournamentName, tournamentLocation);

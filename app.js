@@ -30,9 +30,9 @@ const { getPdfLinks } = require("./services");
 // app.use(express.static(path.join(__dirname, 'models')));
 // app.use(require("./routes/route"));
 
-
 (async () => {
    try {
+
       if (!constant?.postStatus || !constant?.postStatusAll.includes(constant?.postStatus)) {
          throw new Error(`ERROR: Post status must be set as "POST_STATUS=publish or future or draft or pending or private" in .env`);
       }
@@ -50,7 +50,6 @@ const { getPdfLinks } = require("./services");
       //       pdfLink: ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/2012_QF.pdf"]
       //    }
       // ];
-
 
       const lengthOfMediaNoteLinks = mediaNotes.length || 0;
 
@@ -72,22 +71,7 @@ const { getPdfLinks } = require("./services");
             consoleLogger(`${result?.message}`);
          }
       }
-      // for (const site of sites) {
-      //    consoleLogger(`Running ${site?.siteName} site.`);
-      //    consoleLogger(`Script started for ${site?.domain}.`);
-
-
-      // }
-
    } catch (error) {
       consoleLogger(error?.message);
    }
 })();
-
-// app.listen(PORT, async () => {
-//    try {
-//       consoleLogger(`PDF scrapper server running successfully on PORT: ${PORT}`);
-//    } catch (error) {
-//       consoleLogger(error?.message);
-//    }
-// });

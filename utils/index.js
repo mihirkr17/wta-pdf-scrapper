@@ -180,26 +180,27 @@ function httpsGetRequest(url, type = "text") {
 
 function findPlayerNames(inputString) {
 
-   // console.log(inputString);
-   const removeRegex = /\[?\d+R\]?/g;
-   const matchRound = inputString.match(removeRegex);
-
-   let match = inputString?.split(/\s+vs\.\s+/);
-
-   // const removeAnyBraces = /(\[[^\]]*\]|\([^)]*\))\s*/g;
-   const removeAnyBraces = /\[[^\]]*\]|\([^)]*\)/g;
-   const removeColons = /[^:]*:|\[.*?\]|:/g;
-
-   const secondPart = match[1] ? match[1].replace(removeAnyBraces, "") : "";
-
-   const player2Section = secondPart?.split("  ")?.filter(e => e);
-
-   return {
-      player1: match[0] ? match[0].replace(removeAnyBraces, "").replace(removeColons, "")?.trim() : "",
-      player2: player2Section ? player2Section[0]?.trim() : "",
-      leads: player2Section ? player2Section[1]?.trim() : "",
-      round: matchRound ? matchRound[0].replace(/\[|\]/g, "") : null
+   if (typeof inputString !== "string" || inputString === "" || inputString.length === 0) {
+      return {};
    }
+
+   const matchRound = inputString.match(/\[?\d+R\]?/g);
+
+   let players = inputString?.split(/\s+vs[. -]?\s+/i);
+
+   const [player1 = "", player2WithLeads = ""] = Array.isArray(players) && players.map((p) => {
+      return p?.replace(/\[[^\]]*\]|\([^)]*\)|\{[^}]*\}/gi, "")
+         ?.replace(/[^:]*:|\[.*?\]|:/g, "")
+         ?.replace(/\[\S\w|\w\S]/gi, "") // removed [text]
+         ?.replace(/\{\S\w|\w\S}/gi, "") // removed {text}
+         ?.replace(/\(\S\w|\w\S\)/g, "") // removed (text)
+         ?.replace(/[^\w\s]/gi, "")?.trim(); // removed any special characters ?.replace(/\s+ [\s\S]*/, "")
+   });
+
+   // First is player 2 name and second is leads
+   const [player2 = "", leads = ""] = player2WithLeads?.split(/  {2,}/g);
+
+   return { player1df: player1, player2df: player2, leads, round: matchRound?.[0]?.replace(/\[|\]/g, "") ?? "" }
 }
 
 
@@ -232,8 +233,6 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
    const dateRegex = /\b\w+day\b[, -]?\s+(\w+)\s+(\d{1,2})[, -]?\s+(\d{4})/i;
    const dayRegex = /(Day \d+|QUARTERFINALS)/i;
    const yearRegex = /\d{4}/i;
-
-
 
    // regex patterns 2
    const paragraphRegex = / vs[. -]? .+ (leads|First meeting|Tied)/gi;
@@ -311,49 +310,47 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
       // }
    }
 
+
    // Splitting 3 sections 
-   const paragraphs = paragraph?.split("paragraphBreakHere");
+   const paragraphs = paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
 
    if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
       return [];
    }
 
-   const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere");
+   const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e.length !== 0);
 
-   // const seasonHistories = seasonHistory?.split("seasonHistoryBreakHere")?.filter(e => e?.trim());
+   if (!Array.isArray(tournamentHistories) && tournamentHistories.length === 0) {
+      return [];
+   }
 
    // Result will assign here
    const results = [];
 
    // Looping paragraphs
    for (const para of paragraphs) {
-      const { player1 = "", player2 = "", leads = "", round } = findPlayerNames(para?.trim()?.split("\n")[0] || "");
 
-      if (player1.length === 0 || player2.length === 0) {
+      const vsLine = para?.trim()?.split("\n")?.find(line => (/ vs[. -]?.+/gi).test(line));
+
+      if (!vsLine) continue;
+
+      const { player1df = "", player2df = "", leads = "", round } = findPlayerNames(vsLine || "");
+
+      if (!player1df || player1df.length === 0 || !player2df || player2df.length === 0) {
          continue;
       }
 
-      const parts = leads && leads?.split(/\s(?=\d)/);
+      const player1 = capitalizeFirstLetterOfEachWord(player1df);
+      const player2 = capitalizeFirstLetterOfEachWord(player2df);
 
-      const leadKey = parts[0] ? parts[0] : "";
-      const leadValue = parts[1] ? parts[1] : "";
-
-      const regex = new RegExp(leads, 'g');
-
-      const regexWith = `${leadKey}${leadValue ? " head to head " + leadValue + "." : "."}`;
-      const slugRegex = /[-\s]/g;
-
-      const p1r = player1?.replace(/ /g, "|");
-      const p2r = player2?.replace(/ /g, "|");
-
-      const regex2 = new RegExp(`${p1r}|${p2r}`, "gi");
+      const playerRegex = new RegExp(`${player1?.replace(/ /g, "|")}|${player2?.replace(/ /g, "|")}`, "gi");
 
       // Getting tournament by player names...
       const tournamentNew = tournamentHistories && tournamentHistories?.map((str) => {
          let matchIndex = str.lastIndexOf("MATCH NOTES");
          const subStr = str.substring(matchIndex);
 
-         if (regex2.test(subStr)) {
+         if (playerRegex.test(subStr)) {
             let splitStr = str && str?.split(/PLAYER NOTES\n/gi);
             let player1Tour = splitStr[1]?.replace(/CURRENT TOURNAMENT[\s\S]*/gi, "");
             let player2Tour = splitStr[2]?.replace(/MATCH NOTES[\s\S]*/gi, "");
@@ -372,10 +369,19 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          }
       })?.filter(e => e?.trim()?.length > 0);
 
-      const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
 
-      if (newParagraph && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation) {
+      if (para && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation && leads) {
+         const parts = leads ? leads?.split(/\s(?=\d)/) : [];
 
+         const leadKey = parts[0] ? parts[0] : "";
+         const leadValue = parts[1] ? parts[1] : "";
+
+         const regex = new RegExp(leads, 'g');
+
+         const regexWith = `${leadKey}${leadValue ? " head to head " + leadValue + "." : "."}`;
+
+         const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
+         const slugRegex = /[-\s]/g;
          eventDate = capitalizeFirstLetterOfEachWord(eventDate);
          eventDay = capitalizeFirstLetterOfEachWord(eventDay);
          const eventAddress = capitalizeFirstLetterOfEachWord(tournamentLocation);
