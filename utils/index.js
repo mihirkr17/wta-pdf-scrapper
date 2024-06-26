@@ -193,12 +193,11 @@ function findPlayerNames(inputString) {
          ?.replace(/[^:]*:|\[.*?\]|:/g, "")
          ?.replace(/\[\S\w|\w\S]/gi, "") // removed [text]
          ?.replace(/\{\S\w|\w\S}/gi, "") // removed {text}
-         ?.replace(/\(\S\w|\w\S\)/g, "") // removed (text)
-         ?.replace(/[^\w\s]/gi, "")?.trim(); // removed any special characters ?.replace(/\s+ [\s\S]*/, "")
+         ?.replace(/\(\S\w|\w\S\)/g, "")?.trim(); // removed any special characters ?.replace(/\s+ [\s\S]*/, "")
    });
 
    // First is player 2 name and second is leads
-   const [player2 = "", leads = ""] = player2WithLeads?.split(/  {2,}/g);
+   const [player2 = "", leads = ""] = player2WithLeads?.split(/ \s+/g);
 
    return { player1df: player1, player2df: player2, leads, round: matchRound?.[0]?.replace(/\[|\]/g, "") ?? "" }
 }
@@ -229,7 +228,7 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
    let eventYear = "";
 
    // regex patterns 1
-   const targetDateDayYearRegex = /MATCH NOTES [–|-|–] (DAY \d+|QUARTERFINALS) [–|-|–]/i;
+   const targetDateDayYearRegex = /MATCH NOTES\s+[–|-|–]\s+(DAY \d+|QUARTERFINALS)\s+[–|-|–]/i;
    const dateRegex = /\b\w+day\b[, -]?\s+(\w+)\s+(\d{1,2})[, -]?\s+(\d{4})/i;
    const dayRegex = /(Day \d+|QUARTERFINALS)/i;
    const yearRegex = /\d{4}/i;
@@ -290,29 +289,11 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          }
          tournamentHistory += (line + "\n");
       }
-
-      // if ((/Season+\s\d+\sHistory/gi).test(line)) {
-      //    seasonHistoryTracker = true;
-      //    seasonHistoryHeadTracker = true;
-      // } else {
-      //    seasonHistoryHeadTracker = false;
-      // }
-
-      // if ((/Titles/gi).test(line)) {
-      //    seasonHistoryTracker = false;
-      // }
-
-      // if (seasonHistoryTracker) {
-      //    if (seasonHistoryHeadTracker) {
-      //       seasonHistory += "seasonHistoryBreakHere\n";
-      //    }
-      //    seasonHistory += (line + "\n");
-      // }
    }
-
 
    // Splitting 3 sections 
    const paragraphs = paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
+
 
    if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
       return [];
@@ -324,11 +305,14 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
       return [];
    }
 
+
+
    // Result will assign here
    const results = [];
 
    // Looping paragraphs
    for (const para of paragraphs) {
+
 
       const vsLine = para?.trim()?.split("\n")?.find(line => (/ vs[. -]?.+/gi).test(line));
 
@@ -369,9 +353,10 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          }
       })?.filter(e => e?.trim()?.length > 0);
 
-
       if (para && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation && leads) {
          const parts = leads ? leads?.split(/\s(?=\d)/) : [];
+
+         console.log(leads);
 
          const leadKey = parts[0] ? parts[0] : "";
          const leadValue = parts[1] ? parts[1] : "";

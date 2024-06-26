@@ -30,6 +30,7 @@ const { getPdfLinks } = require("./services");
 // app.use(express.static(path.join(__dirname, 'models')));
 // app.use(require("./routes/route"));
 
+
 (async () => {
    try {
 
@@ -59,7 +60,7 @@ const { getPdfLinks } = require("./services");
       }
 
       // Operation will run here
-      for (const note of mediaNotes) {
+      for (const note of mediaNotes.slice(0, 1)) {
          const link = note?.pdfLink;
 
          if (link && link.length >= 1) {
