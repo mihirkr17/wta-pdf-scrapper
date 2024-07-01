@@ -378,7 +378,6 @@ function extractMatchInfo(text, note) {
          const regexWith = `${leadKey}${leadValue ? " head to head " + leadValue + "." : "."}`;
 
          const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
-         const slugRegex = /[-\s]/g;
 
          const eventAddress = capitalizeFirstLetterOfEachWord(tournamentLocation);
 
