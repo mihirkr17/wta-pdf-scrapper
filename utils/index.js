@@ -203,7 +203,18 @@ function findPlayerNames(inputString) {
 }
 
 
-function extractMatchInfo(text, tournamentName, tournamentLocation) {
+// replace all space [-] with "_" so eg. output: john_doe
+function underscoreSlugger(str) {
+   if (typeof str !== "string" || str.length === 0) {
+      return "";
+   }
+
+   return str.toLowerCase().replace(/\s{2,}/gi, " ").replace(/(–|-|–)/g, " ").replace(/\s+/g, "_");
+}
+
+function extractMatchInfo(text, note) {
+
+   const { tournamentDay = "", tournamentName = "", tournamentLocation = "" } = note;
 
    const splittedTexts = text?.split("\n")?.filter(line => line?.trim().length !== 0);
 
@@ -223,15 +234,11 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
    let paragraphTracker = false;
    let paragraphHeadTracker = false;
 
-   let eventDay = "";
    let eventDate = "";
-   let eventYear = "";
 
    // regex patterns 1
    const targetDateDayYearRegex = /MATCH NOTES\s+[–|-|–]\s+(DAY \d+|QUARTERFINALS)\s+[–|-|–]/i;
-   const dateRegex = /\b\w+day\b[, -]?\s+(\w+)\s+(\d{1,2})[, -]?\s+(\d{4})/i;
-   const dayRegex = /(Day \d+|QUARTERFINALS)/i;
-   const yearRegex = /\d{4}/i;
+
 
    // regex patterns 2
    const paragraphRegex = / vs[. -]? .+ (leads|First meeting|Tied)/gi;
@@ -243,12 +250,9 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
 
       // 1. Extracting Event day, date, year;
       if (targetDateDayYearRegex.test(line)) {
-         let days = line && line.match(dayRegex);
-         eventDay = days[0] ? days[0] : "";
-         let dates = line && line.match(dateRegex);
-         eventDate = dates[0] ? dates[0]?.replace(/\s+/, " ") : "";
-         let year = eventDate && eventDate?.match(yearRegex)[0];
-         eventYear = year ? year : new Date().getFullYear();
+         const newLine = line && line.replace(/\s{2,}/gi, " ");
+         const dateLine = newLine.match(/\b\w+day.*$/i);
+         eventDate = Array.isArray(dateLine) ? dateLine[0] : "";
       }
 
 
@@ -269,7 +273,7 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          if (paragraphHeadTracker) {
             paragraph += "paragraphBreakHere \n";
          }
-         paragraph += line && line.length > 0 && line + "\n";
+         paragraph += (line && line.length > 0) ? line + "\n" : "";
       }
 
       if ((/TOURNAMENT HISTORY/gi).test(line)) {
@@ -292,8 +296,7 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
    }
 
    // Splitting 3 sections 
-   const paragraphs = paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
-
+   const paragraphs = paragraph && paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
 
    if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
       return [];
@@ -306,6 +309,17 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
    }
 
 
+   const eventDay = capitalizeFirstLetterOfEachWord(tournamentDay);
+
+   let year = typeof eventDate === "string" && eventDate?.match(/\d{4}/i);
+   const eventYear = Array.isArray(year) ? year[0] : new Date().getFullYear();
+
+   // checking date format
+   if (!(/\b\w+day/i).test(eventDate)) {
+      throw new Error("Sorry! The event date format isn't valid.");
+   }
+
+   eventDate = capitalizeFirstLetterOfEachWord(eventDate);
 
    // Result will assign here
    const results = [];
@@ -353,10 +367,8 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
          }
       })?.filter(e => e?.trim()?.length > 0);
 
-      if (para && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation && leads) {
+      if (para && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation && leads && player1 && player2) {
          const parts = leads ? leads?.split(/\s(?=\d)/) : [];
-
-         console.log(leads);
 
          const leadKey = parts[0] ? parts[0] : "";
          const leadValue = parts[1] ? parts[1] : "";
@@ -367,8 +379,7 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
 
          const newParagraph = para?.replace(regex, regexWith)?.replace(/\n/g, " ")?.trim() || "";
          const slugRegex = /[-\s]/g;
-         eventDate = capitalizeFirstLetterOfEachWord(eventDate);
-         eventDay = capitalizeFirstLetterOfEachWord(eventDay);
+
          const eventAddress = capitalizeFirstLetterOfEachWord(tournamentLocation);
 
          const player1Surname = getSurnameOfPlayer(player1);
@@ -381,8 +392,8 @@ function extractMatchInfo(text, tournamentName, tournamentLocation) {
             player2,
             player1Surname,
             player2Surname,
-            player1slug: player1?.toLowerCase()?.replace(slugRegex, "_"),
-            player2slug: player2?.toLowerCase()?.replace(slugRegex, "_"),
+            player1slug: underscoreSlugger(player1),
+            player2slug: underscoreSlugger(player2),
             leads,
             eventRound: round,
             eventDate,

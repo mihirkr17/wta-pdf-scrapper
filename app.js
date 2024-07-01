@@ -58,17 +58,14 @@ const { getPdfLinks } = require("./services");
          consoleLogger(`Sorry no media note urls available right now!`);
          return;
       }
-
+      // console.log(mediaNotes);
       // Operation will run here
-      for (const note of mediaNotes) {
-         const link = note?.pdfLink;
-
+      for (const note of mediaNotes.slice(0, 1)) {
+         const link = note?.tournamentLink;
+         console.log(note);
+         
          if (link && link.length >= 1) {
-            const result = await init({
-               tournamentLink: link,
-               tournamentLocation: note?.tournamentLocation,
-               tournamentName: note?.tournamentName
-            });
+            const result = await init(note);
             consoleLogger(`${result?.message}`);
          }
       }

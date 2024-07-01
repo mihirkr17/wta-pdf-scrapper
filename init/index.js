@@ -39,7 +39,7 @@ translate.key = process.env.LIBRE_TRANSLATE_KEY;
 const sites = [
    {
       id: 1,
-      siteName: "stevegtennis",
+      siteName: "Stevegtennis",
       siteCode: "sg",
       siteDomain: constant?.domainSg,
       authToken: constant?.authTokenSg,
@@ -49,7 +49,7 @@ const sites = [
    },
    {
       id: 2,
-      siteName: "matchstat",
+      siteName: "Matchstat",
       siteCode: "ms",
       siteDomain: constant?.domainMs,
       authToken: constant?.authTokenMs,
@@ -59,8 +59,10 @@ const sites = [
    }
 ];
 
-async function init({ tournamentLink = "", tournamentName = "", tournamentLocation = "" }) {
+async function init(note) {
    try {
+
+      const { tournamentLink = "", tournamentName = "", tournamentLocation = "" } = note;
 
       let postCounter = 0;
 
@@ -87,7 +89,7 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
       consoleLogger(`PDF parsed. Extracting...`);
 
       // Extracting match details from pdf contents | basically it returns [Array];
-      const matchedContents = extractMatchInfo(downloadedPdf, tournamentName, tournamentLocation);
+      const matchedContents = extractMatchInfo(downloadedPdf, note);
 
       if (!Array.isArray(matchedContents) || matchedContents?.length === 0) {
          return { message: "No matched contents." };
@@ -116,8 +118,12 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
 
          consoleLogger(`Post template found from ${siteName}.`);
 
-         for (const matchContent of matchedContents) {
+         consoleLogger(`Total ${matchedContents.length * templates.length} post will create for ${siteName}.`);
 
+         let postIndex = 1;
+
+         for (const matchContent of matchedContents) {
+ 
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
                content, eventName, eventAddress, eventDay, eventRound, eventHeadingTwo,
@@ -128,7 +134,7 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
             const plainEventName = eventName?.replace(/\d/g, '')?.trim();
 
             if (!player1 || !player2 || !eventName || !eventAddress || !eventDate || !content) {
-               consoleLogger(`Some fields are missing. Content skipped.`);
+               consoleLogger(`${postIndex}. Some fields are missing. Content skipped.`);
                continue;
             }
 
@@ -149,14 +155,14 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
                // Generate image wrapper
                const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], player1Surname, player2Surname);
 
-               await Promise.all(templates.map(async (template) => {
+               await Promise.all(templates.map(async (template, templateIndex) => {
 
                   const { tpCategoryId, tpCategory, tpLanguage, tpLanguageCode, tpEventTag, tpPlayerTag, tpPlayerVsPlayerTag, tpTitle, tpContent } = template;
 
                   let newTitle = "";
                   try {
                      if (!tpCategoryId || !tpCategory || !tpLanguage || !tpEventTag) {
-                        throw new Error("Post skipped. Required [ categoryId, category, language, eventTag ]");
+                        throw new Error(`Temp ${templateIndex}. Post skipped. Required [ categoryId, category, language, eventTag ]`);
                      }
 
                      const playerOneTag = tpPlayerTag?.replace("#playerName", player1);
@@ -201,13 +207,13 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
                      const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteDomain, slug), authToken);
 
                      if (isUniquePost) {
-                        consoleLogger(`Post already exists [ SLUG: ${slug} ].`);
+                        consoleLogger(`Temp ${templateIndex}. Post already exists [ SLUG: ${slug} ].`);
                         return;
                      }
 
-                     consoleLogger(`Post for ${slug} starting...`);
+                     consoleLogger(`${postIndex}. Post Slug: ${slug}.`);
 
-                     consoleLogger("Tags creating...");
+                     consoleLogger(`${postIndex}. Tags: ${[playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag].toString()}`);
 
                      const tagIds = await getPostTagIdsOfWP(constant?.tagUri(siteDomain), [playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag], authToken);
 
@@ -215,12 +221,18 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
                         throw new Error(`Tags are not created. Terminate the request.`);
                      }
 
-                     consoleLogger(`Tags created. Id's: ${tagIds}`);
+                     consoleLogger(`${postIndex}. Created Tags ID's are : ${tagIds.toString()}`);
 
-                     consoleLogger("Paraphrase starting...");
+                     consoleLogger(`${postIndex}. Paraphrase starting...`);
                      const newChatgptCommand = chatgptCommand?.replace("#language", tpLanguage)?.replace("#texts", text);
                      const paraphrasedBlog = await paraphraseContents(newChatgptCommand);
-                     consoleLogger("Paraphrased done.");
+
+                     if (!paraphrasedBlog || paraphrasedBlog.length === 0) {
+                        consoleLogger(`${postIndex}. Sorry! Content not paraphrased.`);
+                        return;
+                     }
+
+                     consoleLogger(`${postIndex}. Paraphrased done.`);
 
                      const htmlContent = tpContent(
                         eventName,
@@ -242,7 +254,7 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
                         plainEventName
                      );
 
-                     consoleLogger(`Post creating...`);
+                     consoleLogger(`${postIndex}. Post creating...`);
                      await createPostOfWP(constant?.postUri(siteDomain), authToken, {
                         title,
                         slug,
@@ -253,9 +265,10 @@ async function init({ tournamentLink = "", tournamentName = "", tournamentLocati
                         featured_media: playerOneMedia?.mediaId || playerTwoMedia?.mediaId,
                         categories: [tpCategoryId]
                      });
-                     consoleLogger(`Post created successfully.`);
+                     consoleLogger(`${postIndex}. Post created successfully.`);
 
                      postCounter += 1;
+                     postIndex++;
                   } catch (error) {
                      consoleLogger(`ERROR: ${error?.message}.`);
                      await delay(1000);
