@@ -37,16 +37,16 @@ translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
 const sites = [
-   {
-      id: 1,
-      siteName: "Stevegtennis",
-      siteCode: "sg",
-      siteDomain: constant?.domainSg,
-      authToken: constant?.authTokenSg,
-      authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate,
-      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-   },
+   // {
+   //    id: 1,
+   //    siteName: "Stevegtennis",
+   //    siteCode: "sg",
+   //    siteDomain: constant?.domainSg,
+   //    authToken: constant?.authTokenSg,
+   //    authorId: constant?.authorIdSg,
+   //    templates: stevegtennisTemplate,
+   //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   // },
    {
       id: 2,
       siteName: "Matchstat",
@@ -54,7 +54,7 @@ const sites = [
       siteDomain: constant?.domainMs,
       authToken: constant?.authTokenMs,
       authorId: constant?.authorIdMs,
-      templates: matchstatsTemplate,
+      templates: matchstatsTemplate.slice(0, 1),
       chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
    }
 ];
@@ -98,7 +98,6 @@ async function init(note) {
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
       // Rest codes
-
       for (const site of sites) {
          const { siteDomain, siteName, chatgptCommand, templates, siteCode, authToken, authorId } = site;
 
@@ -122,8 +121,8 @@ async function init(note) {
 
          let postIndex = 1;
 
-         for (const matchContent of matchedContents) {
- 
+         for (const matchContent of matchedContents.slice(0, 1)) {
+
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
                content, eventName, eventAddress, eventDay, eventRound, eventHeadingTwo,

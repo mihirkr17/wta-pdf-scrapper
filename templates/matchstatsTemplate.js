@@ -1,3 +1,5 @@
+const ELEMENTOR_TEMPLATE_SHORTCODE = '[elementor-template id="115250"]';
+
 const matchstatsTemplate = [
    {
       tpLanguage: "English",
@@ -49,6 +51,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} vs ${player2} prediction.</b>
             </a> 
          </p>
+         ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },

@@ -62,8 +62,9 @@ const { getPdfLinks } = require("./services");
       // Operation will run here
       for (const note of mediaNotes.slice(0, 1)) {
          const link = note?.tournamentLink;
-         console.log(note);
          
+         console.log(note);
+
          if (link && link.length >= 1) {
             const result = await init(note);
             consoleLogger(`${result?.message}`);
