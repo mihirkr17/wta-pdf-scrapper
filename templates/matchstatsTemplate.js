@@ -1,4 +1,15 @@
 const ELEMENTOR_TEMPLATE_SHORTCODE = '[elementor-template id="115250"]';
+const ELEMENTOR_TEXT_BLOCK_CODE = '[elementor-template id="115614"]';
+const ELEMENTOR_DESKTOP_PRICING_CODE = '[elementor-template id="55914"]';
+const ELEMENTOR_MOBILE_PRICING_CODE = '[elementor-template id="55882"]';
+
+
+
+function splitTexts(fullText) {
+   let lastFullStopIndex = fullText.lastIndexOf('.', Math.ceil(fullText.length / 2));
+
+   return fullText.substring(0, lastFullStopIndex + 1) + ELEMENTOR_TEXT_BLOCK_CODE + fullText.substring(lastFullStopIndex + 1);
+}
 
 const matchstatsTemplate = [
    {
@@ -37,9 +48,11 @@ const matchstatsTemplate = [
             ${player1Surname} and ${player2Surname} are on the ${eventDay} Schedule at ${plainEventName} ${eventYear} on ${eventDate}. Lets breakdown the career, past stats and recent form of these players and predict who will get the victory.
             </p>`.replace(/\n/g, " ")}    
          <br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}
+         ${ELEMENTOR_MOBILE_PRICING_CODE}
          <br/>
          <h3>Who Will Win In This Head-To-Head?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>My Conclusion / Prediction:</h3>
          <p>
