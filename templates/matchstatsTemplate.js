@@ -6,7 +6,7 @@ const ELEMENTOR_MOBILE_PRICING_CODE = '[elementor-template id="55882"]';
 
 
 function splitTexts(fullText) {
-   let lastFullStopIndex = fullText.lastIndexOf('.', Math.ceil(fullText.length / 2));
+   let lastFullStopIndex = fullText.lastIndexOf(" ", Math.ceil(fullText.length / 2));
 
    return fullText.substring(0, lastFullStopIndex + 1) + ELEMENTOR_TEXT_BLOCK_CODE + fullText.substring(lastFullStopIndex + 1);
 }
@@ -47,10 +47,7 @@ const matchstatsTemplate = [
             ${`<p>
             ${player1Surname} and ${player2Surname} are on the ${eventDay} Schedule at ${plainEventName} ${eventYear} on ${eventDate}. Lets breakdown the career, past stats and recent form of these players and predict who will get the victory.
             </p>`.replace(/\n/g, " ")}    
-         <br/>
-         ${ELEMENTOR_DESKTOP_PRICING_CODE}
-         ${ELEMENTOR_MOBILE_PRICING_CODE}
-         <br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Who Will Win In This Head-To-Head?</h3>
          <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
@@ -100,9 +97,9 @@ const matchstatsTemplate = [
             ${`<p>
             ${player1Surname} y ${player2Surname} están en el programa de ${eventDay} en ${plainEventName} ${eventYear} el ${eventDate}. Analicemos la carrera, las estadísticas pasadas y la forma reciente de estos jugadores y pronostiquemos quién obtendrá la victoria.
             </p>`.replace(/\n/g, " ")}
-            <br/><br/>
+            ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>¿Quién ganará en este cara a cara?</h3>
-            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
             <br/> <br/>
             <h3>Mi Pronósticos / Conclusión:</h3>
             <p>
@@ -114,6 +111,7 @@ const matchstatsTemplate = [
                   <b>Pronóstico de Matchstat.com ${player1} vs ${player2}.</b>
                </a> 
             </p>
+             ${ELEMENTOR_TEMPLATE_SHORTCODE}
             </div>`
       }
    },
@@ -149,9 +147,9 @@ const matchstatsTemplate = [
             ${`<p>
             ${player1Surname} e ${player2Surname} estão na programação ${eventDay} em ${plainEventName} ${eventYear} em ${eventDate}. Vamos analisar a carreira, as estatísticas anteriores e a forma recente desses jogadores e prever quem conseguirá a vitória.
             </p>`.replace(/\n/g, " ")}
-            <br/><br/>
+            ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Quem vencerá neste confronto direto?</h3>
-            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
             <br/> <br/>
             <h3>Minha Palpites / Conclusão:</h3>
             <p>
@@ -163,6 +161,7 @@ const matchstatsTemplate = [
                   <b>Palpites de ${player1} vs ${player2} do Matchstat.com.</b>
                </a> 
             </p>
+             ${ELEMENTOR_TEMPLATE_SHORTCODE}
             </div>`
       }
    },
@@ -199,9 +198,9 @@ const matchstatsTemplate = [
             ${`<p>
             ${player1Surname} et ${player2Surname} sont inscrits au programme ${eventDay} à ${plainEventName} ${eventYear} le ${eventDate}. Décomposons la carrière, les statistiques passées et la forme récente de ces joueurs et prédisons qui remportera la victoire.
             </p>`.replace(/\n/g, " ")}
-            <br/><br/>
+            ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Qui va gagner dans ce face-à-face ?</h3>
-            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
             <br/> <br/>
             <h3>Ma Pronostics / Conclusion :</h3>
             <p>
@@ -213,6 +212,7 @@ const matchstatsTemplate = [
                   <b>Pronostics Matchstat.com ${player1} contre ${player2}.</b>
                </a> 
             </p>
+             ${ELEMENTOR_TEMPLATE_SHORTCODE}
             </div>`
       }
    },
@@ -249,9 +249,9 @@ const matchstatsTemplate = [
             ${`<p>
             ${player1Surname} und ${player2Surname} stehen am ${eventDate} um ${plainEventName} ${eventYear} im ${eventDay}-Zeitplan. Lassen Sie uns die Karriere, die vergangenen Statistiken und die aktuelle Form dieser Spieler aufschlüsseln und vorhersagen, wer den Sieg erringen wird.
             </p>`.replace(/\n/g, " ")}
-            <br/> <br/>
+            ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Wer wird in diesem direkten Duell gewinnen?</h3>
-            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
             <br/> <br/>
             <h3>Mein Wett-Tipps & Prognosen:</h3>
             <p>
@@ -300,9 +300,9 @@ const matchstatsTemplate = [
             ${`<p>
             ${player1Surname} e ${player2Surname} sono nel programma dell'${eventDay} al ${plainEventName} ${eventYear} il ${eventDate}. Analizziamo la carriera, le statistiche passate e la forma recente di questi giocatori e pronostici chi otterrà la vittoria.
             </p>`.replace(/\n/g, " ")}
-            <br/> <br/>
+            ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Chi vincerà in questo testa a testa?</h3>
-            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
             <br/> <br/>
             <h3>La Mia Conclusione / Pronostici:</h3>
             <p>
@@ -314,6 +314,7 @@ const matchstatsTemplate = [
                   <b>Pronostico di Matchstat.com ${player1} vs ${player2}.</b>
                </a> 
             </p>
+             ${ELEMENTOR_TEMPLATE_SHORTCODE}
             </div>`
       }
    },
@@ -350,9 +351,9 @@ const matchstatsTemplate = [
           ${`<p>
           ${player1Surname} i ${player2Surname} pojawią się w harmonogramie ${eventDay} o godzinie ${plainEventName} ${eventYear} w dniu ${eventDate}. Przeanalizujmy karierę, przeszłe statystyki i obecną formę tych graczy i przewidźmy, kto odniesie zwycięstwo.
           </p>`.replace(/\n/g, " ")}
-          <br/><br/>
+          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
           <h3>Kto wygra w tym pojedynku?</h3>
-          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+          <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
           <br/> <br/>
           <h3>Mój Wniosek / Prognozy:</h3>
           <p>
@@ -364,6 +365,7 @@ const matchstatsTemplate = [
                 <b>Prognozy Matchstat.com ${player1} vs ${player2}.</b>
              </a> 
           </p>
+           ${ELEMENTOR_TEMPLATE_SHORTCODE}
           </div>`
       }
    },
@@ -400,9 +402,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} en ${player2Surname} staan ​​op het ${eventDay} schema om ${plainEventName} ${eventYear} op ${eventDate}. Laten we de carrière, statistieken uit het verleden en de recente vorm van deze spelers uitsplitsen en voorspellen wie de overwinning zal behalen.
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Wie zal winnen in deze onderlinge strijd?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>Mijn Conclusie / Wedtips:</h3>
          <p>
@@ -414,6 +416,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} versus ${player2} Wedtips.</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },
@@ -450,9 +453,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} ve ${player2Surname}, ${eventDate} tarihinde ${plainEventName} ${eventYear} ${eventDay} Programında yer alıyor. Bu oyuncuların kariyerlerini, geçmiş istatistiklerini ve son formlarını inceleyelim ve zaferi kimin kazanacağını tahmin edelim.
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Bu Karşılıklı Mücadelede Kim Kazanacak?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>Sonucum / Tahminleri:</h3>
          <p>
@@ -464,6 +467,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} - ${player2} tahmini.</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },
@@ -500,9 +504,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} 和 ${player2Surname} 的 ${eventDay} 日程表将于 ${eventDate} ${plainEventName} ${eventYear} 进行。让我们分析一下这些球员的职业生涯、过去的统计数据和最近的表现，并预测谁将获得胜利。
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>谁会在这场正面交锋中获胜？</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>我的结论 / 预测：</h3>
          <p>
@@ -514,6 +518,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} vs ${player2} 预测。</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },
@@ -550,9 +555,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} و${player2Surname} موجودان في جدول ${eventDay} في ${plainEventName} ${eventYear} في ${eventDate}. دعونا نفصل المهنة والإحصائيات السابقة والشكل الأخير لهؤلاء اللاعبين ونتوقع من سيحقق النصر.
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>من سيفوز في هذه المواجهة المباشرة؟</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>استنتاجي / توقعي:</h3>
          <p>
@@ -564,6 +569,7 @@ const matchstatsTemplate = [
                <b>توقع Matchstat.com ${player1} مقابل ${player2}.</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },
@@ -600,9 +606,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} と ${player2Surname} は、${eventDate} の ${plainEventName} ${eventYear} の ${eventDay} スケジュールに参加しています。これらの選手のキャリア、過去の統計、最近の調子を分析し、誰が勝利を得るのかを予想してみましょう。
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>この直接対決で勝つのは誰ですか?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>私の結論 / 予測:</h3>
          <p>
@@ -614,6 +620,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} 対 ${player2} の予測。</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },
@@ -650,9 +657,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} и ${player2Surname} включены в расписание ${eventDay} в ${plainEventName} ${eventYear} ${eventDate}. Давайте разберем карьеру, прошлую статистику и недавнюю форму этих игроков и предскажем, кто одержит победу.
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Кто победит в этом противостоянии?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>Мой вывод / прогноз:</h3>
          <p>
@@ -664,6 +671,7 @@ const matchstatsTemplate = [
                <b>Прогноз Matchstat.com: ${player1} против ${player2}.</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    },
@@ -700,9 +708,9 @@ const matchstatsTemplate = [
          ${`<p>
          ${player1Surname} और ${player2Surname} ${eventDate} को ${plainEventName} ${eventYear} पर ${eventDay} शेड्यूल पर हैं। आइए इन खिलाड़ियों के करियर, पिछले आंकड़ों और हालिया फॉर्म का विश्लेषण करें और भविष्यवाणी करें कि जीत किसे मिलेगी।
          </p>`.replace(/\n/g, " ")}
-         <br/><br/>
+         ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>इस आमने-सामने की लड़ाई में कौन जीतेगा?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>मेरा निष्कर्ष / भविष्यवाणी:</h3>
          <p>
@@ -714,6 +722,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} बनाम ${player2} भविष्यवाणी।</b>
             </a> 
          </p>
+          ${ELEMENTOR_TEMPLATE_SHORTCODE}
          </div>`
       }
    }
