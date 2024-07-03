@@ -1,4 +1,4 @@
-const ELEMENTOR_TEMPLATE_SHORTCODE = '[elementor-template id="115250"]';
+// const ddELEMENTOR_TEMPLATE_SHORTCODE = '[elementor-template id="115250"]';
 const ELEMENTOR_TEXT_BLOCK_CODE = '[elementor-template id="115614"]';
 const ELEMENTOR_DESKTOP_PRICING_CODE = '[elementor-template id="55914"]';
 const ELEMENTOR_MOBILE_PRICING_CODE = '[elementor-template id="55882"]';
@@ -49,10 +49,10 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}    
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Who Will Win In This Head-To-Head?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>My Conclusion / Prediction:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>My pick is that ${player1Surname} will win.</b>
             Matchstat.com has an Artificial Intelligence (Ai) prediction model that is trained on all professional ATP and WTA past matches.
             <br/>
@@ -61,7 +61,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} vs ${player2} prediction.</b>
             </a> 
          </p>
-         ${ELEMENTOR_TEMPLATE_SHORTCODE}
+         ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -99,10 +99,10 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>¿Quién ganará en este cara a cara?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Mi Pronósticos / Conclusión:</h3>
-            <p>
+            <p style="margin-bottom: 0px;">
                <b>Mi elección es que ganará ${player1Surname}.</b>
                Matchstat.com tiene un modelo de Pronósticos de Inteligencia Artificial (IA) que se entrena en todos los partidos profesionales anteriores de la ATP y la WTA. 
                <br/>
@@ -111,7 +111,7 @@ const matchstatsTemplate = [
                   <b>Pronóstico de Matchstat.com ${player1} vs ${player2}.</b>
                </a> 
             </p>
-             ${ELEMENTOR_TEMPLATE_SHORTCODE}
+             ${ELEMENTOR_TEXT_BLOCK_CODE}
             </div>`
       }
    },
@@ -149,7 +149,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Quem vencerá neste confronto direto?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Minha Palpites / Conclusão:</h3>
             <p>
@@ -160,8 +160,8 @@ const matchstatsTemplate = [
                <a href="https://matchstat.com/tennis/h2h-odds-bets/${player1slug}/${player2slug}/" target="_blank">
                   <b>Palpites de ${player1} vs ${player2} do Matchstat.com.</b>
                </a> 
-            </p>
-             ${ELEMENTOR_TEMPLATE_SHORTCODE}
+            <p style="margin-bottom: 0px;">
+             ${ELEMENTOR_TEXT_BLOCK_CODE}
             </div>`
       }
    },
@@ -200,10 +200,10 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Qui va gagner dans ce face-à-face ?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Ma Pronostics / Conclusion :</h3>
-            <p>
+            <p style="margin-bottom: 0px;">
                <b>Mon choix est que ${player1Surname} gagnera.</b>
                Matchstat.com dispose d'un modèle de pronostics d'intelligence artificielle (IA) qui est formé sur tous les matchs professionnels passés de l'ATP et de la WTA. 
                <br/>
@@ -212,7 +212,7 @@ const matchstatsTemplate = [
                   <b>Pronostics Matchstat.com ${player1} contre ${player2}.</b>
                </a> 
             </p>
-             ${ELEMENTOR_TEMPLATE_SHORTCODE}
+             ${ELEMENTOR_TEXT_BLOCK_CODE}
             </div>`
       }
    },
@@ -251,10 +251,10 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Wer wird in diesem direkten Duell gewinnen?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Mein Wett-Tipps & Prognosen:</h3>
-            <p>
+            <p style="margin-bottom: 0px;">
                <b>Mein Tipp ist, dass ${player1Surname} gewinnt.</b>
                Matchstat.com verfügt über ein Vorhersagemodell mit künstlicher Intelligenz (KI), das auf allen vergangenen professionellen ATP- und WTA-Spielen trainiert wird. 
                <br/>
@@ -302,10 +302,10 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Chi vincerà in questo testa a testa?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>La Mia Conclusione / Pronostici:</h3>
-            <p>
+            <p style="margin-bottom: 0px;">
                <b>La mia scelta è che ${player1Surname} vincerà.</b>
                Matchstat.com dispone di un modello di previsione dell'intelligenza artificiale (Ai) addestrato su tutte le partite passate dell'ATP e WTA professionistiche. 
                <br/>
@@ -314,7 +314,7 @@ const matchstatsTemplate = [
                   <b>Pronostico di Matchstat.com ${player1} vs ${player2}.</b>
                </a> 
             </p>
-             ${ELEMENTOR_TEMPLATE_SHORTCODE}
+             ${ELEMENTOR_TEXT_BLOCK_CODE}
             </div>`
       }
    },
@@ -353,7 +353,7 @@ const matchstatsTemplate = [
           </p>`.replace(/\n/g, " ")}
           ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
           <h3>Kto wygra w tym pojedynku?</h3>
-          <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
           <br/> <br/>
           <h3>Mój Wniosek / Prognozy:</h3>
           <p>
@@ -365,7 +365,7 @@ const matchstatsTemplate = [
                 <b>Prognozy Matchstat.com ${player1} vs ${player2}.</b>
              </a> 
           </p>
-           ${ELEMENTOR_TEMPLATE_SHORTCODE}
+           ${ELEMENTOR_TEXT_BLOCK_CODE}
           </div>`
       }
    },
@@ -404,10 +404,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Wie zal winnen in deze onderlinge strijd?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>Mijn Conclusie / Wedtips:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>Mijn keuze is dat ${player1Surname} zal winnen.</b>
             Matchstat.com heeft een voorspellingsmodel voor kunstmatige intelligentie (Ai) dat is getraind op alle professionele ATP- en WTA-wedstrijden uit het verleden. 
             <br/>
@@ -416,7 +416,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} versus ${player2} Wedtips.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -455,10 +455,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Bu Karşılıklı Mücadelede Kim Kazanacak?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>Sonucum / Tahminleri:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>Benim tahminim ${player1Surname}'ın kazanacağı yönünde.</b>
             Matchstat.com, tüm profesyonel ATP ve WTA geçmiş maçları üzerine eğitilmiş bir Yapay Zeka (Ai) tahmin modeline sahiptir. 
             <br/>
@@ -467,7 +467,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} - ${player2} tahmini.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -506,10 +506,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>谁会在这场正面交锋中获胜？</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>我的结论 / 预测：</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>我的选择是 ${player1Surname} 将获胜。</b> 
             Matchstat.com 拥有一个人工智能 (Ai) 预测模型，该模型经过所有职业 ATP 和 WTA 过去比赛的训练。 
             <br/>
@@ -518,7 +518,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} vs ${player2} 预测。</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -557,10 +557,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>من سيفوز في هذه المواجهة المباشرة؟</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>استنتاجي / توقعي:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
            <b> خياري هو أن ${player1Surname} هو الذي سيفوز. يحتوي موقع </b>
            Matchstat.com على نموذج للتنبؤ بالذكاء الاصطناعي (Ai) يتم تدريبه على جميع مباريات ATP وWTA الاحترافية السابقة. 
            <br/>
@@ -569,7 +569,7 @@ const matchstatsTemplate = [
                <b>توقع Matchstat.com ${player1} مقابل ${player2}.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -608,10 +608,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>この直接対決で勝つのは誰ですか?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>私の結論 / 予測:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>私の選択は、${player1Surname} が勝つということです。</b>
             Matchstat.com には、ATP と WTA の過去のすべてのプロの試合でトレーニングされた人工知能 (Ai) 予測モデルがあります。 
             <br/>
@@ -620,7 +620,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} 対 ${player2} の予測。</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -659,10 +659,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Кто победит в этом противостоянии?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>Мой вывод / прогноз:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>Я считаю, что победит ${player1Surname}.</b>
             Matchstat.com имеет модель прогнозирования на основе искусственного интеллекта (Ai), которая обучена на всех прошлых матчах профессиональных турниров ATP и WTA. 
             <br/>
@@ -671,7 +671,7 @@ const matchstatsTemplate = [
                <b>Прогноз Matchstat.com: ${player1} против ${player2}.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    },
@@ -710,10 +710,10 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>इस आमने-सामने की लड़ाई में कौन जीतेगा?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>मेरा निष्कर्ष / भविष्यवाणी:</h3>
-         <p>
+         <p style="margin-bottom: 0px;">
             <b>मेरी पसंद यह है कि ${player1Surname} जीतेगा। </b>
             मैचस्टैट.कॉम के पास एक आर्टिफिशियल इंटेलिजेंस (एआई) भविष्यवाणी मॉडल है जो सभी पेशेवर एटीपी और डब्ल्यूटीए पिछले मैचों पर प्रशिक्षित है। 
             <br/>
@@ -722,7 +722,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} बनाम ${player2} भविष्यवाणी।</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEMPLATE_SHORTCODE}
+          ${ELEMENTOR_TEXT_BLOCK_CODE}
          </div>`
       }
    }
