@@ -3,12 +3,14 @@ const ELEMENTOR_TEXT_BLOCK_CODE = '[elementor-template id="115614"]';
 const ELEMENTOR_DESKTOP_PRICING_CODE = '[elementor-template id="55914"]';
 const ELEMENTOR_MOBILE_PRICING_CODE = '[elementor-template id="55882"]';
 
+const SCRIPTS = `<script type="text/javascript" src="https://js.commissionkings.ag/javascript.php?prefix=GRT_4kQsZJzYJMJFEJBL7mNd7ZgqdRLk&amp;media=2230&amp;campaign=1"></script> <script type="text/javascript" src="https://js.commissionkings.ag/javascript.php?prefix=GRT_4kQsZJzYJMJFEJBL7mNd7ZgqdRLk&amp;media=2230&amp;campaign=1"></script>`;
+
 
 
 function splitTexts(fullText) {
    let lastFullStopIndex = fullText.lastIndexOf(" ", Math.ceil(fullText.length / 2));
 
-   return fullText.substring(0, lastFullStopIndex + 1) + ELEMENTOR_TEXT_BLOCK_CODE + fullText.substring(lastFullStopIndex + 1);
+   return fullText.substring(0, lastFullStopIndex + 1) + SCRIPTS + fullText.substring(lastFullStopIndex + 1);
 }
 
 const matchstatsTemplate = [
@@ -49,7 +51,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}    
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Who Will Win In This Head-To-Head?</h3>
-         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
+         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
          <br/> <br/>
          <h3>My Conclusion / Prediction:</h3>
          <p style="margin-bottom: 0px;">
