@@ -3,7 +3,7 @@ const ELEMENTOR_TEXT_BLOCK_CODE = '[elementor-template id="115614"]';
 const ELEMENTOR_DESKTOP_PRICING_CODE = '[elementor-template id="55914"]';
 const ELEMENTOR_MOBILE_PRICING_CODE = '[elementor-template id="55882"]';
 
-const SCRIPTS = `<script type="text/javascript" src="https://js.commissionkings.ag/javascript.php?prefix=GRT_4kQsZJzYJMJFEJBL7mNd7ZgqdRLk&amp;media=2230&amp;campaign=1"></script> <script type="text/javascript" src="https://js.commissionkings.ag/javascript.php?prefix=GRT_4kQsZJzYJMJFEJBL7mNd7ZgqdRLk&amp;media=2230&amp;campaign=1"></script>`;
+const SCRIPTS = `<br /><script type="text/javascript" src="https://js.commissionkings.ag/javascript.php?prefix=GRT_4kQsZJzYJMJFEJBL7mNd7ZgqdRLk&amp;media=2230&amp;campaign=1"></script> <script type="text/javascript" src="https://js.commissionkings.ag/javascript.php?prefix=GRT_4kQsZJzYJMJFEJBL7mNd7ZgqdRLk&amp;media=2230&amp;campaign=1"></script><br />`;
 
 
 
