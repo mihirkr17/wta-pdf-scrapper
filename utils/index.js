@@ -15,8 +15,13 @@ function getSurnameOfPlayer(fullName) {
 
 function imgWrapper(arr, player1Surname, player2Surname) {
    return arr.map((item, index) => {
-      return (`<img height="400" width="500" src="${item?.sourceUrl}" title="${index === 0 ? player1Surname + " vs " + player2Surname : player2Surname + " vs " + player1Surname}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
-   });
+      if (item?.sourceUrl) {
+         return (`<img height="400" width="500" src="${item?.sourceUrl}" title="${index === 0 ? player1Surname + " vs " + player2Surname : player2Surname + " vs " + player1Surname}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
+      } else {
+         return null;
+      }
+
+   }).filter(e => e);
 }
 
 function retryOperation(func, retries = 5) {
