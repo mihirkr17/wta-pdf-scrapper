@@ -144,11 +144,22 @@ async function init(note) {
                playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_${player2slug}`), authToken);
 
                if (!playerOneMedia?.mediaId) {
-                  playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), authToken);
+                  const player1Media = playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon3`), authToken);
+                  playerOneMedia = player1Media;
+
+
+                  if (!player1Media?.mediaId) {
+                     playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic5`), authToken);
+                  }
                }
 
                if (!playerTwoMedia?.mediaId) {
-                  playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic${Math.floor(Math.random() * 6) + 4}`), authToken);
+                  const player2Media = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon4`), authToken);
+                  playerTwoMedia = player2Media; 
+
+                  if (!player2Media?.mediaId) {
+                     playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic4`), authToken);
+                  }
                }
 
                // Generate image wrapper
