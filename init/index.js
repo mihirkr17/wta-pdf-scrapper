@@ -95,10 +95,6 @@ async function init(note) {
          return { message: "No matched contents." };
       }
 
-
-      console.log(matchedContents);
-
-      return
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
       // Rest codes
