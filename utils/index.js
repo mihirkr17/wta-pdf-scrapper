@@ -324,7 +324,7 @@ function extractMatchInfo(text, note) {
       throw new Error("Sorry! The event date format isn't valid.");
    }
 
-   eventDate = capitalizeFirstLetterOfEachWord(eventDate);
+   eventDate = capitalizeFirstLetterOfEachWord(eventDate.replace(/\s+\,/g, ","));
 
    // Result will assign here
    const results = [];
