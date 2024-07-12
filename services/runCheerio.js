@@ -23,13 +23,18 @@ async function runCheerio(url) {
          let pdfLink = $("div.static-article__body.article-body.wrapper > p").eq(pdfContainerIndex).find("a").last().attr("href") || "";
          let pdfText = $("div.static-article__body.article-body.wrapper > p").eq(pdfContainerIndex).find("a").last().text() || "";
          eventDetails = eventDetails.length > 0 && eventDetails?.split("|");
-         const eventDay = pdfText && pdfText.match(/day \d+|qf|sf/gi)?.[0];
+         const eventDay = pdfText && pdfText.match(/day \d+|qf|sf|Singles Final/gi)?.[0];
 
-         wta.push({ tournamentName: eventDetails?.[0].trim(), tournamentLocation: eventDetails?.[1]?.trim(), tournamentLink: pdfLink, pdfText, tournamentDay: eventDay });
+         wta.push({
+            tournamentName: eventDetails?.[0].trim(),
+            tournamentLocation: eventDetails?.[1]?.trim(),
+            tournamentLink: pdfLink, pdfText,
+            tournamentDay: eventDay
+         });
       }
 
       if (Array.isArray(wta)) {
-         return wta.filter(e => (/(Day \d+|QF|SF)/gi).test(e.pdfText));
+         return wta.filter(e => (/(Day \d+|QF|SF|Singles Final)/gi).test(e.pdfText));
       }
    })();
 }

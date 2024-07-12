@@ -1,6 +1,7 @@
 const fs = require("fs");
 const https = require("https");
 const splitString = require("split-string");
+const para = require("./para");
 const fetch = (...args) =>
    import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
@@ -301,13 +302,16 @@ function extractMatchInfo(text, note) {
    }
 
    // Splitting 3 sections 
-   const paragraphs = paragraph && paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
+   const paragraphs = [para]; // paragraph && paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
 
    if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
       return [];
    }
 
    const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e.length !== 0);
+
+
+   
 
    if (!Array.isArray(tournamentHistories) && tournamentHistories.length === 0) {
       return [];

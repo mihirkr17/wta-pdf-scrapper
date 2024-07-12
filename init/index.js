@@ -95,6 +95,7 @@ async function init(note) {
          return { message: "No matched contents." };
       }
 
+
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
       // Rest codes
@@ -155,7 +156,7 @@ async function init(note) {
 
                if (!playerTwoMedia?.mediaId) {
                   const player2Media = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon4`), authToken);
-                  playerTwoMedia = player2Media; 
+                  playerTwoMedia = player2Media;
 
                   if (!player2Media?.mediaId) {
                      playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic4`), authToken);
