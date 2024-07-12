@@ -302,7 +302,7 @@ function extractMatchInfo(text, note) {
    }
 
    // Splitting 3 sections 
-   const paragraphs = [para]; // paragraph && paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
+   const paragraphs = paragraph && paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
 
    if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
       return [];
