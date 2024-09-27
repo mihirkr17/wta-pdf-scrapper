@@ -214,7 +214,7 @@ async function init(note) {
                      const slug = slugMaker(title);
 
 
-                     const metaTitle = templates?.tpMetaTitle ? templates?.tpMetaTitle.replace("#eventName", plainEventName)
+                     const metaTitle = template?.tpMetaTitle ? templates?.tpMetaTitle.replace("#eventName", plainEventName)
                      ?.replace("#player1Surname", player1Surname)
                      ?.replace("#player2Surname", player2Surname)
                      ?.replace("#eventYear", eventYear) : title;
@@ -279,7 +279,10 @@ async function init(note) {
                         author: parseInt(authorId),
                         tags: tagIds,
                         featured_media: playerOneMedia?.mediaId || playerTwoMedia?.mediaId,
-                        categories: [tpCategoryId]
+                        categories: [tpCategoryId],
+                        meta: {
+                           aioseo_title: metaTitle || "aiseo title"
+                        }
                      });
                      consoleLogger(`${postIndex}. Post created successfully.`);
 
