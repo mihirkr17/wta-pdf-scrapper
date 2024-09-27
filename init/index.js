@@ -214,7 +214,7 @@ async function init(note) {
                      const slug = slugMaker(title);
 
 
-                     const metaTitle = resource?.tpMetaTitle ? resource?.tpMetaTitle.replace("#eventName", plainEventName)
+                     const metaTitle = templates?.tpMetaTitle ? templates?.tpMetaTitle.replace("#eventName", plainEventName)
                      ?.replace("#player1Surname", player1Surname)
                      ?.replace("#player2Surname", player2Surname)
                      ?.replace("#eventYear", eventYear) : title;
