@@ -120,10 +120,6 @@ async function init(note) {
 
          consoleLogger(`Total ${matchedContents.length * templates.length} post will create for ${siteName}.`);
 
-         console.log(matchedContents);
-
-         return
-
          let postIndex = 1;
 
          for (const matchContent of matchedContents) {
