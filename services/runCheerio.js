@@ -17,7 +17,7 @@ async function runCheerio(url) {
 
       const wta = []; // { eventDetails1, pdfLink1, pdfText1 };
       for (let i = 0; i < arr; i++) {
-         let eventDetails = $("div.static-article__body.article-body.wrapper > p > strong").eq(i).text() || "";
+         let eventDetails = $("div.static-article__body.article-body.wrapper > h3 > strong").eq(i).text() || "";
          let pdfContainerIndex = (i * 2) + 1;
 
          let pdfLink = $("div.static-article__body.article-body.wrapper > p").eq(pdfContainerIndex).find("a").last().attr("href") || "";
@@ -25,8 +25,10 @@ async function runCheerio(url) {
          eventDetails = eventDetails.length > 0 && eventDetails?.split("|");
          const eventDay = pdfText && pdfText.match(/day \d+|qf|sf|Singles Final/gi)?.[0];
 
+
+         console.log(pdfLink);
          wta.push({
-            tournamentName: eventDetails?.[0].trim(),
+            tournamentName: eventDetails?.[0]?.trim(),
             tournamentLocation: eventDetails?.[1]?.trim(),
             tournamentLink: pdfLink, pdfText,
             tournamentDay: eventDay

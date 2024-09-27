@@ -243,7 +243,7 @@ function extractMatchInfo(text, note) {
    let eventDate = "";
 
    // regex patterns 1
-   const targetDateDayYearRegex = /MATCH NOTES\s+[–|-|–]\s+(DAY \d+|QUARTERFINALS)\s+[–|-|–]/i;
+   const targetDateDayYearRegex = /MATCH NOTES\s+[–|-|–]/i;
 
 
    // regex patterns 2
@@ -259,6 +259,7 @@ function extractMatchInfo(text, note) {
          const newLine = line && line.replace(/\s{2,}/gi, " ");
          const dateLine = newLine.match(/\b\w+day.*$/i);
          eventDate = Array.isArray(dateLine) ? dateLine[0] : "";
+
       }
 
 
@@ -319,6 +320,9 @@ function extractMatchInfo(text, note) {
 
 
    const eventDay = capitalizeFirstLetterOfEachWord(tournamentDay);
+
+
+   console.log(eventDate);
 
    let year = typeof eventDate === "string" && eventDate?.match(/\d{4}/i);
    const eventYear = Array.isArray(year) ? year[0] : new Date().getFullYear();

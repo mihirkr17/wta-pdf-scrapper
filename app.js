@@ -42,15 +42,16 @@ const { getPdfLinks } = require("./services");
          throw new Error(`ERROR: Author id must be set as "AUTHOR_ID_SG=12345 | AUTHOR_ID_MS=12345" in .env`);
       }
 
-      let mediaNotes = await getPdfLinks("https://www.wtatennis.com/match-notes");
+      let mediaNotes = //await getPdfLinks("https://www.wtatennis.com/match-notes");
 
-      // [
-      //    {
-      //       tournamentName: "Ecotrans Ladies Open",
-      //       tournamentLocation: "Berlin, Germany",
-      //       pdfLink: ["https://wtafiles.wtatennis.com/pdf/matchnotes/2024/2012_QF.pdf"]
-      //    }
-      // ];
+         [
+            {
+               tournamentName: "China Open",
+               tournamentLocation: "Beijing, China",
+               tournamentLink: "https://wtafiles.wtatennis.com/pdf/matchnotes/2024/1020_3_.pdf?x",
+               tournamentDay: "Day 3"
+            }
+         ];
 
       const lengthOfMediaNoteLinks = mediaNotes.length || 0;
 
@@ -62,7 +63,7 @@ const { getPdfLinks } = require("./services");
       // Operation will run here
       for (const note of mediaNotes.slice(0, 1)) {
          const link = note?.tournamentLink;
-         
+
          console.log(note);
 
          if (link && link.length >= 1) {

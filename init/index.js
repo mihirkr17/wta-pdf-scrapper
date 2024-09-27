@@ -120,6 +120,10 @@ async function init(note) {
 
          consoleLogger(`Total ${matchedContents.length * templates.length} post will create for ${siteName}.`);
 
+         console.log(matchedContents);
+
+         return
+
          let postIndex = 1;
 
          for (const matchContent of matchedContents) {
@@ -214,6 +218,11 @@ async function init(note) {
                      const slug = slugMaker(title);
 
 
+                     const metaTitle = resource?.tpMetaTitle ? resource?.tpMetaTitle.replace("#eventName", plainEventName)
+                     ?.replace("#player1Surname", player1Surname)
+                     ?.replace("#player2Surname", player2Surname)
+                     ?.replace("#eventYear", eventYear) : title;
+
                      // Finding duplicate post by slug
                      const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteDomain, slug), authToken);
 
@@ -267,7 +276,7 @@ async function init(note) {
 
                      consoleLogger(`${postIndex}. Post creating...`);
                      await createPostOfWP(constant?.postUri(siteDomain), authToken, {
-                        title,
+                        title: metaTitle,
                         slug,
                         content: htmlContent,
                         status: constant?.postStatus,

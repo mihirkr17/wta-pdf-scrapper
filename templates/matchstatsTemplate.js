@@ -20,6 +20,7 @@ const matchstatsTemplate = [
       tpCategory: "WTA / ATP Tennis Predictions",
       tpCategoryId: 4339,
       tpTitle: "Who Will Win: #player1Surname vs #player2Surname? Prediction For WTA #eventName #eventYear",
+      tpMetaTitle: "Prediction Of #player1Surname Vs #player2Surname H2H, Who Will Win At ATP #eventName #eventYear?",
       tpPlayerTag: "#playerName PREDICTIONS",
       tpPlayerVsPlayerTag: "#player1Surname VS #player2Surname H2H PREDICTIONS",
       tpEventTag: "WTA #eventName PREDICTIONS, PICKS & BEST BETS",
@@ -51,7 +52,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}    
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Who Will Win In This Head-To-Head?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>My Conclusion / Prediction:</h3>
          <p style="margin-bottom: 0px;">
@@ -63,7 +64,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} vs ${player2} prediction.</b>
             </a> 
          </p>
-         ${ELEMENTOR_TEXT_BLOCK_CODE}
+         
          </div>`
       }
    },
@@ -101,7 +102,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>¿Quién ganará en este cara a cara?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Mi Pronósticos / Conclusión:</h3>
             <p style="margin-bottom: 0px;">
@@ -113,7 +114,7 @@ const matchstatsTemplate = [
                   <b>Pronóstico de Matchstat.com ${player1} vs ${player2}.</b>
                </a> 
             </p>
-             ${ELEMENTOR_TEXT_BLOCK_CODE}
+             
             </div>`
       }
    },
@@ -151,7 +152,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Quem vencerá neste confronto direto?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Minha Palpites / Conclusão:</h3>
             <p>
@@ -163,7 +164,7 @@ const matchstatsTemplate = [
                   <b>Palpites de ${player1} vs ${player2} do Matchstat.com.</b>
                </a> 
             <p style="margin-bottom: 0px;">
-             ${ELEMENTOR_TEXT_BLOCK_CODE}
+             
             </div>`
       }
    },
@@ -202,7 +203,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Qui va gagner dans ce face-à-face ?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Ma Pronostics / Conclusion :</h3>
             <p style="margin-bottom: 0px;">
@@ -214,7 +215,7 @@ const matchstatsTemplate = [
                   <b>Pronostics Matchstat.com ${player1} contre ${player2}.</b>
                </a> 
             </p>
-             ${ELEMENTOR_TEXT_BLOCK_CODE}
+             
             </div>`
       }
    },
@@ -253,7 +254,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Wer wird in diesem direkten Duell gewinnen?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>Mein Wett-Tipps & Prognosen:</h3>
             <p style="margin-bottom: 0px;">
@@ -304,7 +305,7 @@ const matchstatsTemplate = [
             </p>`.replace(/\n/g, " ")}
             ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
             <h3>Chi vincerà in questo testa a testa?</h3>
-            <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
             <br/> <br/>
             <h3>La Mia Conclusione / Pronostici:</h3>
             <p style="margin-bottom: 0px;">
@@ -316,7 +317,7 @@ const matchstatsTemplate = [
                   <b>Pronostico di Matchstat.com ${player1} vs ${player2}.</b>
                </a> 
             </p>
-             ${ELEMENTOR_TEXT_BLOCK_CODE}
+             
             </div>`
       }
    },
@@ -355,7 +356,7 @@ const matchstatsTemplate = [
           </p>`.replace(/\n/g, " ")}
           ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
           <h3>Kto wygra w tym pojedynku?</h3>
-          <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
           <br/> <br/>
           <h3>Mój Wniosek / Prognozy:</h3>
           <p>
@@ -367,7 +368,7 @@ const matchstatsTemplate = [
                 <b>Prognozy Matchstat.com ${player1} vs ${player2}.</b>
              </a> 
           </p>
-           ${ELEMENTOR_TEXT_BLOCK_CODE}
+           
           </div>`
       }
    },
@@ -406,7 +407,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Wie zal winnen in deze onderlinge strijd?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>Mijn Conclusie / Wedtips:</h3>
          <p style="margin-bottom: 0px;">
@@ -418,7 +419,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} versus ${player2} Wedtips.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    },
@@ -457,7 +458,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Bu Karşılıklı Mücadelede Kim Kazanacak?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>Sonucum / Tahminleri:</h3>
          <p style="margin-bottom: 0px;">
@@ -469,7 +470,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} - ${player2} tahmini.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    },
@@ -508,7 +509,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>谁会在这场正面交锋中获胜？</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>我的结论 / 预测：</h3>
          <p style="margin-bottom: 0px;">
@@ -520,7 +521,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} vs ${player2} 预测。</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    },
@@ -559,7 +560,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>من سيفوز في هذه المواجهة المباشرة؟</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>استنتاجي / توقعي:</h3>
          <p style="margin-bottom: 0px;">
@@ -571,7 +572,7 @@ const matchstatsTemplate = [
                <b>توقع Matchstat.com ${player1} مقابل ${player2}.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    },
@@ -610,7 +611,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>この直接対決で勝つのは誰ですか?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>私の結論 / 予測:</h3>
          <p style="margin-bottom: 0px;">
@@ -622,7 +623,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} 対 ${player2} の予測。</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    },
@@ -661,7 +662,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>Кто победит в этом противостоянии?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>Мой вывод / прогноз:</h3>
          <p style="margin-bottom: 0px;">
@@ -673,7 +674,7 @@ const matchstatsTemplate = [
                <b>Прогноз Matchstat.com: ${player1} против ${player2}.</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    },
@@ -712,7 +713,7 @@ const matchstatsTemplate = [
          </p>`.replace(/\n/g, " ")}
          ${ELEMENTOR_DESKTOP_PRICING_CODE}${ELEMENTOR_MOBILE_PRICING_CODE}
          <h3>इस आमने-सामने की लड़ाई में कौन जीतेगा?</h3>
-         <p>${splitTexts(paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, ''))}</p>
+         <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
          <br/> <br/>
          <h3>मेरा निष्कर्ष / भविष्यवाणी:</h3>
          <p style="margin-bottom: 0px;">
@@ -724,7 +725,7 @@ const matchstatsTemplate = [
                <b>Matchstat.com ${player1} बनाम ${player2} भविष्यवाणी।</b>
             </a> 
          </p>
-          ${ELEMENTOR_TEXT_BLOCK_CODE}
+          
          </div>`
       }
    }
