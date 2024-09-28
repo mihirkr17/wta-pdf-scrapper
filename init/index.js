@@ -96,6 +96,11 @@ async function init(note) {
       }
 
 
+      // console.log(matchedContents);
+
+
+      // return
+
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
       // Rest codes

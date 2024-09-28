@@ -48,8 +48,8 @@ const { getPdfLinks } = require("./services");
             {
                tournamentName: "China Open",
                tournamentLocation: "Beijing, China",
-               tournamentLink: "https://wtafiles.wtatennis.com/pdf/matchnotes/2024/1020_3_.pdf?x",
-               tournamentDay: "Day 3"
+               tournamentLink: "https://wtafiles.wtatennis.com/pdf/matchnotes/2024/1020_4.pdf?x",
+               tournamentDay: "Day 4"
             }
          ];
 
