@@ -1,38 +1,20 @@
-// const express = require("express");
-// const cookieParser = require("cookie-parser");
-// const schedule = require("node-schedule");
 require("dotenv").config();
-
 
 const {
    consoleLogger,
 } = require("./utils");
 
-// const path = require("path");
+
 const init = require("./init");
 const { constant } = require("./config");
-const { getPdfLinks } = require("./services");
-
-
-// const app = express();
-// const PORT = process.env.PORT || 8000;
-
-// Middlewares
-// app.use(cookieParser());
-// app.use(express.json());
-// app.set({
-//    origin: "*",
-//    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
-//    allowedHeaders: ["Content-Type", "Authorization", "role"],
-//    credentials: true,
-// });
-// // Serve static files from the "models" directory
-// app.use(express.static(path.join(__dirname, 'models')));
-// app.use(require("./routes/route"));
-
 
 (async () => {
    try {
+
+      const noteUrl = process.env.MEDIA_NOTE_URL;
+      const noteDay = process.env.MEDIA_NOTE_DAY;
+      const noteTournamentLocation = process.env.MEDIA_NOTE_TOURNAMENT_LOCATION;
+      const noteTournament = process.env.MEDIA_NOTE_TOURNAMENT;
 
       if (!constant?.postStatus || !constant?.postStatusAll.includes(constant?.postStatus)) {
          throw new Error(`ERROR: Post status must be set as "POST_STATUS=publish or future or draft or pending or private" in .env`);
@@ -42,39 +24,37 @@ const { getPdfLinks } = require("./services");
          throw new Error(`ERROR: Author id must be set as "AUTHOR_ID_SG=12345 | AUTHOR_ID_MS=12345" in .env`);
       }
 
-      let mediaNotes = //await getPdfLinks("https://www.wtatennis.com/match-notes");
-
-         [
-            {
-               tournamentName: "China Open",
-               tournamentLocation: "Beijing, China",
-               tournamentLink: "https://wtafiles.wtatennis.com/pdf/matchnotes/2024/1020_6_.pdf?x",
-               tournamentDay: "Day 6"
-            }
-         ];
-
-      const lengthOfMediaNoteLinks = mediaNotes.length || 0;
-
-      if (lengthOfMediaNoteLinks <= 0) {
-         consoleLogger(`Sorry no media note urls available right now!`);
-         return;
+      if (!noteUrl) {
+         throw new Error(`ERROR: Required tournament pdf url link.`);
       }
-      // console.log(mediaNotes);
-      // Operation will run here
-      for (const note of mediaNotes.slice(0, 1)) {
-         const link = note?.tournamentLink;
 
-         console.log(note);
-
-         if (link && link.length >= 1) {
-            const result = await init(note);
-            consoleLogger(`${result?.message}`);
-         }
+      if (!noteDay) {
+         throw new Error(`ERROR: Required tournament day.`);
       }
+
+      if (!noteTournamentLocation) {
+         throw new Error(`ERROR: Required tournament location.`);
+      }
+
+      if (!noteTournament) {
+         throw new Error(`ERROR: Required tournament name.`);
+      }
+
+      const noteDetail = {
+         tournamentName: noteTournament,
+         tournamentLocation: noteTournamentLocation,
+         tournamentLink: noteUrl,
+         tournamentDay: noteDay
+      }
+
+      consoleLogger(`Running ${noteTournament}, ${noteTournamentLocation}, ${noteDay}.`);
+
+      const result = await init(noteDetail);
+      consoleLogger(`${result?.message}`);
+
    } catch (error) {
       consoleLogger(error?.message);
       process.exit(1);
-
    } finally {
       process.exit(0);
    }

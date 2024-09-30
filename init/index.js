@@ -107,23 +107,23 @@ async function init(note) {
       for (const site of sites) {
          const { siteDomain, siteName, chatgptCommand, templates, siteCode, authToken, authorId } = site;
 
-         consoleLogger(`Running ${siteDomain}.`);
+         consoleLogger(`${siteCode}: Running ${siteDomain}.`);
 
          if (!authToken) {
-            consoleLogger(`Sorry! Auth token not found from ${siteName}.`);
+            consoleLogger(`${siteCode}: Sorry! Auth token not found from ${siteName}.`);
             continue;
          }
 
-         consoleLogger(`Auth token found from ${siteName}.`);
+         consoleLogger(`${siteCode}: Auth token found from ${siteName}.`);
 
          if (!templates || !Array.isArray(templates)) {
-            consoleLogger(`Post template not found from ${siteName}.`);
+            consoleLogger(`${siteCode}: Post template not found from ${siteName}.`);
             continue
          }
 
-         consoleLogger(`Post template found from ${siteName}.`);
+         consoleLogger(`${siteCode}: Post template found from ${siteName}.`);
 
-         consoleLogger(`Total ${matchedContents.length * templates.length} post will create for ${siteName}.`);
+         consoleLogger(`${siteCode}: Total ${matchedContents.length * templates.length} post will create for ${siteName}.`);
 
          let postIndex = 1;
 
@@ -139,7 +139,7 @@ async function init(note) {
             const plainEventName = eventName?.replace(/\d/g, '')?.trim();
 
             if (!player1 || !player2 || !eventName || !eventAddress || !eventDate || !content) {
-               consoleLogger(`${postIndex}. Some fields are missing. Content skipped.`);
+               consoleLogger(`${siteCode}: ${postIndex}. Some fields are missing. Content skipped.`);
                continue;
             }
 
@@ -178,7 +178,7 @@ async function init(note) {
                   let newTitle = "";
                   try {
                      if (!tpCategoryId || !tpCategory || !tpLanguage || !tpEventTag) {
-                        throw new Error(`Temp ${templateIndex}. Post skipped. Required [ categoryId, category, language, eventTag ]`);
+                        throw new Error(`${siteCode}: Temp ${templateIndex}. Post skipped. Required [ categoryId, category, language, eventTag ]`);
                      }
 
                      const playerOneTag = tpPlayerTag?.replace("#playerName", player1);
@@ -228,13 +228,13 @@ async function init(note) {
                      const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteDomain, slug), authToken);
 
                      if (isUniquePost) {
-                        consoleLogger(`Temp ${templateIndex}. Post already exists [ SLUG: ${slug} ].`);
+                        consoleLogger(`${siteCode}: Temp ${templateIndex}. Post already exists [ SLUG: ${slug} ].`);
                         return;
                      }
 
-                     consoleLogger(`${postIndex}. Post Slug: ${slug}.`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Post Slug: ${slug}.`);
 
-                     consoleLogger(`${postIndex}. Tags: ${[playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag].toString()}`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Tags: ${[playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag].toString()}`);
 
                      const tagIds = await getPostTagIdsOfWP(constant?.tagUri(siteDomain), [playerOneTag, playerTwoTag, eventTag, playerVsPlayerTag], authToken);
 
@@ -242,18 +242,18 @@ async function init(note) {
                         throw new Error(`Tags are not created. Terminate the request.`);
                      }
 
-                     consoleLogger(`${postIndex}. Created Tags ID's are : ${tagIds.toString()}`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Created Tags ID's are : ${tagIds.toString()}`);
 
-                     consoleLogger(`${postIndex}. Paraphrase starting...`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Paraphrase starting...`);
                      const newChatgptCommand = chatgptCommand?.replace("#language", tpLanguage)?.replace("#texts", text);
                      const paraphrasedBlog = await paraphraseContents(newChatgptCommand);
 
                      if (!paraphrasedBlog || paraphrasedBlog.length === 0) {
-                        consoleLogger(`${postIndex}. Sorry! Content not paraphrased.`);
+                        consoleLogger(`${siteCode}: ${postIndex}. Sorry! Content not paraphrased.`);
                         return;
                      }
 
-                     consoleLogger(`${postIndex}. Paraphrased done.`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Paraphrased done.`);
 
                      const htmlContent = tpContent(
                         eventName,
@@ -275,7 +275,7 @@ async function init(note) {
                         plainEventName
                      );
 
-                     consoleLogger(`${postIndex}. Post creating...`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Post creating...`);
                      await createPostOfWP(constant?.postUri(siteDomain), authToken, {
                         title: metaTitle,
                         slug,
@@ -289,12 +289,12 @@ async function init(note) {
                            aioseo_title: metaTitle || "aiseo title"
                         }
                      });
-                     consoleLogger(`${postIndex}. Post created successfully.`);
+                     consoleLogger(`${siteCode}: ${postIndex}. Post created successfully.`);
 
                      postCounter += 1;
                      postIndex++;
                   } catch (error) {
-                     consoleLogger(`ERROR: ${error?.message}.`);
+                     consoleLogger(`${siteCode}: ERROR: ${error?.message}.`);
                      await delay(1000);
                   }
                }));
