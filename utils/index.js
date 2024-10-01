@@ -222,6 +222,8 @@ function extractMatchInfo(text, note) {
 
    const { tournamentDay = "", tournamentName = "", tournamentLocation = "" } = note;
 
+   const tournamentRound = note?.round || null;
+
    const splittedTexts = text?.split("\n")?.filter(line => line?.trim().length !== 0);
 
    // new variables
@@ -312,7 +314,7 @@ function extractMatchInfo(text, note) {
    const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e.length !== 0);
 
 
-   
+
 
    if (!Array.isArray(tournamentHistories) && tournamentHistories.length === 0) {
       return [];
@@ -320,9 +322,6 @@ function extractMatchInfo(text, note) {
 
 
    const eventDay = capitalizeFirstLetterOfEachWord(tournamentDay);
-
-
-   console.log(eventDate);
 
    let year = typeof eventDate === "string" && eventDate?.match(/\d{4}/i);
    const eventYear = Array.isArray(year) ? year[0] : new Date().getFullYear();
@@ -397,6 +396,9 @@ function extractMatchInfo(text, note) {
          const player1Surname = getSurnameOfPlayer(player1);
          const player2Surname = getSurnameOfPlayer(player2);
 
+
+        
+
          const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`.trim();
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
@@ -407,7 +409,7 @@ function extractMatchInfo(text, note) {
             player1slug: underscoreSlugger(player1),
             player2slug: underscoreSlugger(player2),
             leads,
-            eventRound: round,
+            eventRound: tournamentRound ? tournamentRound : round,
             eventDate,
             eventDay,
             eventName: capitalizeFirstLetterOfEachWord(tournamentName),

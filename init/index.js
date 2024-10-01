@@ -37,16 +37,16 @@ translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
 const sites = [
-   {
-      id: 1,
-      siteName: "Stevegtennis",
-      siteCode: "sg",
-      siteDomain: constant?.domainSg,
-      authToken: constant?.authTokenSg,
-      authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate,
-      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-   },
+   // {
+   //    id: 1,
+   //    siteName: "Stevegtennis",
+   //    siteCode: "sg",
+   //    siteDomain: constant?.domainSg,
+   //    authToken: constant?.authTokenSg,
+   //    authorId: constant?.authorIdSg,
+   //    templates: stevegtennisTemplate,
+   //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   // },
    {
       id: 2,
       siteName: "Matchstat",
@@ -54,7 +54,7 @@ const sites = [
       siteDomain: constant?.domainMs,
       authToken: constant?.authTokenMs,
       authorId: constant?.authorIdMs,
-      templates: matchstatsTemplate,
+      templates: matchstatsTemplate.slice(0, 1),
       chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
    }
 ];
@@ -146,26 +146,25 @@ async function init(note) {
             try {
                let playerOneMedia = {}, playerTwoMedia = {};
 
-               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_${player1slug}`), authToken);
-               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_${player2slug}`), authToken);
+               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta ${player1Surname} `), authToken);
+               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta ${player2Surname} `), authToken);
 
                if (!playerOneMedia?.mediaId) {
-                  const player1Media = playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon3`), authToken);
-                  playerOneMedia = player1Media;
+                  // const player1Media = playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon3`), authToken);
+                  // playerOneMedia = player1Media;
 
-
-                  if (!player1Media?.mediaId) {
+                  // if (!player1Media?.mediaId) {
                      playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic5`), authToken);
-                  }
+                  // }
                }
 
                if (!playerTwoMedia?.mediaId) {
-                  const player2Media = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon4`), authToken);
-                  playerTwoMedia = player2Media;
+                  // const player2Media = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon4`), authToken);
+                  // playerTwoMedia = player2Media;
 
-                  if (!player2Media?.mediaId) {
+                  // if (!player2Media?.mediaId) {
                      playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic4`), authToken);
-                  }
+                  // }
                }
 
                // Generate image wrapper

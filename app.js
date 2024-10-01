@@ -15,6 +15,7 @@ const { constant } = require("./config");
       const noteDay = process.env.MEDIA_NOTE_DAY;
       const noteTournamentLocation = process.env.MEDIA_NOTE_TOURNAMENT_LOCATION;
       const noteTournament = process.env.MEDIA_NOTE_TOURNAMENT;
+      const round = process.env.MEDIA_NOTE_TOURNAMENT_ROUND;
 
       if (!constant?.postStatus || !constant?.postStatusAll.includes(constant?.postStatus)) {
          throw new Error(`ERROR: Post status must be set as "POST_STATUS=publish or future or draft or pending or private" in .env`);
@@ -45,6 +46,10 @@ const { constant } = require("./config");
          tournamentLocation: noteTournamentLocation,
          tournamentLink: noteUrl,
          tournamentDay: noteDay
+      }
+
+      if (round) {
+         Object.assign(noteDetail, { round: round })
       }
 
       consoleLogger(`Running ${noteTournament}, ${noteTournamentLocation}, ${noteDay}.`);
