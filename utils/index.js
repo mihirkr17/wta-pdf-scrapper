@@ -25,7 +25,8 @@ function imgWrapper(arr, playerOneSurname, playerTwoSurname, option) {
       }
 
       if (item?.sourceUrl) {
-         return (`<img width="350" height="500" src="${item?.sourceUrl}" title="${title}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
+         return (`<img width="350" height="500" src="${item?.sourceUrl}" title="${title}" alt="${item?.slug}" style="flex: 1; width: 50%; height: 100%;
+    object-fit: fill;" />`);
       }
    }).filter(e => e);
 }

@@ -1,3 +1,14 @@
+
+const imageBanner = `
+<a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
+               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
+               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
+               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
+               </picture>
+            </a>
+`;
+
+
 const stevegtennisTemplate = [
    {
       tpLanguage: "English",
@@ -25,7 +36,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">${imgWrapper?.join("")}</div>
          
          <div style="margin: 15px 0">
          <ul>
@@ -49,12 +60,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+            ${imageBanner}
          </p>
          <br/>
          
@@ -106,7 +112,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
         </div>
         
-        <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+        <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
         </div>
         
@@ -132,12 +138,7 @@ const stevegtennisTemplate = [
         
         <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
         
@@ -189,7 +190,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
      </div>
      
-     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
          ${imgWrapper?.join("")}
      </div>
      
@@ -215,12 +216,7 @@ const stevegtennisTemplate = [
      
      <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
      
@@ -273,7 +269,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
      </div>
      
-     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
          ${imgWrapper?.join("")}
      </div>
      
@@ -299,12 +295,7 @@ const stevegtennisTemplate = [
      
      <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
      
@@ -356,7 +347,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
      </div>
      
-     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
          ${imgWrapper?.join("")}
      </div>
      
@@ -382,12 +373,7 @@ const stevegtennisTemplate = [
      
      <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
      
@@ -439,7 +425,7 @@ const stevegtennisTemplate = [
            <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
            ${imgWrapper?.join("")}
          </div>
          
@@ -465,12 +451,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -521,7 +502,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
       </div>
       
-      <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+      <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
          ${imgWrapper?.join("")}
       </div>
       
@@ -547,12 +528,7 @@ const stevegtennisTemplate = [
       
       <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
       
@@ -605,7 +581,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -631,12 +607,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -689,7 +660,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -715,12 +686,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -773,7 +739,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -799,12 +765,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -857,7 +818,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -883,12 +844,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -942,7 +898,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -968,12 +924,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -1027,7 +978,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -1053,12 +1004,7 @@ const stevegtennisTemplate = [
          
          <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
          
@@ -1111,7 +1057,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
       </div>
       
-      <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
+      <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px; height: 450px;">${imgWrapper?.join("")}</div>
       
       <div style="margin: 15px 0">
          <ul>
@@ -1135,12 +1081,7 @@ const stevegtennisTemplate = [
       
       <br/>
          <p>
-            <a href="https://www.stevegtennis.com/h2h-predictions/plans-match-winner-pro-monthly/" title="Tennis Premium Subscription" style="text-align: center; display: block;"> <picture>
-               <source media="(max-width: 899px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans-sm_v2.webp">
-               <source media="(min-width: 900px)" srcset="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp">
-               <img decoding="async" src="https://www.stevegtennis.com/assets/images/tennis-subscription-plans_v2.webp" style="max-width: 640px; width:100%;" alt="Subscription Plans">
-               </picture>
-            </a>
+         ${imageBanner}
          </p>
          <br/>
       

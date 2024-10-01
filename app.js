@@ -11,6 +11,12 @@ const { constant } = require("./config");
 (async () => {
    try {
 
+      const appAction = process.env.ACTION;
+
+      if (appAction == "off") {
+         process.exit(0);
+      }
+
       const noteUrl = process.env.MEDIA_NOTE_URL;
       const noteDay = process.env.MEDIA_NOTE_DAY;
       const noteTournamentLocation = process.env.MEDIA_NOTE_TOURNAMENT_LOCATION;
