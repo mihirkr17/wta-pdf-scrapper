@@ -127,7 +127,7 @@ async function init(note) {
 
          let postIndex = 1;
 
-         for (const matchContent of matchedContents) {
+         for (const matchContent of matchedContents.slice(0, 1)) {
 
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
