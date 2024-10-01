@@ -25,7 +25,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          
          <div style="margin: 15px 0">
          <ul>
@@ -106,7 +106,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
         </div>
         
-        <div style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
         </div>
         
@@ -189,7 +189,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
      </div>
      
-     <div style="display: flex; flex-direction: row;">
+     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
          ${imgWrapper?.join("")}
      </div>
      
@@ -273,7 +273,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
      </div>
      
-     <div style="display: flex; flex-direction: row;">
+     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
          ${imgWrapper?.join("")}
      </div>
      
@@ -356,7 +356,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
      </div>
      
-     <div style="display: flex; flex-direction: row;">
+     <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
          ${imgWrapper?.join("")}
      </div>
      
@@ -439,7 +439,7 @@ const stevegtennisTemplate = [
            <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
            ${imgWrapper?.join("")}
          </div>
          
@@ -521,7 +521,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
       </div>
       
-      <div style="display: flex; flex-direction: row;">
+      <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
          ${imgWrapper?.join("")}
       </div>
       
@@ -605,7 +605,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -689,7 +689,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -773,7 +773,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -857,7 +857,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -942,7 +942,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -1027,7 +1027,7 @@ const stevegtennisTemplate = [
             <p>${eventHeading2}</p>
          </div>
          
-         <div style="display: flex; flex-direction: row;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
             ${imgWrapper?.join("")}
          </div>
          
@@ -1111,7 +1111,7 @@ const stevegtennisTemplate = [
          <p>${eventHeading2}</p>
       </div>
       
-      <div style="display: flex; flex-direction: row;">${imgWrapper?.join("")}</div>
+      <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
       
       <div style="margin: 15px 0">
          <ul>

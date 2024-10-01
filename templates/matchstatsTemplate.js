@@ -44,7 +44,7 @@ const matchstatsTemplate = [
       ) {
 
          return `<div style="padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">
          ${imgWrapper?.join("")}
          </div>
          <br/>
@@ -96,7 +96,7 @@ const matchstatsTemplate = [
          eventYear,
          plainEventName) {
          return `<div style="padding-bottom: 5px;">
-            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
             <br/>
             <h3>¿A qué hora jugará ${player1} contra ${player2}?</h3>
             ${`<p>
@@ -146,7 +146,7 @@ const matchstatsTemplate = [
          eventYear,
          plainEventName) {
          return `<div style="padding-bottom: 5px;">
-            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
             <br/>
             <h3>A que horas ${player1} jogará contra ${player2}?</h3>
             ${`<p>
@@ -197,7 +197,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
             <br/>
             <h3>À quelle heure ${player1} jouera-t-il contre ${player2} ?</h3>
             ${`<p>
@@ -248,7 +248,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
             <br/>
             <h3>Wann spielt ${player1} gegen ${player2}?</h3>
             ${`<p>
@@ -299,7 +299,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+            <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
             <br/>
             <h3>A che ora giocherà ${player1} contro ${player2}?</h3>
             ${`<p>
@@ -350,7 +350,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-          <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+          <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
           <br/>
           <h3>O której godzinie ${player1} zagra z ${player2}?</h3>
           ${`<p>
@@ -401,7 +401,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          <br/>
          <h3>Hoe laat speelt ${player1} tegen ${player2}?</h3>
          ${`<p>
@@ -452,7 +452,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style = "padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          <br/>
          <h3>${player1}, ${player2}'a Karşı Ne Zaman Oynayacak?</h3>
          ${`<p>
@@ -503,7 +503,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          <br/>
          <h3>${player1} 何时对阵 ${player2}？</h3>
          ${`<p>
@@ -554,7 +554,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          <br/>
          <h3>في أي وقت سيلعب ${player1} ضد ${player2}؟</h3>
          ${`<p>
@@ -605,7 +605,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          <br/>
          <h3>${player1} は ${player2} と何時に対戦しますか?</h3>
          ${`<p>
@@ -656,7 +656,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style="padding-bottom: 5px;">
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join("")}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join("")}</div>
          <br/>
          <h3>В какое время ${player1} сыграет против ${player2}?</h3>
          ${`<p>
@@ -707,7 +707,7 @@ const matchstatsTemplate = [
          plainEventName) {
 
          return `<div style='padding-bottom: 5px;'>
-         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 400px; min-height: 380px;">${imgWrapper?.join('')}</div>
+         <div style="display: flex; flex-direction: row; gap: 6px; max-height: 450px; min-height: 400px;">${imgWrapper?.join('')}</div>
          <br/>
          <h3>${player1} किस समय ${player2} के विरुद्ध खेलेगा?</h3>
          ${`<p>
