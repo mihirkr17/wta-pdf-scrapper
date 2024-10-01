@@ -14,16 +14,22 @@ function getSurnameOfPlayer(fullName) {
    return nameParts[nameParts.length - 1];
 }
 
-function imgWrapper(arr, player1Surname, player2Surname) {
+
+function imgWrapper(arr, playerOneSurname, playerTwoSurname, option) {
    return arr.map((item, index) => {
-      if (item?.sourceUrl) {
-         return (`<img height="400" width="500" src="${item?.sourceUrl}" title="${index === 0 ? player1Surname + " vs " + player2Surname : player2Surname + " vs " + player1Surname}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
-      } else {
-         return null;
+      let title = playerOneSurname + " Vs " + playerTwoSurname;
+      if (option === "sg") {
+         title = `${index === 0 ? playerOneSurname + " vs " + playerTwoSurname : playerTwoSurname + " vs " + playerOneSurname}`;
+      } else if (option === "ms") {
+         title = `${index === 0 ? "Will " + playerOneSurname + " win?" : "Will " + playerTwoSurname + " win?"}`;
       }
 
+      if (item?.sourceUrl) {
+         return (`<img width="350" height="500" src="${item?.sourceUrl}" title="${title}" alt="${item?.slug}" style="flex: 1; width: 50%;" />`);
+      }
    }).filter(e => e);
 }
+
 
 function retryOperation(func, retries = 5) {
    return async function (...args) {
@@ -215,7 +221,12 @@ function underscoreSlugger(str) {
       return "";
    }
 
-   return str.toLowerCase().replace(/\s{2,}/gi, " ").replace(/(–|-|–)/g, " ").replace(/\s+/g, "_");
+   // return str.toLowerCase().replace(/\s{2,}/gi, " ").replace(/(–|-|–)/g, " ").replace(/\s+/g, "_");
+   return str
+      .trim() 
+      .toLowerCase()
+      .replace(/[-–.]/g, " ")
+      .replace(/\s+/g, "_");
 }
 
 function extractMatchInfo(text, note) {
@@ -395,9 +406,6 @@ function extractMatchInfo(text, note) {
 
          const player1Surname = getSurnameOfPlayer(player1);
          const player2Surname = getSurnameOfPlayer(player2);
-
-
-        
 
          const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`.trim();
          results.push({

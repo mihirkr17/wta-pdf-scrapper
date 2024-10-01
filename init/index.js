@@ -168,7 +168,7 @@ async function init(note) {
                }
 
                // Generate image wrapper
-               const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], player1Surname, player2Surname);
+               const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], player1Surname, player2Surname, siteCode);
 
                await Promise.all(templates.map(async (template, templateIndex) => {
 
