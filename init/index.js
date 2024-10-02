@@ -44,7 +44,7 @@ const sites = [
       siteDomain: constant?.domainSg,
       authToken: constant?.authTokenSg,
       authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate.slice(0, 1),
+      templates: stevegtennisTemplate,
       chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
    },
    // {
@@ -127,7 +127,7 @@ async function init(note) {
 
          let postIndex = 1;
 
-         for (const matchContent of matchedContents.slice(0, 1)) {
+         for (const matchContent of matchedContents) {
 
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
