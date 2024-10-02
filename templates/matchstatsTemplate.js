@@ -20,7 +20,7 @@ const matchstatsTemplate = [
       tpCategory: "WTA / ATP Tennis Predictions",
       tpCategoryId: 4339,
       tpTitle: "Who Will Win: #player1Surname vs #player2Surname? Prediction For WTA #eventName #eventYear",
-      tpMetaTitle: "Prediction Of #player1Surname Vs #player2Surname H2H, Who Will Win At ATP #eventName #eventYear?",
+      tpMetaTitle: "Prediction Of #player1Surname Vs #player2Surname H2H, Who Will Win At WTA #eventName #eventYear?",
       tpPlayerTag: "#playerName PREDICTIONS",
       tpPlayerVsPlayerTag: "#player1Surname VS #player2Surname H2H PREDICTIONS",
       tpEventTag: "WTA #eventName PREDICTIONS, PICKS & BEST BETS",

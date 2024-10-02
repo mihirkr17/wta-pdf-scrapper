@@ -5,7 +5,7 @@ const constant = {
    domainSg: process.env.CLIENT_DOMAIN_SG,
    domainMs: process.env.CLIENT_DOMAIN_MS,
    mediaUri: function (domain, slug) {
-      return `${domain}/wp-json/wp/v2/media?search=${slug}yes`;
+      return `${domain}/wp-json/wp/v2/media?search=${slug}`;
    },
    tagUri: function (domain) {
       return `${domain}/wp-json/wp/v2/tags`;
