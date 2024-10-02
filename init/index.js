@@ -96,10 +96,10 @@ async function init(note) {
       }
 
 
-      // console.log(matchedContents);
+      console.log(matchedContents);
 
 
-      // return
+      return
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
@@ -144,17 +144,32 @@ async function init(note) {
             }
 
             try {
-               let playerOneMedia = {}, playerTwoMedia = {};
+               let playerOneMedia = {}, playerTwoMedia = {}, thumbnail = {};
 
-               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta ${player1Surname} `), authToken);
-               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta ${player2Surname} `), authToken);
+               playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player1Surname}-WTA-400`), authToken);
+               playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player2Surname}-WTA-400`), authToken);
+
+
+               thumbnail = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player1Surname}-WTA-490`), authToken);
+
+               // Taking featured images
+               if (!thumbnail?.mediaId) {
+                  let player2Thumb = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player2Surname}-WTA-490}`), authToken);
+
+                  if (!player2Thumb?.mediaId) {
+                     thumbnail = await getMediaIdOfWP(constant.mediaUri(siteDomain, `thumbnail${Math.floor(Math.random() * 2) + 1}-WTA-490`), authToken);
+                  } else {
+                     thumbnail = player2Thumb
+                  }
+               }
+
 
                if (!playerOneMedia?.mediaId) {
                   // const player1Media = playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon3`), authToken);
                   // playerOneMedia = player1Media;
 
                   // if (!player1Media?.mediaId) {
-                     playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic5`), authToken);
+                  playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `default${Math.floor(Math.random() * 4) + 1}-WTA-400`), authToken);
                   // }
                }
 
@@ -163,7 +178,7 @@ async function init(note) {
                   // playerTwoMedia = player2Media;
 
                   // if (!player2Media?.mediaId) {
-                     playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wta_generic4`), authToken);
+                  playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `default${Math.floor(Math.random() * 4) + 1}-WTA-400`), authToken);
                   // }
                }
 
@@ -219,9 +234,9 @@ async function init(note) {
 
 
                      const metaTitle = template?.tpMetaTitle ? template?.tpMetaTitle.replace("#eventName", plainEventName)
-                     ?.replace("#player1Surname", player1Surname)
-                     ?.replace("#player2Surname", player2Surname)
-                     ?.replace("#eventYear", eventYear) : title;
+                        ?.replace("#player1Surname", player1Surname)
+                        ?.replace("#player2Surname", player2Surname)
+                        ?.replace("#eventYear", eventYear) : title;
 
                      // Finding duplicate post by slug
                      const isUniquePost = await checkExistingPostOfWP(constant?.postExistUri(siteDomain, slug), authToken);
@@ -282,7 +297,7 @@ async function init(note) {
                         status: constant?.postStatus,
                         author: parseInt(authorId),
                         tags: tagIds,
-                        featured_media: playerOneMedia?.mediaId || playerTwoMedia?.mediaId,
+                        featured_media: thumbnail?.mediaId || playerTwoMedia?.mediaId,
                         categories: [tpCategoryId],
                         meta: {
                            aioseo_title: metaTitle || "aiseo title"
