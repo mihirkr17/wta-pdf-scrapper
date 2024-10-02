@@ -37,26 +37,26 @@ translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
 const sites = [
-   // {
-   //    id: 1,
-   //    siteName: "Stevegtennis",
-   //    siteCode: "sg",
-   //    siteDomain: constant?.domainSg,
-   //    authToken: constant?.authTokenSg,
-   //    authorId: constant?.authorIdSg,
-   //    templates: stevegtennisTemplate,
-   //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-   // },
    {
-      id: 2,
-      siteName: "Matchstat",
-      siteCode: "ms",
-      siteDomain: constant?.domainMs,
-      authToken: constant?.authTokenMs,
-      authorId: constant?.authorIdMs,
-      templates: matchstatsTemplate,
-      chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
-   }
+      id: 1,
+      siteName: "Stevegtennis",
+      siteCode: "sg",
+      siteDomain: constant?.domainSg,
+      authToken: constant?.authTokenSg,
+      authorId: constant?.authorIdSg,
+      templates: stevegtennisTemplate.slice(0, 1),
+      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   },
+   // {
+   //    id: 2,
+   //    siteName: "Matchstat",
+   //    siteCode: "ms",
+   //    siteDomain: constant?.domainMs,
+   //    authToken: constant?.authTokenMs,
+   //    authorId: constant?.authorIdMs,
+   //    templates: matchstatsTemplate,
+   //    chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
+   // }
 ];
 
 async function init(note) {
@@ -127,7 +127,7 @@ async function init(note) {
 
          let postIndex = 1;
 
-         for (const matchContent of matchedContents) {
+         for (const matchContent of matchedContents.slice(0, 1)) {
 
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
