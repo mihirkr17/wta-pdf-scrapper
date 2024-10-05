@@ -54,7 +54,7 @@ const { constant } = require("./config");
          tournamentDay: noteDay
       }
 
-      if (round) {
+      if (round && round !== "null") {
          Object.assign(noteDetail, { round: round })
       }
 
