@@ -59,7 +59,39 @@ const sites = [
    }
 ];
 
-async function init(note) {
+
+function replaceWordsToLink(texts, predList = []) {
+   const textArr = texts.split(/\s+/g);
+   let finalStr = '';
+
+   for (let i = 0; i < textArr.length; i++) {
+      let eachElem = textArr[i];
+      let matched = false;
+
+      // Check each word against the prediction list
+      for (let j = 0; j < predList.length; j++) {
+         const predElem = predList[j];
+         const [surname, link] = predElem.split("|");
+
+         // Match the word and ignore case sensitivity
+         if (eachElem.replace(/[.,]/g, "") === surname) {
+            finalStr += `<a href='${link}' style='text-decoration: underline;'>${eachElem}</a> `;
+            matched = true;
+            break;
+         }
+      }
+
+      // If no match, append the word as is
+      if (!matched) {
+         finalStr += eachElem + " ";
+      }
+   }
+
+   // Return the final string, trimming any extra spaces
+   return finalStr.trim();
+}
+
+async function init(note, predictionList) {
    try {
 
       const { tournamentLink = "", tournamentName = "", tournamentLocation = "" } = note;
@@ -107,6 +139,8 @@ async function init(note) {
       for (const site of sites) {
          const { siteDomain, siteName, chatgptCommand, templates, siteCode, authToken, authorId } = site;
 
+         let predList = siteCode == "ms" ? predictionList?.filteredMsLinks : predictionList?.filteredSgLinks;
+
          consoleLogger(`${siteCode}: Running ${siteDomain}.`);
 
          if (!authToken) {
@@ -149,7 +183,6 @@ async function init(note) {
                playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player1Surname}-WTA-400`), authToken);
                playerTwoMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player2Surname}-WTA-400`), authToken);
 
-
                thumbnail = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player1Surname}-WTA-490`), authToken);
 
                // Taking featured images
@@ -165,21 +198,11 @@ async function init(note) {
 
 
                if (!playerOneMedia?.mediaId) {
-                  // const player1Media = playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon3`), authToken);
-                  // playerOneMedia = player1Media;
-
-                  // if (!player1Media?.mediaId) {
                   playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `default${Math.floor(Math.random() * 4) + 1}-WTA-400`), authToken);
-                  // }
                }
 
                if (!playerTwoMedia?.mediaId) {
-                  // const player2Media = await getMediaIdOfWP(constant.mediaUri(siteDomain, `wimbledon4`), authToken);
-                  // playerTwoMedia = player2Media;
-
-                  // if (!player2Media?.mediaId) {
                   playerOneMedia = await getMediaIdOfWP(constant.mediaUri(siteDomain, `default${Math.floor(Math.random() * 4) + 1}-WTA-400`), authToken);
-                  // }
                }
 
                // Generate image wrapper
@@ -260,11 +283,15 @@ async function init(note) {
 
                      consoleLogger(`${siteCode}: ${postIndex}. Paraphrase starting...`);
                      const newChatgptCommand = chatgptCommand?.replace("#language", tpLanguage)?.replace("#texts", text);
-                     const paraphrasedBlog = await paraphraseContents(newChatgptCommand);
+                     let paraphrasedBlog = await paraphraseContents(newChatgptCommand);
 
                      if (!paraphrasedBlog || paraphrasedBlog.length === 0) {
                         consoleLogger(`${siteCode}: ${postIndex}. Sorry! Content not paraphrased.`);
                         return;
+                     }
+
+                     if (predList && predList.length >= 1) {
+                        paraphrasedBlog = replaceWordsToLink(paraphrasedBlog, predList);
                      }
 
                      consoleLogger(`${siteCode}: ${postIndex}. Paraphrased done.`);

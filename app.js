@@ -7,6 +7,7 @@ const {
 
 const init = require("./init");
 const { constant } = require("./config");
+const tennisApi = require("./tennis_api");
 
 (async () => {
    try {
@@ -16,6 +17,12 @@ const { constant } = require("./config");
       if (appAction == "off") {
          process.exit(0);
       }
+
+      const predictionList = await tennisApi();
+
+      // console.log(predictionList);
+
+      // return;
 
       const noteUrl = process.env.MEDIA_NOTE_URL;
       const noteDay = process.env.MEDIA_NOTE_DAY;
@@ -60,7 +67,7 @@ const { constant } = require("./config");
 
       consoleLogger(`Running ${noteTournament}, ${noteTournamentLocation}, ${noteDay}.`);
 
-      const result = await init(noteDetail);
+      const result = await init(noteDetail, predictionList);
       consoleLogger(`${result?.message}`);
 
    } catch (error) {
