@@ -224,10 +224,20 @@ function underscoreSlugger(str) {
 
    // return str.toLowerCase().replace(/\s{2,}/gi, " ").replace(/(–|-|–)/g, " ").replace(/\s+/g, "_");
    return str
-      .trim() 
+      .trim()
       .toLowerCase()
       .replace(/[-–.]/g, " ")
       .replace(/\s+/g, "_");
+}
+
+
+function getDateFormat(str) {
+   str = str.replace(/MATCH NOTES\s+[–|-|–]|day\s+\d/gi, "").trim()
+   // str = str.replace(/\b(?:saturday|sunday|monday|tuesday|wednesday|thursday|friday),/gi, "").trim();
+   str = str.replace(/SINGLES FINAL/gi, "").trim();
+   str = str.replace(/–|-|–/g, "").trim();
+
+   return str;
 }
 
 function extractMatchInfo(text, note) {
@@ -263,6 +273,7 @@ function extractMatchInfo(text, note) {
    // regex patterns 2
    const paragraphRegex = / vs[. -]? .+ (leads|First meeting|Tied)/gi;
    const matchNoteRegex = /MATCH NOTES/gi;
+   // const datePattern = /(\b\d{1,2}\s(?:JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER),?\s\d{4})|(\b(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s\d{1,2},?\s\d{4})/i;
 
    for (let i = 0; i < splittedTexts.length; i++) {
 
@@ -270,12 +281,24 @@ function extractMatchInfo(text, note) {
 
       // 1. Extracting Event day, date, year;
       if (targetDateDayYearRegex.test(line)) {
+
+
          const newLine = line && line.replace(/\s{2,}/gi, " ");
-         const dateLine = newLine.match(/\b\w+day.*$/i);
-         eventDate = Array.isArray(dateLine) ? dateLine[0] : "";
+         eventDate = newLine;
+         // console.log(newLine);
+         // // /\b(?:SUN|MON|TUE|WED|THU|FRI|SAT)(?:day)?.*$/gi
+         // // Old /\b\w+?:day.*$/i
+         // let dateLine = null; //newLine.match(datePattern);
+         // if (!dateLine || dateLine === null) {
+         //    dateLine = newLine.replace(/MATCH NOTES\s+[–|-|–]|day\s+\d/gi, "").trim()
+         //    dateLine = dateLine.replace(/\b(?:saturday|sunday|monday|tuesday|wednesday|thursday|friday),/gi, "").trim();
+         //    dateLine = dateLine.replace(/–|-|–/g, "").trim();
+         //    // dateLine = dateLine.replace();
+         // }
+         // console.log(dateLine);
+         // eventDate = dateLine; // Array.isArray(dateLine) ? dateLine[0] : "";
 
       }
-
 
       // 2.
       if (paragraphRegex.test(line)) {
@@ -335,13 +358,22 @@ function extractMatchInfo(text, note) {
 
    const eventDay = capitalizeFirstLetterOfEachWord(tournamentDay);
 
+   eventDate = getDateFormat(eventDate);
+
+   // console.log(eventDate);
+
    let year = typeof eventDate === "string" && eventDate?.match(/\d{4}/i);
    const eventYear = Array.isArray(year) ? year[0] : new Date().getFullYear();
 
+
+   // console.log(eventDate);
    // checking date format
-   if (!(/\b\w+day/i).test(eventDate)) {
-      throw new Error("Sorry! The event date format isn't valid.");
-   }
+
+
+   // if (!(/\b(?:SUN|MON|TUE|WED|THU|FRI|SAT)(?:day)?.*$/i).test(eventDate)) {
+   //    throw new Error("Sorry! The event date format isn't valid.");
+   // }
+
 
    eventDate = capitalizeFirstLetterOfEachWord(eventDate.replace(/\s+\,/g, ","));
 
@@ -390,6 +422,7 @@ function extractMatchInfo(text, note) {
             return "";
          }
       })?.filter(e => e?.trim()?.length > 0);
+
 
       if (para && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation && leads && player1 && player2) {
          const parts = leads ? leads?.split(/\s(?=\d)/) : [];

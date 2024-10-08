@@ -37,16 +37,16 @@ translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
 const sites = [
-   {
-      id: 1,
-      siteName: "Stevegtennis",
-      siteCode: "sg",
-      siteDomain: constant?.domainSg,
-      authToken: constant?.authTokenSg,
-      authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate,
-      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-   },
+   // {
+   //    id: 1,
+   //    siteName: "Stevegtennis",
+   //    siteCode: "sg",
+   //    siteDomain: constant?.domainSg,
+   //    authToken: constant?.authTokenSg,
+   //    authorId: constant?.authorIdSg,
+   //    templates: stevegtennisTemplate,
+   //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   // },
    {
       id: 2,
       siteName: "Matchstat",
@@ -54,41 +54,57 @@ const sites = [
       siteDomain: constant?.domainMs,
       authToken: constant?.authTokenMs,
       authorId: constant?.authorIdMs,
-      templates: matchstatsTemplate,
+      templates: matchstatsTemplate.slice(0, 1),
       chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
    }
 ];
 
 
 function replaceWordsToLink(texts, predList = []) {
-   const textArr = texts.split(/\s+/g);
-   let finalStr = '';
 
-   for (let i = 0; i < textArr.length; i++) {
-      let eachElem = textArr[i];
-      let matched = false;
+   let replaceMap = {};
 
-      // Check each word against the prediction list
-      for (let j = 0; j < predList.length; j++) {
-         const predElem = predList[j];
-         const [surname, link] = predElem.split("|");
+   predList.forEach(item => {
+      let [name, link] = item.split('|');
+      replaceMap[name] = link;
+   });
 
-         // Match the word and ignore case sensitivity
-         if (eachElem.replace(/[.,]/g, "") === surname) {
-            finalStr += `<a href='${link}' style='text-decoration: underline;'>${eachElem}</a> `;
-            matched = true;
-            break;
-         }
-      }
+   // Replace all names with corresponding links using RegExp
+   let newStr = texts.replace(new RegExp(Object.keys(replaceMap).join('|'), 'g'), (matched) => {
+      return `<a href="${replaceMap[matched]}" style='text-decoration: underline;'>${matched}</a>`;
+   });
 
-      // If no match, append the word as is
-      if (!matched) {
-         finalStr += eachElem + " ";
-      }
-   }
+   return newStr;
 
-   // Return the final string, trimming any extra spaces
-   return finalStr.trim();
+
+   // const textArr = texts.split(/\s+/g);
+   // let finalStr = '';
+
+   // for (let i = 0; i < textArr.length; i++) {
+   //    let eachElem = textArr[i];
+   //    let matched = false;
+
+   //    // Check each word against the prediction list
+   //    for (let j = 0; j < predList.length; j++) {
+   //       const predElem = predList[j];
+   //       const [surname, link] = predElem.split("|");
+
+   //       // Match the word and ignore case sensitivity
+   //       if (eachElem.replace(/[.,]/g, "") === surname) {
+   //          finalStr += `<a href='${link}' style='text-decoration: underline;'>${eachElem}</a> `;
+   //          matched = true;
+   //          break;
+   //       }
+   //    }
+
+   //    // If no match, append the word as is
+   //    if (!matched) {
+   //       finalStr += eachElem + " ";
+   //    }
+   // }
+
+   // // Return the final string, trimming any extra spaces
+   // return finalStr.trim();
 }
 
 async function init(note, predictionList) {
@@ -128,10 +144,10 @@ async function init(note, predictionList) {
       }
 
 
-      // console.log(matchedContents);
+      console.log(matchedContents);
 
 
-      // return
+      return
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
