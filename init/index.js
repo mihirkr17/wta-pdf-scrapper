@@ -144,10 +144,10 @@ async function init(note, predictionList) {
       }
 
 
-      console.log(matchedContents);
+      // console.log(matchedContents);
 
 
-      return
+      // return
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 
