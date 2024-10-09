@@ -69,15 +69,21 @@ function replaceWordsToLink(texts, predList = []) {
       replaceMap[name] = link;
    });
 
-   Object.keys(replaceMap).forEach(name => {
-      const regExp = new RegExp(`\\b${name}\\b`, 'i');
+   const pattern = new RegExp(Object.keys(replaceMap).join('|'), 'gi');
 
-      texts = texts.replace(regExp, (matched) => {
-         return `<a href="${replaceMap[name]}" style="text-decoration: underline;">${matched}</a>`;
-      });
+   const replacedWords = new Set();
+
+   let newStr = texts.replace(pattern, (matched) => {
+      if (replacedWords.has(matched.toLowerCase())) {
+         return matched;
+      }
+
+      replacedWords.add(matched.toLowerCase());
+
+      return `<a href="${replaceMap[matched]}" style="text-decoration: underline;">${matched}</a>`;
    });
 
-   return texts;
+   return newStr;
 
    // const escapedKeys = Object.keys(replaceMap).map(key => key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
