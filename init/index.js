@@ -70,8 +70,10 @@ function replaceWordsToLink(texts, predList = []) {
    });
 
    Object.keys(replaceMap).forEach(name => {
-      texts = texts.replace(new RegExp(`\\b${name}\\b`), (matched) => {
-         return `<a href="${replaceMap[matched]}" style="text-decoration: underline;">${matched}</a>`;
+      const regExp = new RegExp(`\\b${name}\\b`);
+
+      texts = texts.replace(regExp, (matched) => {
+         return `<a href="${replaceMap[name]}" style="text-decoration: underline;">${matched}</a>`;
       });
    });
 
