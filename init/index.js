@@ -37,16 +37,16 @@ translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
 const sites = [
-   {
-      id: 1,
-      siteName: "Stevegtennis",
-      siteCode: "sg",
-      siteDomain: constant?.domainSg,
-      authToken: constant?.authTokenSg,
-      authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate,
-      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-   },
+   // {
+   //    id: 1,
+   //    siteName: "Stevegtennis",
+   //    siteCode: "sg",
+   //    siteDomain: constant?.domainSg,
+   //    authToken: constant?.authTokenSg,
+   //    authorId: constant?.authorIdSg,
+   //    templates: stevegtennisTemplate,
+   //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   // },
    {
       id: 2,
       siteName: "Matchstat",
@@ -54,7 +54,7 @@ const sites = [
       siteDomain: constant?.domainMs,
       authToken: constant?.authTokenMs,
       authorId: constant?.authorIdMs,
-      templates: matchstatsTemplate,
+      templates: matchstatsTemplate.slice(0, 1),
       chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
    }
 ];
@@ -69,12 +69,19 @@ function replaceWordsToLink(texts, predList = []) {
       replaceMap[name] = link;
    });
 
-   // Replace all names with corresponding links using RegExp
-   let newStr = texts.replace(new RegExp(Object.keys(replaceMap).join('|'), 'g'), (matched) => {
-      return `<a href="${replaceMap[matched]}" style='text-decoration: underline;'>${matched}</a>`;
+   Object.keys(replaceMap).forEach(name => {
+      let regex = new RegExp(name); // Create a RegExp without 'g' to replace the first match
+      texts = texts.replace(regex, `<a href="${replaceMap[name]}" style='text-decoration: underline;'>${name}</a>`);
    });
 
-   return newStr;
+   return texts;
+
+   // Replace all names with corresponding links using RegExp
+   // let newStr = texts.replace(new RegExp(Object.keys(replaceMap).join('|'), 'g'), (matched) => {
+   //    return `<a href="${replaceMap[matched]}" style='text-decoration: underline;'>${matched}</a>`;
+   // });
+
+   // return newStr;
 
 
    // const textArr = texts.split(/\s+/g);
@@ -177,7 +184,7 @@ async function init(note, predictionList) {
 
          let postIndex = 1;
 
-         for (const matchContent of matchedContents) {
+         for (const matchContent of matchedContents.slice(0, 1)) {
 
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
