@@ -69,12 +69,14 @@ function replaceWordsToLink(texts, predList = []) {
       replaceMap[name] = link;
    });
 
-   Object.keys(replaceMap).forEach(name => {
-      let regex = new RegExp(name); // Create a RegExp without 'g' to replace the first match
-      texts = texts.replace(regex, `<a href="${replaceMap[name]}" style='text-decoration: underline;'>${name}</a>`);
+   const escapedKeys = Object.keys(replaceMap).map(key => key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+   // Replace all names with corresponding links using RegExp
+   let newStr = texts.replace(new RegExp(escapedKeys.join('|')), (matched) => {
+      return `<a href="${replaceMap[matched]}" style='text-decoration: underline;'>${matched}</a>`;
    });
 
-   return texts;
+   return newStr;
 
    // Replace all names with corresponding links using RegExp
    // let newStr = texts.replace(new RegExp(Object.keys(replaceMap).join('|'), 'g'), (matched) => {
