@@ -37,16 +37,16 @@ translate.engine = 'libre';
 translate.key = process.env.LIBRE_TRANSLATE_KEY;
 
 const sites = [
-   {
-      id: 1,
-      siteName: "Stevegtennis",
-      siteCode: "sg",
-      siteDomain: constant?.domainSg,
-      authToken: constant?.authTokenSg,
-      authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate,
-      chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
-   },
+   // {
+   //    id: 1,
+   //    siteName: "Stevegtennis",
+   //    siteCode: "sg",
+   //    siteDomain: constant?.domainSg,
+   //    authToken: constant?.authTokenSg,
+   //    authorId: constant?.authorIdSg,
+   //    templates: stevegtennisTemplate,
+   //    chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
+   // },
    {
       id: 2,
       siteName: "Matchstat",
@@ -54,8 +54,9 @@ const sites = [
       siteDomain: constant?.domainMs,
       authToken: constant?.authTokenMs,
       authorId: constant?.authorIdMs,
-      templates: matchstatsTemplate,
-      chatgptCommand: 'With your reply in #language, including all facts in this text, rewrite "#texts"'
+      templates: matchstatsTemplate.slice(0, 1),
+      chatgptCommand: 'With your response in #language, rewrite the provided text, incorporating all facts and organizing the information into clear, broken-down paragraphs "#texts"'
+      // chatgptCommand: 'With your reply in #language, including all facts in this text with paragraph, rewrite "#texts"'
    }
 ];
 
@@ -202,7 +203,7 @@ async function init(note, predictionList) {
 
          let postIndex = 1;
 
-         for (const matchContent of matchedContents) {
+         for (const matchContent of matchedContents.slice(0, 1)) {
 
             const {
                player1, player2, player1slug, player2slug, player1Surname, player2Surname,
@@ -228,7 +229,7 @@ async function init(note, predictionList) {
 
                // Taking featured images
                if (!thumbnail?.mediaId) {
-                  let player2Thumb = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player2Surname}-WTA-490}`), authToken);
+                  let player2Thumb = await getMediaIdOfWP(constant.mediaUri(siteDomain, `${player2Surname}-WTA-490`), authToken);
 
                   if (!player2Thumb?.mediaId) {
                      thumbnail = await getMediaIdOfWP(constant.mediaUri(siteDomain, `thumbnail${Math.floor(Math.random() * 2) + 1}-WTA-490`), authToken);
@@ -248,6 +249,10 @@ async function init(note, predictionList) {
 
                // Generate image wrapper
                const imageWrapperHtml = imgWrapper([playerOneMedia, playerTwoMedia], player1Surname, player2Surname, siteCode);
+
+
+               playerOneMedia = null;
+               playerTwoMedia = null;
 
                await Promise.all(templates.map(async (template, templateIndex) => {
 
@@ -365,7 +370,7 @@ async function init(note, predictionList) {
                         status: constant?.postStatus,
                         author: parseInt(authorId),
                         tags: tagIds,
-                        featured_media: thumbnail?.mediaId || playerTwoMedia?.mediaId,
+                        featured_media: thumbnail?.mediaId,
                         categories: [tpCategoryId],
                         meta: {
                            aioseo_title: metaTitle || "aiseo title"
