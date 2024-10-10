@@ -44,20 +44,20 @@ const sites = [
       siteDomain: constant?.domainSg,
       authToken: constant?.authTokenSg,
       authorId: constant?.authorIdSg,
-      templates: stevegtennisTemplate.slice(0, 1),
+      templates: stevegtennisTemplate,
       chatgptCommand: "Rewrite this in #language, not adding extra facts that are not in this text, reply in broken-down paragraph form, in an interesting tennis journalistic manner with a long as possible reply: #texts"
    },
-   // {
-   //    id: 2,
-   //    siteName: "Matchstat",
-   //    siteCode: "ms",
-   //    siteDomain: constant?.domainMs,
-   //    authToken: constant?.authTokenMs,
-   //    authorId: constant?.authorIdMs,
-   //    templates: matchstatsTemplate,
-   //    chatgptCommand: 'With your response in #language, rewrite the provided text, incorporating all facts and organizing the information into clear, broken-down paragraphs "#texts"'
-   //    // chatgptCommand: 'With your reply in #language, including all facts in this text with paragraph, rewrite "#texts"'
-   // }
+   {
+      id: 2,
+      siteName: "Matchstat",
+      siteCode: "ms",
+      siteDomain: constant?.domainMs,
+      authToken: constant?.authTokenMs,
+      authorId: constant?.authorIdMs,
+      templates: matchstatsTemplate,
+      chatgptCommand: 'With your response in #language, rewrite the provided text, incorporating all facts and organizing the information into clear, broken-down paragraphs "#texts"'
+      // chatgptCommand: 'With your reply in #language, including all facts in this text with paragraph, rewrite "#texts"'
+   }
 ];
 
 
