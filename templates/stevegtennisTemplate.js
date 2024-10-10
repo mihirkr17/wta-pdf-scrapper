@@ -65,12 +65,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>${player1} vs ${player2} Head-to-Head, Preview, Stats & Pick:</h3>
-         <article>
-         <h5>Head To Head ${leads}.</h5>
+
+         <p>Head To Head ${leads}.</p>
          <br/>
          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
-         
+
          <br/> <br/>
          
          <h3>${player1} vs ${player2} Prediction:</h3>
@@ -143,11 +142,11 @@ const stevegtennisTemplate = [
          <br/>
         
         <h3>${player1} vs ${player2} cara a cara, vista previa, estadísticas y selección:</h3>
-        <article>
-            <h5>Enfrentamiento ${leads}.</h5>
+ 
+            <p>Enfrentamiento ${leads}.</p>
             <br/>
             <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-        </article>
+
         
         <br/> <br/>
         
@@ -221,11 +220,11 @@ const stevegtennisTemplate = [
          <br/>
      
      <h3>${player1} vs ${player2} confronto direto, visualização, estatísticas e escolha:</h3>
-     <article>
-         <h5>Confronto direto ${leads}.</h5>
+
+         <p>Confronto direto ${leads}.</p>
          <br/>
          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-     </article>
+
      
      <br/> <br/>
      
@@ -300,11 +299,9 @@ const stevegtennisTemplate = [
          <br/>
      
      <h3>${player1} contre ${player2} Face-à-face, aperçu, statistiques et choix :</h3>
-     <article>
-         <h5>Tête à face ${leads}.</h5>
+         <p>Tête à face ${leads}.</p>
          <br/>
          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-     </article>
      
      <br/> <br/>
      
@@ -378,11 +375,11 @@ const stevegtennisTemplate = [
          <br/>
      
      <h3>${player1} vs. ${player2} Head-to-Head, Vorschau, Statistiken & Auswahl:</h3>
-     <article>
-         <h5>Kopf an Kopf ${leads}.</h5>
+
+         <p>Kopf an Kopf ${leads}.</p>
          <br/>
          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-     </article>
+
      
      <br/> <br/>
      
@@ -456,11 +453,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>Confronto testa a testa tra ${player1} e ${player2}, anteprima, statistiche e scelta:</h3>
-         <article>
-           <h5>Testa a testa ${leads}.</h5>
+
+           <p>Testa a testa ${leads}.</p>
            <br/>
            <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
+
          
          <br/><br/>
          
@@ -533,11 +530,9 @@ const stevegtennisTemplate = [
          <br/>
       
       <h3>${player1} kontra ${player2} bezpośrednie starcie, podgląd, statystyki i wybór:</h3>
-      <article>
-         <h5>Bezpośrednie ${leads}.</h5>
+         <p>Bezpośrednie ${leads}.</p>
          <br/>
          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-      </article>
       
       <br/> <br/>
       
@@ -612,11 +607,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>${player1} versus ${player2} Head-to-Head, preview, statistieken en keuze:</h3>
-         <article>
-            <h5>Head to Head ${leads}.</h5>
+
+            <p>Head to Head ${leads}.</p>
             <br/>
             <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
+
          
          <br/> <br/>
          
@@ -691,11 +686,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>${player1} ile ${player2} Karşı karşıya, Önizleme, İstatistikler ve Seçim:</h3>
-         <article>
-            <h5>Birebir ${leads}.</h5>
+
+            <p>Birebir ${leads}.</p>
             <br/>
             <p>${paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
+   
          
          <br/><br/>
          
@@ -770,11 +765,10 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>${player1} 与 ${player2} 的对决、预览、统计数据和选择：</h3>
-         <article>
-            <h5>头对头${leads}。</h5>
+
+            <p>头对头${leads}。</p>
             <br/>
             <p>${paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
          
          <br/><br/>
          
@@ -849,11 +843,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>${player1} vs ${player2} المواجهات المباشرة والمعاينة والإحصائيات والاختيار:</h3>
-         <article>
-            <h5>وجها لوجه ${leads}.</h5>
+
+            <p>وجها لوجه ${leads}.</p>
             <br/>
             <p>${paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
+
          
          <br/><br/>
          
@@ -929,11 +923,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>${player1} 対 ${player2} の直接対決、プレビュー、統計、選択:</h3>
-         <article>
-            <h5>直接対決 ${leads}。</h5>
+  
+            <p>直接対決 ${leads}。</p>
             <br />
             <p>${paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
+
          
          <br /><br />
          
@@ -1009,12 +1003,11 @@ const stevegtennisTemplate = [
          <br/>
          
          <h3>Личный бой ${player1} против ${player2}, обзор, статистика и выбор:</h3>
-         <article>
-            <h5>Сопоставление ${leads}.</h5>
+
+            <p>Сопоставление ${leads}.</p>
             <br/>
             <p>${paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-         </article>
-         
+ 
          <br/><br/>
          
          <h3>Прогноз ${player1} против ${player2}:</h3>
@@ -1086,11 +1079,11 @@ const stevegtennisTemplate = [
          <br/>
       
       <h3>${player1} बनाम ${player2} आमने-सामने, पूर्वावलोकन, आँकड़े और चयन:</h3>
-      <article>
-         <h5>हेड टू हेड ${leads}.</h5>
+
+         <p>हेड टू हेड ${leads}.</p>
          <br/>
          <p>${paraphrasedBlog && paraphrasedBlog?.replace(/^"|"$/g, '')}</p>
-      </article>
+    
       
       <br/> <br/>
       
