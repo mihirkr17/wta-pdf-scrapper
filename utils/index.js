@@ -234,7 +234,7 @@ function underscoreSlugger(str) {
 function getDateFormat(str) {
    str = str.replace(/MATCH NOTES\s+[–|-|–]|day\s+\d/gi, "").trim()
    // str = str.replace(/\b(?:saturday|sunday|monday|tuesday|wednesday|thursday|friday),/gi, "").trim();
-   str = str.replace(/SINGLES FINAL/gi, "").trim();
+   str = str.replace(/SINGLES FINAL|Quarterfinals/gi, "").trim();
    str = str.replace(/–|-|–/g, "").trim();
 
    return str;
