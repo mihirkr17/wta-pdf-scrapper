@@ -202,7 +202,7 @@ function findPlayerNames(inputString) {
    let players = inputString?.split(/\s+vs[. -]?\s+/i);
 
    const [player1 = "", player2WithLeads = ""] = Array.isArray(players) && players.map((p) => {
-      return p?.replace(/\[[^\]]*\]|\([^)]*\)|\{[^}]*\}/gi, "")
+      return p?.replace(/\[[^\]]*\]|\([^)]*\)|\{[^}]*\}/gi, " ")
          ?.replace(/[^:]*:|\[.*?\]|:/g, "")
          ?.replace(/\[\S\w|\w\S]/gi, "") // removed [text]
          ?.replace(/\{\S\w|\w\S}/gi, "") // removed {text}
@@ -348,9 +348,6 @@ function extractMatchInfo(text, note) {
 
    const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e.length !== 0);
 
-
-
-
    if (!Array.isArray(tournamentHistories) && tournamentHistories.length === 0) {
       return [];
    }
@@ -379,6 +376,8 @@ function extractMatchInfo(text, note) {
 
    // Result will assign here
    const results = [];
+
+
 
    // Looping paragraphs
    for (const para of paragraphs) {
@@ -423,7 +422,6 @@ function extractMatchInfo(text, note) {
          }
       })?.filter(e => e?.trim()?.length > 0);
 
-
       if (para && tournamentNew[0] && eventDay && eventDate && tournamentName && tournamentLocation && leads && player1 && player2) {
          const parts = leads ? leads?.split(/\s(?=\d)/) : [];
 
@@ -442,6 +440,7 @@ function extractMatchInfo(text, note) {
          const player2Surname = getSurnameOfPlayer(player2);
 
          const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`.trim();
+
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
             player1,
@@ -461,6 +460,8 @@ function extractMatchInfo(text, note) {
          });
       }
    }
+
+
    return results.filter(e => e?.player1.trim().length > 0);
 }
 
