@@ -169,11 +169,11 @@ async function init(note, predictionList) {
          return { message: "No matched contents." };
       }
 
-
-      // console.log(matchedContents);
-
-
-      // return
+      if (constant?.postCreateAction !== "1") {
+         consoleLogger(`Running script for testing...`);
+         console.log(matchedContents);
+         return
+      }
 
       consoleLogger(`Pdf downloaded and extracted contents successfully.`);
 

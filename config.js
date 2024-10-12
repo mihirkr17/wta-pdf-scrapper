@@ -26,7 +26,8 @@ const constant = {
    },
    authorIdSg: process.env.AUTHOR_ID_SG,
    authorIdMs: process.env.AUTHOR_ID_MS,
-   postStatus: process.env.POST_STATUS
+   postStatus: process.env.POST_STATUS,
+   postCreateAction: process.env.POST_CREATE_ACTION
 };
 
 // Set properties that depend on other properties
