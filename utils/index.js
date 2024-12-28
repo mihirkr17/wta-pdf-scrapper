@@ -269,10 +269,10 @@ function extractMatchInfo(text, note) {
    // regex patterns 1
    const targetDateDayYearRegex = /MATCH NOTES\s+[–|-|–]/i;
 
-
    // regex patterns 2
    const paragraphRegex = / vs[. -]? .+ (leads|First meeting|Tied)/gi;
    const matchNoteRegex = /MATCH NOTES/gi;
+
    // const datePattern = /(\b\d{1,2}\s(?:JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER),?\s\d{4})|(\b(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s\d{1,2},?\s\d{4})/i;
 
    for (let i = 0; i < splittedTexts.length; i++) {
@@ -281,7 +281,6 @@ function extractMatchInfo(text, note) {
 
       // 1. Extracting Event day, date, year;
       if (targetDateDayYearRegex.test(line)) {
-
 
          const newLine = line && line.replace(/\s{2,}/gi, " ");
          eventDate = newLine;
@@ -342,11 +341,13 @@ function extractMatchInfo(text, note) {
    // Splitting 3 sections 
    const paragraphs = paragraph && paragraph?.split("paragraphBreakHere")?.filter(e => e.length !== 0);
 
+
    if (!Array.isArray(paragraphs) && paragraphs.length === 0) {
       return [];
    }
 
    const tournamentHistories = tournamentHistory?.split("tournamentHistoryBreakHere")?.filter(e => e.length !== 0);
+
 
    if (!Array.isArray(tournamentHistories) && tournamentHistories.length === 0) {
       return [];
@@ -440,6 +441,7 @@ function extractMatchInfo(text, note) {
          const player2Surname = getSurnameOfPlayer(player2);
 
          const eventHeadingTwo = `${eventDay} - ${eventDate}, ${tournamentLocation}.`.trim();
+
 
          results.push({
             content: (newParagraph + "\n\n" + (tournamentNew[0] || "")),
